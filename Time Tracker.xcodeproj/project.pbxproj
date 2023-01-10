@@ -29,6 +29,7 @@
 		8499C3442956DC5700522178 /* ExpenseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499C3432956DC5700522178 /* ExpenseCard.swift */; };
 		849C83912950624700132B03 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C83902950624700132B03 /* ImagePickerView.swift */; };
 		849C83942950636100132B03 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C83932950636100132B03 /* Coordinator.swift */; };
+		84B6222C296D098400567125 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6222B296D098400567125 /* ViewRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		8499C3432956DC5700522178 /* ExpenseCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCard.swift; sourceTree = "<group>"; };
 		849C83902950624700132B03 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		849C83932950636100132B03 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		84B6222B296D098400567125 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +247,7 @@
 		84B6222A296CCE9C00567125 /* Routing */ = {
 			isa = PBXGroup;
 			children = (
+				84B6222B296D098400567125 /* ViewRouter.swift */,
 			);
 			path = Routing;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				841701BC2940A4C100FA9658 /* HomeView.swift in Sources */,
 				849C83912950624700132B03 /* ImagePickerView.swift in Sources */,
 				8499C33D2955B6F300522178 /* Extensions.swift in Sources */,
+				84B6222C296D098400567125 /* ViewRouter.swift in Sources */,
 				8499C3442956DC5700522178 /* ExpenseCard.swift in Sources */,
 				8499C33B2955A61D00522178 /* PdfView.swift in Sources */,
 				841701C82940A50200FA9658 /* DataController.swift in Sources */,
