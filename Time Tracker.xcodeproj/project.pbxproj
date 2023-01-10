@@ -22,6 +22,13 @@
 		842288412947302A00467096 /* TimecardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842288402947302A00467096 /* TimecardModel.swift */; };
 		843345002952FBA200E79DBE /* HCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843344FF2952FBA200E79DBE /* HCard.swift */; };
 		844D23A5295CE82E00AD5191 /* SavedTimecardEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D23A4295CE82E00AD5191 /* SavedTimecardEditView.swift */; };
+		847A3CC5296D123800BF6793 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CC4296D123800BF6793 /* MapViewModel.swift */; };
+		847A3CCB296D12B900BF6793 /* MapViewTimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CCA296D12B900BF6793 /* MapViewTimeLine.swift */; };
+		847A3CCD296D134C00BF6793 /* ObserverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CCC296D134C00BF6793 /* ObserverModel.swift */; };
+		847A3CD3296D143000BF6793 /* UserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CD2296D143000BF6793 /* UserProfileRepository.swift */; };
+		847A3CD6296D147E00BF6793 /* UserDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CD5296D147E00BF6793 /* UserDetailView.swift */; };
+		847A3CD8296D149E00BF6793 /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CD7296D149E00BF6793 /* UserListView.swift */; };
+		847A3CDB296D14EC00BF6793 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CDA296D14EC00BF6793 /* AuthenticationService.swift */; };
 		848008DF296D10360014CDF9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 848008DE296D10360014CDF9 /* GoogleService-Info.plist */; };
 		8499C33B2955A61D00522178 /* PdfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499C33A2955A61D00522178 /* PdfView.swift */; };
 		8499C33D2955B6F300522178 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499C33C2955B6F300522178 /* Extensions.swift */; };
@@ -51,6 +58,13 @@
 		842288402947302A00467096 /* TimecardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimecardModel.swift; sourceTree = "<group>"; };
 		843344FF2952FBA200E79DBE /* HCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCard.swift; sourceTree = "<group>"; };
 		844D23A4295CE82E00AD5191 /* SavedTimecardEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTimecardEditView.swift; sourceTree = "<group>"; };
+		847A3CC4296D123800BF6793 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		847A3CCA296D12B900BF6793 /* MapViewTimeLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewTimeLine.swift; sourceTree = "<group>"; };
+		847A3CCC296D134C00BF6793 /* ObserverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverModel.swift; sourceTree = "<group>"; };
+		847A3CD2296D143000BF6793 /* UserProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileRepository.swift; sourceTree = "<group>"; };
+		847A3CD5296D147E00BF6793 /* UserDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailView.swift; sourceTree = "<group>"; };
+		847A3CD7296D149E00BF6793 /* UserListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
+		847A3CDA296D14EC00BF6793 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		848008DE296D10360014CDF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8499C33A2955A61D00522178 /* PdfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfView.swift; sourceTree = "<group>"; };
 		8499C33C2955B6F300522178 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -83,7 +97,6 @@
 				F7476E082EB53B8699D93975 /* Pods-Time Tracker.debug.xcconfig */,
 				D5339EA2062E7EAEFF2D111B /* Pods-Time Tracker.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -212,6 +225,10 @@
 		844D23A0295CDE7B00AD5191 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				847A3CD1296D13EC00BF6793 /* Views */,
+				847A3CD0296D13E200BF6793 /* View Models */,
+				847A3CCF296D13D100BF6793 /* Auth Service */,
+				847A3CCE296D13B700BF6793 /* User Profile */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -219,6 +236,8 @@
 		844D23A1295CDE8D00AD5191 /* Location */ = {
 			isa = PBXGroup;
 			children = (
+				847A3CC7296D128600BF6793 /* Views */,
+				847A3CC6296D127C00BF6793 /* ViewModels */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -239,6 +258,71 @@
 				849C83902950624700132B03 /* ImagePickerView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		847A3CC6296D127C00BF6793 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				847A3CC4296D123800BF6793 /* MapViewModel.swift */,
+				847A3CCC296D134C00BF6793 /* ObserverModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		847A3CC7296D128600BF6793 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				847A3CCA296D12B900BF6793 /* MapViewTimeLine.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		847A3CCE296D13B700BF6793 /* User Profile */ = {
+			isa = PBXGroup;
+			children = (
+				847A3CD4296D146C00BF6793 /* Views */,
+				847A3CD9296D14BD00BF6793 /* Models */,
+			);
+			path = "User Profile";
+			sourceTree = "<group>";
+		};
+		847A3CCF296D13D100BF6793 /* Auth Service */ = {
+			isa = PBXGroup;
+			children = (
+				847A3CDA296D14EC00BF6793 /* AuthenticationService.swift */,
+			);
+			path = "Auth Service";
+			sourceTree = "<group>";
+		};
+		847A3CD0296D13E200BF6793 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
+		847A3CD1296D13EC00BF6793 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		847A3CD4296D146C00BF6793 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				847A3CD5296D147E00BF6793 /* UserDetailView.swift */,
+				847A3CD7296D149E00BF6793 /* UserListView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		847A3CD9296D14BD00BF6793 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				847A3CD2296D143000BF6793 /* UserProfileRepository.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		8499C3402956CBBC00522178 /* Extensions */ = {
@@ -396,7 +480,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8499C33F2956C20F00522178 /* Timecard.swift in Sources */,
+				847A3CD3296D143000BF6793 /* UserProfileRepository.swift in Sources */,
+				847A3CCD296D134C00BF6793 /* ObserverModel.swift in Sources */,
 				841701CB2940A5DF00FA9658 /* Time Tracker.xcdatamodeld in Sources */,
+				847A3CD6296D147E00BF6793 /* UserDetailView.swift in Sources */,
 				842288412947302A00467096 /* TimecardModel.swift in Sources */,
 				844D23A5295CE82E00AD5191 /* SavedTimecardEditView.swift in Sources */,
 				8422883F2946DC6F00467096 /* TimecardEditView.swift in Sources */,
@@ -411,11 +498,15 @@
 				849C83912950624700132B03 /* ImagePickerView.swift in Sources */,
 				8499C33D2955B6F300522178 /* Extensions.swift in Sources */,
 				84B6222C296D098400567125 /* ViewRouter.swift in Sources */,
+				847A3CD8296D149E00BF6793 /* UserListView.swift in Sources */,
+				847A3CCB296D12B900BF6793 /* MapViewTimeLine.swift in Sources */,
 				8499C3442956DC5700522178 /* ExpenseCard.swift in Sources */,
+				847A3CC5296D123800BF6793 /* MapViewModel.swift in Sources */,
 				8499C33B2955A61D00522178 /* PdfView.swift in Sources */,
 				841701C82940A50200FA9658 /* DataController.swift in Sources */,
 				841701D3294196EC00FA9658 /* AddNewEmployeeView.swift in Sources */,
 				841701BA2940A4C100FA9658 /* Time_TrackerApp.swift in Sources */,
+				847A3CDB296D14EC00BF6793 /* AuthenticationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
