@@ -13,6 +13,8 @@ struct MotherView: View {
     
     var body: some View {
         switch viewRouter.currentPage {
+        case .registerPage:
+            RegisterPage().environmentObject(AuthenticationService())
         case .loginPage:
             LoginPage().environmentObject(AuthenticationService())
         case .homePage:
