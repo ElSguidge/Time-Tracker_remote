@@ -9,9 +9,18 @@ import SwiftUI
 
 @main
 struct Time_TrackerApp: App {
+    @StateObject var dataController : DataController
+    
+    init() {
+        let dataController = DataController()
+        _dataController = StateObject(wrappedValue: dataController)
+    }
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView()
+                .environment(\.managedObjectContext, dataController.container.viewContext)
+                .environmentObject(dataController)
+                .preferredColorScheme(.dark)
         }
     }
 }

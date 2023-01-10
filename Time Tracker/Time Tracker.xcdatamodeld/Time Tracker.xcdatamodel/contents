@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="21G115" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Employee" representedClassName="Employee" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="payrollNumber" optional="YES" attributeType="String"/>
+        <relationship name="expenses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkExpense" inverseName="employees" inverseEntity="WorkExpense"/>
+        <relationship name="timesheets" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Timesheet" inverseName="employees" inverseEntity="Timesheet"/>
+        <relationship name="weeks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Week" inverseName="employees" inverseEntity="Week"/>
+    </entity>
+    <entity name="Timesheet" representedClassName="Timesheet" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="day" optional="YES" attributeType="String"/>
+        <attribute name="department" optional="YES" attributeType="String"/>
+        <attribute name="hours" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="jobCode" optional="YES" attributeType="String"/>
+        <attribute name="overtime" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="projectName" optional="YES" attributeType="String"/>
+        <attribute name="projectNumber" optional="YES" attributeType="String"/>
+        <attribute name="weekEnding" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="employees" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Employee" inverseName="timesheets" inverseEntity="Employee"/>
+        <relationship name="expenses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkExpense" inverseName="timesheets" inverseEntity="WorkExpense"/>
+        <relationship name="weeks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Week" inverseName="timesheets" inverseEntity="Week"/>
+    </entity>
+    <entity name="Week" representedClassName="Week" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="day" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="totalHours" optional="YES" attributeType="String"/>
+        <attribute name="totalHoursNormal" optional="YES" attributeType="String"/>
+        <attribute name="totalHoursOvertime" optional="YES" attributeType="String"/>
+        <attribute name="weekEnding" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="employees" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Employee" inverseName="weeks" inverseEntity="Employee"/>
+        <relationship name="expenses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkExpense" inverseName="weeks" inverseEntity="WorkExpense"/>
+        <relationship name="timesheets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Timesheet" inverseName="weeks" inverseEntity="Timesheet"/>
+    </entity>
+    <entity name="WorkExpense" representedClassName="WorkExpense" syncable="YES" codeGenerationType="class">
+        <attribute name="amount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="comment" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="expenseType" optional="YES" attributeType="String"/>
+        <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="projectNumber" optional="YES" attributeType="String"/>
+        <attribute name="weekEnding" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="employees" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Employee" inverseName="expenses" inverseEntity="Employee"/>
+        <relationship name="timesheets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Timesheet" inverseName="expenses" inverseEntity="Timesheet"/>
+        <relationship name="weeks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Week" inverseName="expenses" inverseEntity="Week"/>
+    </entity>
+</model>
