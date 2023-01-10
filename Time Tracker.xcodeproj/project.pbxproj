@@ -22,6 +22,7 @@
 		842288412947302A00467096 /* TimecardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842288402947302A00467096 /* TimecardModel.swift */; };
 		843345002952FBA200E79DBE /* HCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843344FF2952FBA200E79DBE /* HCard.swift */; };
 		844D23A5295CE82E00AD5191 /* SavedTimecardEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D23A4295CE82E00AD5191 /* SavedTimecardEditView.swift */; };
+		848008DF296D10360014CDF9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 848008DE296D10360014CDF9 /* GoogleService-Info.plist */; };
 		8499C33B2955A61D00522178 /* PdfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499C33A2955A61D00522178 /* PdfView.swift */; };
 		8499C33D2955B6F300522178 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499C33C2955B6F300522178 /* Extensions.swift */; };
 		8499C33F2956C20F00522178 /* Timecard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499C33E2956C20F00522178 /* Timecard.swift */; };
@@ -30,6 +31,7 @@
 		849C83912950624700132B03 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C83902950624700132B03 /* ImagePickerView.swift */; };
 		849C83942950636100132B03 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C83932950636100132B03 /* Coordinator.swift */; };
 		84B6222C296D098400567125 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6222B296D098400567125 /* ViewRouter.swift */; };
+		F7C20B68A44BCF132E05BA5A /* Pods_Time_Tracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F865BFFB60107AAE0492A9F /* Pods_Time_Tracker.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +51,7 @@
 		842288402947302A00467096 /* TimecardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimecardModel.swift; sourceTree = "<group>"; };
 		843344FF2952FBA200E79DBE /* HCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCard.swift; sourceTree = "<group>"; };
 		844D23A4295CE82E00AD5191 /* SavedTimecardEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTimecardEditView.swift; sourceTree = "<group>"; };
+		848008DE296D10360014CDF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8499C33A2955A61D00522178 /* PdfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfView.swift; sourceTree = "<group>"; };
 		8499C33C2955B6F300522178 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8499C33E2956C20F00522178 /* Timecard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timecard.swift; sourceTree = "<group>"; };
@@ -57,6 +60,9 @@
 		849C83902950624700132B03 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		849C83932950636100132B03 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		84B6222B296D098400567125 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
+		9F865BFFB60107AAE0492A9F /* Pods_Time_Tracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Time_Tracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5339EA2062E7EAEFF2D111B /* Pods-Time Tracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Time Tracker.release.xcconfig"; path = "Target Support Files/Pods-Time Tracker/Pods-Time Tracker.release.xcconfig"; sourceTree = "<group>"; };
+		F7476E082EB53B8699D93975 /* Pods-Time Tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Time Tracker.debug.xcconfig"; path = "Target Support Files/Pods-Time Tracker/Pods-Time Tracker.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,17 +70,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7C20B68A44BCF132E05BA5A /* Pods_Time_Tracker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F1FBACE4F5AE7B30EC08265 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F7476E082EB53B8699D93975 /* Pods-Time Tracker.debug.xcconfig */,
+				D5339EA2062E7EAEFF2D111B /* Pods-Time Tracker.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		841701AD2940A4C100FA9658 = {
 			isa = PBXGroup;
 			children = (
 				841701B82940A4C100FA9658 /* Time Tracker */,
 				841701B72940A4C100FA9658 /* Products */,
+				6F1FBACE4F5AE7B30EC08265 /* Pods */,
+				D2C4E3DF94B21A520C214C17 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,6 +116,7 @@
 				841701B92940A4C100FA9658 /* Time_TrackerApp.swift */,
 				8422884629474E9100467096 /* DataManager */,
 				841701C92940A5DF00FA9658 /* Time Tracker.xcdatamodeld */,
+				848008DE296D10360014CDF9 /* GoogleService-Info.plist */,
 				841701BD2940A4C300FA9658 /* Assets.xcassets */,
 				841701BF2940A4C300FA9658 /* Preview Content */,
 			);
@@ -252,6 +272,14 @@
 			path = Routing;
 			sourceTree = "<group>";
 		};
+		D2C4E3DF94B21A520C214C17 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9F865BFFB60107AAE0492A9F /* Pods_Time_Tracker.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -259,9 +287,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 841701C42940A4C300FA9658 /* Build configuration list for PBXNativeTarget "Time Tracker" */;
 			buildPhases = (
+				4D91571C12DDF9D53FF56864 /* [CP] Check Pods Manifest.lock */,
 				841701B22940A4C100FA9658 /* Sources */,
 				841701B32940A4C100FA9658 /* Frameworks */,
 				841701B42940A4C100FA9658 /* Resources */,
+				4384C42F8C3160411375AF6F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -310,12 +340,55 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				848008DF296D10360014CDF9 /* GoogleService-Info.plist in Resources */,
 				841701C12940A4C300FA9658 /* Preview Assets.xcassets in Resources */,
 				841701BE2940A4C300FA9658 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4384C42F8C3160411375AF6F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Time Tracker/Pods-Time Tracker-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Time Tracker/Pods-Time Tracker-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Time Tracker/Pods-Time Tracker-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4D91571C12DDF9D53FF56864 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Time Tracker-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		841701B22940A4C100FA9658 /* Sources */ = {
@@ -465,6 +538,7 @@
 		};
 		841701C52940A4C300FA9658 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F7476E082EB53B8699D93975 /* Pods-Time Tracker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -496,6 +570,7 @@
 		};
 		841701C62940A4C300FA9658 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D5339EA2062E7EAEFF2D111B /* Pods-Time Tracker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
