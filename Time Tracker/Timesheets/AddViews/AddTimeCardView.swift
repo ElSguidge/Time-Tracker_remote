@@ -64,7 +64,9 @@ struct AddTimeCardView: View {
             Form {
                 
                 DatePickerView
-
+                
+                 SavedWeeklyCard(employee: employee, timesheets: timesheets, weeks: weeks)
+                
                 if weekArray.isEmpty == false {
                     
                     CardTile

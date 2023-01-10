@@ -38,6 +38,7 @@
 		847A3CEC296D192800BF6793 /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CEB296D192800BF6793 /* SettingsPage.swift */; };
 		847A3CEE296D198F00BF6793 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CED296D198F00BF6793 /* LoginPage.swift */; };
 		847A3CF0296D19E200BF6793 /* RegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CEF296D19E200BF6793 /* RegisterPage.swift */; };
+		847A3CF2296D5B7300BF6793 /* SavedWeeklyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CF1296D5B7300BF6793 /* SavedWeeklyCard.swift */; };
 		848008DF296D10360014CDF9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 848008DE296D10360014CDF9 /* GoogleService-Info.plist */; };
 		8499C33B2955A61D00522178 /* PdfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499C33A2955A61D00522178 /* PdfView.swift */; };
 		8499C33D2955B6F300522178 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499C33C2955B6F300522178 /* Extensions.swift */; };
@@ -83,6 +84,7 @@
 		847A3CEB296D192800BF6793 /* SettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPage.swift; sourceTree = "<group>"; };
 		847A3CED296D198F00BF6793 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		847A3CEF296D19E200BF6793 /* RegisterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPage.swift; sourceTree = "<group>"; };
+		847A3CF1296D5B7300BF6793 /* SavedWeeklyCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedWeeklyCard.swift; sourceTree = "<group>"; };
 		848008DE296D10360014CDF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8499C33A2955A61D00522178 /* PdfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfView.swift; sourceTree = "<group>"; };
 		8499C33C2955B6F300522178 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 			children = (
 				841701D2294196EC00FA9658 /* AddNewEmployeeView.swift */,
 				841701D62941C62F00FA9658 /* AddTimeCardView.swift */,
+				847A3CF1296D5B7300BF6793 /* SavedWeeklyCard.swift */,
 			);
 			path = AddViews;
 			sourceTree = "<group>";
@@ -560,6 +563,7 @@
 				8499C3442956DC5700522178 /* ExpenseCard.swift in Sources */,
 				847A3CEE296D198F00BF6793 /* LoginPage.swift in Sources */,
 				847A3CF0296D19E200BF6793 /* RegisterPage.swift in Sources */,
+				847A3CF2296D5B7300BF6793 /* SavedWeeklyCard.swift in Sources */,
 				847A3CC5296D123800BF6793 /* MapViewModel.swift in Sources */,
 				8499C33B2955A61D00522178 /* PdfView.swift in Sources */,
 				847A3CE5296D169600BF6793 /* MotherView.swift in Sources */,
