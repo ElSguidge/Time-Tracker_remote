@@ -10,11 +10,11 @@ import SwiftUI
 struct MotherView: View {
     
     @EnvironmentObject var viewRouter: ViewRouter
-    
+//    @StateObject var dataController : DataController
+
+
     var body: some View {
         switch viewRouter.currentPage {
-        case .registerPage:
-            RegisterPage().environmentObject(AuthenticationService())
         case .loginPage:
             LoginPage().environmentObject(AuthenticationService())
         case .homePage:

@@ -41,7 +41,7 @@
 + (NSString *_Nullable)getNetworkMobileCountryCode {
 #ifdef TARGET_HAS_MOBILE_CONNECTIVITY
   CTTelephonyNetworkInfo *networkInfo = [GULNetworkInfo getNetworkInfo];
-  CTCarrier *provider = networkInfo.subscriberCellularProvider;
+    CTCarrier *provider = networkInfo.serviceSubscriberCellularProviders;
   return provider.mobileCountryCode;
 #endif
   return nil;
@@ -50,7 +50,7 @@
 + (NSString *_Nullable)getNetworkMobileNetworkCode {
 #ifdef TARGET_HAS_MOBILE_CONNECTIVITY
   CTTelephonyNetworkInfo *networkInfo = [GULNetworkInfo getNetworkInfo];
-  CTCarrier *provider = networkInfo.subscriberCellularProvider;
+    CTCarrier *provider = networkInfo.serviceSubscriberCellularProviders;
   return provider.mobileNetworkCode;
 #endif
   return nil;
@@ -120,7 +120,7 @@
 + (NSString *)getNetworkRadioType {
 #ifdef TARGET_HAS_MOBILE_CONNECTIVITY
   CTTelephonyNetworkInfo *networkInfo = [GULNetworkInfo getNetworkInfo];
-  return networkInfo.currentRadioAccessTechnology;
+    return networkInfo.serviceCurrentRadioAccessTechnology;
 #else
   return @"";
 #endif

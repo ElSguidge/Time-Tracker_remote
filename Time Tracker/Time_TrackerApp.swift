@@ -12,13 +12,12 @@ import FirebaseFirestore
 @main
 struct Time_TrackerApp: App {
     
-    @StateObject var dataController : DataController
+//    @StateObject var dataController : DataController
     @StateObject var viewRouter = ViewRouter()
     
     init() {
         FirebaseApp.configure()
-        let dataController = DataController()
-        _dataController = StateObject(wrappedValue: dataController)
+
     }
     var body: some Scene {
         WindowGroup {

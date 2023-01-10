@@ -27,7 +27,7 @@ struct HomeView: View {
                         List {
                             ForEach(employees.wrappedValue) { employee in
                                 NavigationLink  {
-                                    MainDetailView(employee: employee)
+                                    MainDetailView(employee: employee).environmentObject(dataController)
                                 } label: {
                                     VStack(alignment: .leading) {
                                         Text(employee.name ?? "Anonymous")

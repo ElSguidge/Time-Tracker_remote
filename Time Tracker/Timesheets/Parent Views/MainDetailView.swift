@@ -65,7 +65,7 @@ struct MainDetailView: View {
             .navigationTitle(self.employee.name ?? "Anonymous")
             .navigationBarTitleDisplayMode(.inline)
             .sheet(isPresented: $showingAddTimecard) {
-                AddTimeCardView(employee: self.employee, timesheets: self.timesheets, weeks: self.weeks, workExpenses: self.workExpenses, cards: cards)
+                AddTimeCardView(employee: self.employee, timesheets: self.timesheets, weeks: self.weeks, workExpenses: self.workExpenses, cards: cards).environmentObject(dataController)
 //                    .presentationDetents([.large, .medium])
 //                    .presentationDragIndicator(.visible)
             }
