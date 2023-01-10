@@ -8,17 +8,53 @@
 
 /* Begin PBXBuildFile section */
 		841701BA2940A4C100FA9658 /* Time_TrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841701B92940A4C100FA9658 /* Time_TrackerApp.swift */; };
-		841701BC2940A4C100FA9658 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841701BB2940A4C100FA9658 /* ContentView.swift */; };
+		841701BC2940A4C100FA9658 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841701BB2940A4C100FA9658 /* HomeView.swift */; };
 		841701BE2940A4C300FA9658 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 841701BD2940A4C300FA9658 /* Assets.xcassets */; };
 		841701C12940A4C300FA9658 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 841701C02940A4C300FA9658 /* Preview Assets.xcassets */; };
+		841701C82940A50200FA9658 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841701C72940A50200FA9658 /* DataController.swift */; };
+		841701CB2940A5DF00FA9658 /* Time Tracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 841701C92940A5DF00FA9658 /* Time Tracker.xcdatamodeld */; };
+		841701D12941937500FA9658 /* MainDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841701D02941937500FA9658 /* MainDetailView.swift */; };
+		841701D3294196EC00FA9658 /* AddNewEmployeeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841701D2294196EC00FA9658 /* AddNewEmployeeView.swift */; };
+		841701D52941AE1F00FA9658 /* SavedTimecardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841701D42941AE1F00FA9658 /* SavedTimecardDetailView.swift */; };
+		841701D72941C62F00FA9658 /* AddTimeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841701D62941C62F00FA9658 /* AddTimeCardView.swift */; };
+		841701D9294204D000FA9658 /* DailyDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841701D8294204D000FA9658 /* DailyDetailView.swift */; };
+		8422883F2946DC6F00467096 /* TimecardEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422883E2946DC6F00467096 /* TimecardEditView.swift */; };
+		842288412947302A00467096 /* TimecardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842288402947302A00467096 /* TimecardModel.swift */; };
+		843345002952FBA200E79DBE /* HCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843344FF2952FBA200E79DBE /* HCard.swift */; };
+		844D23A5295CE82E00AD5191 /* SavedTimecardEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D23A4295CE82E00AD5191 /* SavedTimecardEditView.swift */; };
+		8499C33B2955A61D00522178 /* PdfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499C33A2955A61D00522178 /* PdfView.swift */; };
+		8499C33D2955B6F300522178 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499C33C2955B6F300522178 /* Extensions.swift */; };
+		8499C33F2956C20F00522178 /* Timecard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499C33E2956C20F00522178 /* Timecard.swift */; };
+		8499C3422956CD0F00522178 /* TotalsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499C3412956CD0F00522178 /* TotalsCard.swift */; };
+		8499C3442956DC5700522178 /* ExpenseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499C3432956DC5700522178 /* ExpenseCard.swift */; };
+		849C83912950624700132B03 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C83902950624700132B03 /* ImagePickerView.swift */; };
+		849C83942950636100132B03 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C83932950636100132B03 /* Coordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		841701B62940A4C100FA9658 /* Time Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Time Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		841701B92940A4C100FA9658 /* Time_TrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time_TrackerApp.swift; sourceTree = "<group>"; };
-		841701BB2940A4C100FA9658 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		841701BB2940A4C100FA9658 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		841701BD2940A4C300FA9658 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		841701C02940A4C300FA9658 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		841701C72940A50200FA9658 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		841701CA2940A5DF00FA9658 /* Time Tracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Time Tracker.xcdatamodel"; sourceTree = "<group>"; };
+		841701D02941937500FA9658 /* MainDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDetailView.swift; sourceTree = "<group>"; };
+		841701D2294196EC00FA9658 /* AddNewEmployeeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewEmployeeView.swift; sourceTree = "<group>"; };
+		841701D42941AE1F00FA9658 /* SavedTimecardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTimecardDetailView.swift; sourceTree = "<group>"; };
+		841701D62941C62F00FA9658 /* AddTimeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTimeCardView.swift; sourceTree = "<group>"; };
+		841701D8294204D000FA9658 /* DailyDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDetailView.swift; sourceTree = "<group>"; };
+		8422883E2946DC6F00467096 /* TimecardEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimecardEditView.swift; sourceTree = "<group>"; };
+		842288402947302A00467096 /* TimecardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimecardModel.swift; sourceTree = "<group>"; };
+		843344FF2952FBA200E79DBE /* HCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCard.swift; sourceTree = "<group>"; };
+		844D23A4295CE82E00AD5191 /* SavedTimecardEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTimecardEditView.swift; sourceTree = "<group>"; };
+		8499C33A2955A61D00522178 /* PdfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfView.swift; sourceTree = "<group>"; };
+		8499C33C2955B6F300522178 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		8499C33E2956C20F00522178 /* Timecard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timecard.swift; sourceTree = "<group>"; };
+		8499C3412956CD0F00522178 /* TotalsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalsCard.swift; sourceTree = "<group>"; };
+		8499C3432956DC5700522178 /* ExpenseCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCard.swift; sourceTree = "<group>"; };
+		849C83902950624700132B03 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
+		849C83932950636100132B03 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +87,14 @@
 		841701B82940A4C100FA9658 /* Time Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				84B6222A296CCE9C00567125 /* Routing */,
+				84B62229296CCE9200567125 /* Notifications */,
+				844D23A1295CDE8D00AD5191 /* Location */,
+				844D23A0295CDE7B00AD5191 /* Auth */,
+				844D239F295CDE4600AD5191 /* Timesheets */,
 				841701B92940A4C100FA9658 /* Time_TrackerApp.swift */,
-				841701BB2940A4C100FA9658 /* ContentView.swift */,
+				8422884629474E9100467096 /* DataManager */,
+				841701C92940A5DF00FA9658 /* Time Tracker.xcdatamodeld */,
 				841701BD2940A4C300FA9658 /* Assets.xcassets */,
 				841701BF2940A4C300FA9658 /* Preview Content */,
 			);
@@ -65,6 +107,146 @@
 				841701C02940A4C300FA9658 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		842288332944275100467096 /* Parent Views */ = {
+			isa = PBXGroup;
+			children = (
+				841701D02941937500FA9658 /* MainDetailView.swift */,
+				841701BB2940A4C100FA9658 /* HomeView.swift */,
+			);
+			path = "Parent Views";
+			sourceTree = "<group>";
+		};
+		84228842294732C100467096 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				842288402947302A00467096 /* TimecardModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8422884329474E0A00467096 /* AddViews */ = {
+			isa = PBXGroup;
+			children = (
+				841701D2294196EC00FA9658 /* AddNewEmployeeView.swift */,
+				841701D62941C62F00FA9658 /* AddTimeCardView.swift */,
+			);
+			path = AddViews;
+			sourceTree = "<group>";
+		};
+		8422884429474E3D00467096 /* ChildDetailViews */ = {
+			isa = PBXGroup;
+			children = (
+				841701D8294204D000FA9658 /* DailyDetailView.swift */,
+				841701D42941AE1F00FA9658 /* SavedTimecardDetailView.swift */,
+			);
+			path = ChildDetailViews;
+			sourceTree = "<group>";
+		};
+		8422884529474E7400467096 /* ChildEditViews */ = {
+			isa = PBXGroup;
+			children = (
+				8422883E2946DC6F00467096 /* TimecardEditView.swift */,
+				844D23A4295CE82E00AD5191 /* SavedTimecardEditView.swift */,
+			);
+			path = ChildEditViews;
+			sourceTree = "<group>";
+		};
+		8422884629474E9100467096 /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				841701C72940A50200FA9658 /* DataController.swift */,
+			);
+			path = DataManager;
+			sourceTree = "<group>";
+		};
+		842288492947E92600467096 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				843344FF2952FBA200E79DBE /* HCard.swift */,
+				8499C33A2955A61D00522178 /* PdfView.swift */,
+				8499C33E2956C20F00522178 /* Timecard.swift */,
+				8499C3412956CD0F00522178 /* TotalsCard.swift */,
+				8499C3432956DC5700522178 /* ExpenseCard.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		844D239F295CDE4600AD5191 /* Timesheets */ = {
+			isa = PBXGroup;
+			children = (
+				844D23A2295CDEBD00AD5191 /* Image */,
+				8422884529474E7400467096 /* ChildEditViews */,
+				84228842294732C100467096 /* Models */,
+				8422884429474E3D00467096 /* ChildDetailViews */,
+				8422884329474E0A00467096 /* AddViews */,
+				842288332944275100467096 /* Parent Views */,
+				842288492947E92600467096 /* Components */,
+			);
+			path = Timesheets;
+			sourceTree = "<group>";
+		};
+		844D23A0295CDE7B00AD5191 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		844D23A1295CDE8D00AD5191 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		844D23A2295CDEBD00AD5191 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				844D23A3295CDEE300AD5191 /* Views */,
+				849C83922950634800132B03 /* Coordinator */,
+				8499C3402956CBBC00522178 /* Extensions */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		844D23A3295CDEE300AD5191 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				849C83902950624700132B03 /* ImagePickerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8499C3402956CBBC00522178 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8499C33C2955B6F300522178 /* Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		849C83922950634800132B03 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				849C83932950636100132B03 /* Coordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		84B62229296CCE9200567125 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		84B6222A296CCE9C00567125 /* Routing */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Routing;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +319,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				841701BC2940A4C100FA9658 /* ContentView.swift in Sources */,
+				8499C33F2956C20F00522178 /* Timecard.swift in Sources */,
+				841701CB2940A5DF00FA9658 /* Time Tracker.xcdatamodeld in Sources */,
+				842288412947302A00467096 /* TimecardModel.swift in Sources */,
+				844D23A5295CE82E00AD5191 /* SavedTimecardEditView.swift in Sources */,
+				8422883F2946DC6F00467096 /* TimecardEditView.swift in Sources */,
+				841701D9294204D000FA9658 /* DailyDetailView.swift in Sources */,
+				843345002952FBA200E79DBE /* HCard.swift in Sources */,
+				841701D12941937500FA9658 /* MainDetailView.swift in Sources */,
+				849C83942950636100132B03 /* Coordinator.swift in Sources */,
+				8499C3422956CD0F00522178 /* TotalsCard.swift in Sources */,
+				841701D72941C62F00FA9658 /* AddTimeCardView.swift in Sources */,
+				841701D52941AE1F00FA9658 /* SavedTimecardDetailView.swift in Sources */,
+				841701BC2940A4C100FA9658 /* HomeView.swift in Sources */,
+				849C83912950624700132B03 /* ImagePickerView.swift in Sources */,
+				8499C33D2955B6F300522178 /* Extensions.swift in Sources */,
+				8499C3442956DC5700522178 /* ExpenseCard.swift in Sources */,
+				8499C33B2955A61D00522178 /* PdfView.swift in Sources */,
+				841701C82940A50200FA9658 /* DataController.swift in Sources */,
+				841701D3294196EC00FA9658 /* AddNewEmployeeView.swift in Sources */,
 				841701BA2940A4C100FA9658 /* Time_TrackerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,11 +470,13 @@
 				DEVELOPMENT_TEAM = HBJP4B48D7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "TimeTracker would like to access your camera and photo library.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -299,11 +501,13 @@
 				DEVELOPMENT_TEAM = HBJP4B48D7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "TimeTracker would like to access your camera and photo library.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -339,6 +543,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		841701C92940A5DF00FA9658 /* Time Tracker.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				841701CA2940A5DF00FA9658 /* Time Tracker.xcdatamodel */,
+			);
+			currentVersion = 841701CA2940A5DF00FA9658 /* Time Tracker.xcdatamodel */;
+			path = "Time Tracker.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 841701AE2940A4C100FA9658 /* Project object */;
 }
