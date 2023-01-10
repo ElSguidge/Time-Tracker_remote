@@ -7,14 +7,13 @@
 
 import SwiftUI
 
-struct ViewRouter: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+class ViewRouter: ObservableObject {
+    static let shared = ViewRouter()
+    
+    @Published var currentPage: Page = .loginPage
 }
 
-struct ViewRouter_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewRouter()
-    }
+enum Page {
+    case loginPage
+    case homePage
 }

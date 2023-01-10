@@ -29,6 +29,12 @@
 		847A3CD6296D147E00BF6793 /* UserDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CD5296D147E00BF6793 /* UserDetailView.swift */; };
 		847A3CD8296D149E00BF6793 /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CD7296D149E00BF6793 /* UserListView.swift */; };
 		847A3CDB296D14EC00BF6793 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CDA296D14EC00BF6793 /* AuthenticationService.swift */; };
+		847A3CDD296D157300BF6793 /* UserNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CDC296D157300BF6793 /* UserNotifications.swift */; };
+		847A3CDF296D15C400BF6793 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CDE296D15C400BF6793 /* LoginViewModel.swift */; };
+		847A3CE1296D15F200BF6793 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CE0296D15F200BF6793 /* RegisterViewModel.swift */; };
+		847A3CE3296D163300BF6793 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CE2296D163300BF6793 /* AuthViewModel.swift */; };
+		847A3CE5296D169600BF6793 /* MotherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CE4296D169600BF6793 /* MotherView.swift */; };
+		847A3CE8296D184200BF6793 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CE7296D184200BF6793 /* TabBarView.swift */; };
 		848008DF296D10360014CDF9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 848008DE296D10360014CDF9 /* GoogleService-Info.plist */; };
 		8499C33B2955A61D00522178 /* PdfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499C33A2955A61D00522178 /* PdfView.swift */; };
 		8499C33D2955B6F300522178 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499C33C2955B6F300522178 /* Extensions.swift */; };
@@ -65,6 +71,12 @@
 		847A3CD5296D147E00BF6793 /* UserDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailView.swift; sourceTree = "<group>"; };
 		847A3CD7296D149E00BF6793 /* UserListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
 		847A3CDA296D14EC00BF6793 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		847A3CDC296D157300BF6793 /* UserNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotifications.swift; sourceTree = "<group>"; };
+		847A3CDE296D15C400BF6793 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		847A3CE0296D15F200BF6793 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		847A3CE2296D163300BF6793 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		847A3CE4296D169600BF6793 /* MotherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherView.swift; sourceTree = "<group>"; };
+		847A3CE7296D184200BF6793 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		848008DE296D10360014CDF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8499C33A2955A61D00522178 /* PdfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfView.swift; sourceTree = "<group>"; };
 		8499C33C2955B6F300522178 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -121,6 +133,7 @@
 		841701B82940A4C100FA9658 /* Time Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				847A3CE6296D182F00BF6793 /* Tab Bar */,
 				84B6222A296CCE9C00567125 /* Routing */,
 				84B62229296CCE9200567125 /* Notifications */,
 				844D23A1295CDE8D00AD5191 /* Location */,
@@ -297,6 +310,9 @@
 		847A3CD0296D13E200BF6793 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
+				847A3CDE296D15C400BF6793 /* LoginViewModel.swift */,
+				847A3CE0296D15F200BF6793 /* RegisterViewModel.swift */,
+				847A3CE2296D163300BF6793 /* AuthViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -325,6 +341,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		847A3CE6296D182F00BF6793 /* Tab Bar */ = {
+			isa = PBXGroup;
+			children = (
+				847A3CE7296D184200BF6793 /* TabBarView.swift */,
+			);
+			path = "Tab Bar";
+			sourceTree = "<group>";
+		};
 		8499C3402956CBBC00522178 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -344,6 +368,7 @@
 		84B62229296CCE9200567125 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
+				847A3CDC296D157300BF6793 /* UserNotifications.swift */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";
@@ -352,6 +377,7 @@
 			isa = PBXGroup;
 			children = (
 				84B6222B296D098400567125 /* ViewRouter.swift */,
+				847A3CE4296D169600BF6793 /* MotherView.swift */,
 			);
 			path = Routing;
 			sourceTree = "<group>";
@@ -479,22 +505,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				847A3CE8296D184200BF6793 /* TabBarView.swift in Sources */,
 				8499C33F2956C20F00522178 /* Timecard.swift in Sources */,
+				847A3CDD296D157300BF6793 /* UserNotifications.swift in Sources */,
 				847A3CD3296D143000BF6793 /* UserProfileRepository.swift in Sources */,
 				847A3CCD296D134C00BF6793 /* ObserverModel.swift in Sources */,
 				841701CB2940A5DF00FA9658 /* Time Tracker.xcdatamodeld in Sources */,
 				847A3CD6296D147E00BF6793 /* UserDetailView.swift in Sources */,
 				842288412947302A00467096 /* TimecardModel.swift in Sources */,
 				844D23A5295CE82E00AD5191 /* SavedTimecardEditView.swift in Sources */,
+				847A3CDF296D15C400BF6793 /* LoginViewModel.swift in Sources */,
 				8422883F2946DC6F00467096 /* TimecardEditView.swift in Sources */,
 				841701D9294204D000FA9658 /* DailyDetailView.swift in Sources */,
 				843345002952FBA200E79DBE /* HCard.swift in Sources */,
+				847A3CE3296D163300BF6793 /* AuthViewModel.swift in Sources */,
 				841701D12941937500FA9658 /* MainDetailView.swift in Sources */,
 				849C83942950636100132B03 /* Coordinator.swift in Sources */,
 				8499C3422956CD0F00522178 /* TotalsCard.swift in Sources */,
 				841701D72941C62F00FA9658 /* AddTimeCardView.swift in Sources */,
 				841701D52941AE1F00FA9658 /* SavedTimecardDetailView.swift in Sources */,
 				841701BC2940A4C100FA9658 /* HomeView.swift in Sources */,
+				847A3CE1296D15F200BF6793 /* RegisterViewModel.swift in Sources */,
 				849C83912950624700132B03 /* ImagePickerView.swift in Sources */,
 				8499C33D2955B6F300522178 /* Extensions.swift in Sources */,
 				84B6222C296D098400567125 /* ViewRouter.swift in Sources */,
@@ -503,6 +534,7 @@
 				8499C3442956DC5700522178 /* ExpenseCard.swift in Sources */,
 				847A3CC5296D123800BF6793 /* MapViewModel.swift in Sources */,
 				8499C33B2955A61D00522178 /* PdfView.swift in Sources */,
+				847A3CE5296D169600BF6793 /* MotherView.swift in Sources */,
 				841701C82940A50200FA9658 /* DataController.swift in Sources */,
 				841701D3294196EC00FA9658 /* AddNewEmployeeView.swift in Sources */,
 				841701BA2940A4C100FA9658 /* Time_TrackerApp.swift in Sources */,

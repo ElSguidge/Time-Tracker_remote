@@ -6,21 +6,28 @@
 //
 
 import SwiftUI
+import FirebaseCore
+import FirebaseFirestore
 
 @main
 struct Time_TrackerApp: App {
+    
     @StateObject var dataController : DataController
+    @StateObject var viewRouter = ViewRouter()
     
     init() {
+        FirebaseApp.configure()
         let dataController = DataController()
         _dataController = StateObject(wrappedValue: dataController)
     }
     var body: some Scene {
         WindowGroup {
-            HomeView()
-                .environment(\.managedObjectContext, dataController.container.viewContext)
-                .environmentObject(dataController)
-                .preferredColorScheme(.dark)
+            
+            MotherView().environmentObject(viewRouter)
+//            HomeView()
+//                .environment(\.managedObjectContext, dataController.container.viewContext)
+//                .environmentObject(dataController)
+//                .preferredColorScheme(.dark)
         }
     }
 }
