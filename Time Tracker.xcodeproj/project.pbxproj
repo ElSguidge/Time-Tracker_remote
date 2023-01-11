@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		840BCC36296EC07F00738A06 /* PDFViewSaved.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840BCC35296EC07F00738A06 /* PDFViewSaved.swift */; };
 		841701BA2940A4C100FA9658 /* Time_TrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841701B92940A4C100FA9658 /* Time_TrackerApp.swift */; };
 		841701BC2940A4C100FA9658 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841701BB2940A4C100FA9658 /* HomeView.swift */; };
 		841701BE2940A4C300FA9658 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 841701BD2940A4C300FA9658 /* Assets.xcassets */; };
@@ -52,6 +53,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		840BCC35296EC07F00738A06 /* PDFViewSaved.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewSaved.swift; sourceTree = "<group>"; };
 		841701B62940A4C100FA9658 /* Time Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Time Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		841701B92940A4C100FA9658 /* Time_TrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time_TrackerApp.swift; sourceTree = "<group>"; };
 		841701BB2940A4C100FA9658 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				8499C33E2956C20F00522178 /* Timecard.swift */,
 				8499C3412956CD0F00522178 /* TotalsCard.swift */,
 				8499C3432956DC5700522178 /* ExpenseCard.swift */,
+				840BCC35296EC07F00738A06 /* PDFViewSaved.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -545,6 +548,7 @@
 				847A3CDF296D15C400BF6793 /* LoginViewModel.swift in Sources */,
 				8422883F2946DC6F00467096 /* TimecardEditView.swift in Sources */,
 				841701D9294204D000FA9658 /* DailyDetailView.swift in Sources */,
+				840BCC36296EC07F00738A06 /* PDFViewSaved.swift in Sources */,
 				843345002952FBA200E79DBE /* HCard.swift in Sources */,
 				847A3CE3296D163300BF6793 /* AuthViewModel.swift in Sources */,
 				841701D12941937500FA9658 /* MainDetailView.swift in Sources */,

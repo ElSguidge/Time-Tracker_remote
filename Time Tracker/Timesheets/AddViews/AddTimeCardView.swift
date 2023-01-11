@@ -81,11 +81,7 @@ struct AddTimeCardView: View {
                 if temp.count >= 5 {
                     Section {
                         ShareLink("Submit", item: render())
-                            .font(.system(size: 20))
                             .fontWeight(.bold)
-                            .listRowBackground(Color.blue.opacity(0.7))
-                            .foregroundColor(Color.white)
-                            .buttonStyle(BorderlessButtonStyle())
                     }
                 }
                 
@@ -100,6 +96,7 @@ struct AddTimeCardView: View {
                     
                 }
                 else if weekArray.isEmpty == false && showPicker == true {
+                    
                     SavedCardTile
                 }
 
@@ -201,8 +198,12 @@ struct AddTimeCardView: View {
         }
     }
     var SavedCardTile: some View {
+        
             List {
                 if selectedTemplate != "" {
+                    ShareLink("Submit", item: renderSaved())
+                        .fontWeight(.bold)
+
                     ForEach(0..<weekArray.count, id: \.self) { i in
                         let weekEndingDay = weekArray[i]
                         let day = weekEndingDay.components(separatedBy: " ").first ?? ""
@@ -404,10 +405,34 @@ struct AddTimeCardView: View {
             pdf.endPDFPage()
             pdf.closePDF()
             
-            
-            
         }
-        //
+        return url
+    }
+    
+    func renderSaved() -> URL {
+        let url = URL.documentsDirectory.appending(path: "for_\(weekEnding).pdf")
+        let renderer = ImageRenderer(content: PDFViewSaved(weekArray: $weekArray, employee: self.employee, timesheet: filteredArray))
+        
+        renderer.render { size, context in
+            // 4: Tell SwiftUI our PDF should be the same size as the views we're rendering
+            var box = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+            
+            // 5: Create the CGContext for our PDF pages
+            guard let pdf = CGContext(url as CFURL, mediaBox: &box, nil) else {
+                return
+            }
+            
+            // 6: Start a new PDF page
+            pdf.beginPDFPage(nil)
+            
+            // 7: Render the SwiftUI view data onto the page
+            context(pdf)
+            
+            // 8: End the page and close the file
+            pdf.endPDFPage()
+            pdf.closePDF()
+       
+        }
         return url
     }
 }
