@@ -283,7 +283,7 @@ struct AddTimeCardView: View {
                     for week in weeks {
                         let changeDate = formatter.string(from: week.weekEnding!)
                         let selectedDay = formatter.string(from: anchor)
-                        if checkDay && selectedDay == changeDate && week.submitted == true {
+                        if checkDay && selectedDay == changeDate {
                             weekArray = []
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                                 weekArray = []
