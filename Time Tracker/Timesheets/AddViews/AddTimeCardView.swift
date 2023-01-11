@@ -106,7 +106,7 @@ struct AddTimeCardView: View {
                 case .first:
                     return Alert(title: Text("Weekending must be a monday."), message: Text("Please choose a Monday for the pay week ending date."), dismissButton: .default(Text("OK")))
                 case .second:
-                    return Alert(title: Text("Nope!"), message: Text("You have already submitted a timesheet for that week! Please choose another payweek date."), dismissButton: .default(Text("OK")))
+                    return Alert(title: Text("Woops!"), message: Text("You have already submitted a timesheet for that week! Please choose another payweek date."), dismissButton: .default(Text("OK")))
                 case .third:
                     return Alert(title: Text("Saved!"), message: Text("Timesheet saved on \(Date())"), dismissButton: .default(Text("OK")) {
                         cards.items.removeAll()
@@ -283,7 +283,7 @@ struct AddTimeCardView: View {
                     for week in weeks {
                         let changeDate = formatter.string(from: week.weekEnding!)
                         let selectedDay = formatter.string(from: anchor)
-                        if checkDay && selectedDay == changeDate {
+                        if checkDay && selectedDay == changeDate && week.submitted == true {
                             weekArray = []
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                                 weekArray = []
