@@ -9,34 +9,30 @@ import SwiftUI
 
 struct SavedWeeklyCard: View {
     
-    @Environment(\.presentationMode) var presentation
-    @EnvironmentObject var dataController : DataController
-    @Environment(\.managedObjectContext) var moc
     
     let employee : Employee
     var timesheets : [Timesheet]
     var weeks : [Week]
     
-    @State private var showPicker: Bool = false
-    @State private var selectedTemplate = ""
+    @Binding var showPicker: Bool 
+    @Binding var selectedTemplate : String
     
-    var weekEndingArray: [String] {
+    var savedWeekendingArray: [String] {
         return weeks.map { dateStrings(for: $0.weekEnding ?? Date.now) }
     }
-  
+    
     var body: some View {
         Section {
             
             Toggle(isOn: $showPicker) {
-                Text("Auto fill timesheet?")
+                Text("Copy saved timesheet")
             }
-            
             if showPicker {
                 withAnimation {
-                    Picker("Select from saved", selection: $selectedTemplate) {
-                        ForEach(weekEndingArray, id: \.self) { weekEnding in
-                            Text(weekEnding)
-                            }
+                    Picker(savedWeekendingArray.isEmpty ? "No saved timesheets" : "Select from saved", selection: $selectedTemplate) {
+                        ForEach(savedWeekendingArray, id: \.self) { weekEndingSaved in
+                            Text(weekEndingSaved)
+                        }
                     }
                 }
             }

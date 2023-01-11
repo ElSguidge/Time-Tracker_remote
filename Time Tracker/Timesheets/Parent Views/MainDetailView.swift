@@ -45,15 +45,15 @@ struct MainDetailView: View {
                     Label("Create a new timesheet", systemImage: "plus.circle.fill")
                 }
             }
-            Section (header: Text("My Saved Timesheets")) {
+            Section (header: Text("My Timesheets")) {
                 List {
                     ForEach(weeks) { week in
                         NavigationLink {
                             SavedTimecardDetailView(employee: employee, week: week)
                         } label: {
                             HStack {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .foregroundColor(.green)
+                                Image(systemName: week.submitted ? "checkmark.circle.fill" : "x.circle.fill")
+                                    .foregroundColor(week.submitted ? .green : .gray)
                                     .padding(5)
                                 Text("\(dateStrings(for: week.weekEnding ?? Date()))")
                             }
@@ -66,8 +66,7 @@ struct MainDetailView: View {
             .navigationBarTitleDisplayMode(.inline)
             .sheet(isPresented: $showingAddTimecard) {
                 AddTimeCardView(employee: self.employee, timesheets: self.timesheets, weeks: self.weeks, workExpenses: self.workExpenses, cards: cards).environmentObject(dataController)
-//                    .presentationDetents([.large, .medium])
-//                    .presentationDragIndicator(.visible)
+
             }
         }
     }

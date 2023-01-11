@@ -28,6 +28,7 @@
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="day" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="submitted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="totalHours" optional="YES" attributeType="String"/>
         <attribute name="totalHoursNormal" optional="YES" attributeType="String"/>
         <attribute name="totalHoursOvertime" optional="YES" attributeType="String"/>

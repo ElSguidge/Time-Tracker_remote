@@ -42,6 +42,9 @@ struct SavedTimecardDetailView: View {
                         Section(header: Text("Date saved")) {
                             Text("\(week.date ?? Date())")
                         }
+                Section(header: Text("Status")) {
+                    Text(week.submitted ? "Submitted" : "Saved only")
+                }
                 Section(header: Text("Total hours")) {
                     Text("Total: \(week.totalHours ?? "")")
                         Text("Normal: \(week.totalHoursNormal ?? "" )")

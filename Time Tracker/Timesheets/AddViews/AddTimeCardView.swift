@@ -25,6 +25,12 @@ struct AddTimeCardView: View {
     var timesheets : [Timesheet]
     var weeks : [Week]
     var workExpenses: [WorkExpense]
+
+    
+    var filteredArray: [Timesheet] {
+        
+        return timesheets.filter { dateStrings(for: $0.weekEnding!) == selectedTemplate }.sorted { $0.day! < $1.day! }
+    }
     
     @ObservedObject var cards = Cards()
     
@@ -37,6 +43,10 @@ struct AddTimeCardView: View {
     @State private var weekArray : [String] = []
     @State private var workDay = ""
     @State private var datePickerId: Int = 0
+    @State private var timesheetSubmittedConfirmation: Bool = false
+    
+    @State private var selectedTemplate: String = ""
+    @State private var showPicker: Bool = false
     
     var monday: Date {
         let calendar = Calendar(identifier: .gregorian)
@@ -44,6 +54,7 @@ struct AddTimeCardView: View {
         let monday = calendar.date(byAdding: .day, value: 1, to: sunday ?? Date())
         return monday!
     }
+    
     
     var checkDay: Bool {
         let day = weekEnding
@@ -57,27 +68,41 @@ struct AddTimeCardView: View {
             return false
         }
     }
-
+    
     var body: some View {
         NavigationStack {
-
+            
             Form {
                 
                 DatePickerView
                 
-                 SavedWeeklyCard(employee: employee, timesheets: timesheets, weeks: weeks)
+                SavedWeeklyCard(employee: employee, timesheets: timesheets, weeks: weeks, showPicker: $showPicker, selectedTemplate: $selectedTemplate)
                 
-                if weekArray.isEmpty == false {
-                    
+                if temp.count >= 5 {
+                    Section {
+                        ShareLink("Submit", item: render())
+                            .font(.system(size: 20))
+                            .fontWeight(.bold)
+                            .listRowBackground(Color.blue.opacity(0.7))
+                            .foregroundColor(Color.white)
+                            .buttonStyle(BorderlessButtonStyle())
+                    }
+                }
+                
+                if weekArray.isEmpty == false && showPicker == false {
                     CardTile
                     
                         .onChange(of: cards.items) { newValue in
                             showSaveButton()
-                            
                         }
+                    
                     TotalsCard(cards: cards)
-                
+                    
                 }
+                else if weekArray.isEmpty == false && showPicker == true {
+                    SavedCardTile
+                }
+
             }
             .alert(isPresented: $showAlert) {
                 switch activeAlert {
@@ -92,9 +117,12 @@ struct AddTimeCardView: View {
                         self.presentation.wrappedValue.dismiss()
                     })
                 case .fourth:
-                    return Alert(title: Text("Save only?"), message: Text("Please make ensure you have submitted your timesheet before saving."), primaryButton: .default(Text("Save")) {
-                            saveButton()
-                    }, secondaryButton: .cancel())
+                    return Alert(title: Text("Have you submitted your timesheet?"), message: Text("Please confirm you have submitted your timesheet before saving. Otherwise proceed with saving only."), primaryButton: .default(Text("Save")) {
+                        saveButton()
+                    }, secondaryButton: .default(Text("Confirm")) {
+                        timesheetSubmittedConfirmation = true
+                        saveButton()
+                    })
                 case .fifth:
                     return Alert(title: Text("Timesheet submitted."), message: Text("Timesheet submitted successfully on \(Date.now)"), dismissButton: .default(Text("OK")) {
                         cards.items.removeAll()
@@ -124,7 +152,7 @@ struct AddTimeCardView: View {
                         }
                     label: {
                         Text("Save")
-                        }
+                    }
                     }
                 }
             }
@@ -140,27 +168,27 @@ struct AddTimeCardView: View {
                     }
                     ForEach(cards.items) { index in
                         if self.weekArray[day] == index.day {
-                        NavigationLink {
-                            TimecardEditView(card: index, items: self.cards)
-                        } label: {
-                            VStack {
-                                Spacer()
-
-                                HStack {
-                                    Text(index.jobNumber)
-                                    Text(index.jobCode.uppercased())
-                                    Text(index.jobName.uppercased())
-                                    Text("\(index.hours.formatted()) hours".uppercased())
-                                    Text("\(index.overtime.formatted()) O/T".uppercased())
-                                }
+                            NavigationLink {
+                                TimecardEditView(card: index, items: self.cards)
+                            } label: {
+                                VStack {
+                                    Spacer()
+                                    
+                                    HStack {
+                                        Text(index.jobNumber)
+                                        Text(index.jobCode.uppercased())
+                                        Text(index.jobName.uppercased())
+                                        Text("\(index.hours.formatted()) hours".uppercased())
+                                        Text("\(index.overtime.formatted()) O/T".uppercased())
+                                    }
                                     Spacer()
                                 }
-                            .font(.caption)
-                            .fontWeight(.semibold)
-                            .listRowBackground(Color.green.opacity(0.3))
+                                .font(.caption)
+                                .fontWeight(.semibold)
+                                .listRowBackground(Color.green.opacity(0.3))
                             }
                         }
-
+                        
                     }
                 }
                 .onDelete { idx in
@@ -170,32 +198,62 @@ struct AddTimeCardView: View {
                     }
                 }
             }
-            if temp.count >= 5 {
-                Section {
-                    ShareLink("Submit", item: render())
-                        .font(.system(size: 20))
-                        .fontWeight(.bold)
-                        .listRowBackground(Color.blue.opacity(0.7))
-                        .foregroundColor(Color.white)
-                        .buttonStyle(BorderlessButtonStyle())
-                    
+        }
+    }
+    var SavedCardTile: some View {
+            List {
+                if selectedTemplate != "" {
+                    ForEach(0..<weekArray.count, id: \.self) { i in
+                        let weekEndingDay = weekArray[i]
+                        let day = weekEndingDay.components(separatedBy: " ").first ?? ""
+                        Section(header: Text(weekArray[i])) {
+                            ForEach(filteredArray) { index in
+                                if let timesheetWeekEnding = index.day,
+                                   let firstWord = timesheetWeekEnding.components(separatedBy: " ").first,
+                                   firstWord == day {
+                                    VStack {
+                                        Spacer()
+                                        HStack {
+                                            Text("Dep: \(index.department ?? "")")
+                                            Text(index.projectNumber ?? "")
+                                            Text(index.jobCode?.uppercased() ?? "")
+                                            Text(index.projectName?.uppercased() ?? "")
+                                            Text("\(index.hours.formatted()) hrs".uppercased())
+                                            Text("\(index.overtime.formatted()) O/T".uppercased())
+                                        }
+                                        Spacer()
+                                    }
+                                    .font(.caption)
+                                    .fontWeight(.semibold)
+                                }
+                            }
+                        }
+                    }
                 }
-            }
         }
     }
     
     var DatePickerView: some View {
         Section (header: Text("Select Week Ending"), footer: Text("NOTE: Payweek ending each Monday")) {
-                    ZStack {
-                        DatePicker("Week ending date", selection: $weekEnding,
-                                       in: monday...,
-                                       displayedComponents: [.date])
-                            .id(datePickerId)
-                            .onChange(of: weekEnding){ _ in
-                                _ = generateDates()
-                            }
-                        }
-                    }
+            ZStack {
+                DatePicker("Week ending date", selection: $weekEnding,
+                           in: monday...,
+                           displayedComponents: [.date])
+                .id(datePickerId)
+                .onChange(of: weekEnding){ _ in
+                    _ = generateDates()
+                }
+            }
+        }
+    }
+    
+    
+    func dateStrings(for date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_GB")
+        dateFormatter.setLocalizedDateFormatFromTemplate("y-MM-dd")
+        let dateString = dateFormatter.string(from: date)
+        return dateString
     }
     
     func deleteEntry(_ idsToDelete: [UUID]) {
@@ -224,13 +282,13 @@ struct AddTimeCardView: View {
                     for week in weeks {
                         let changeDate = formatter.string(from: week.weekEnding!)
                         let selectedDay = formatter.string(from: anchor)
-                            if checkDay && selectedDay == changeDate {
+                        if checkDay && selectedDay == changeDate {
+                            weekArray = []
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                                 weekArray = []
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                                    weekArray = []
-                                    self.showAlert = true
-                                    self.activeAlert = .second
-                                }
+                                self.showAlert = true
+                                self.activeAlert = .second
+                            }
                         }
                     }
                 }
@@ -262,11 +320,12 @@ struct AddTimeCardView: View {
         self.showAlert = true
         self.activeAlert = .fourth
     }
-
+    
     func saveButton() {
         
         let newWeek = Week(context: dataController.container.viewContext)
         newWeek.weekEnding = self.weekEnding
+        newWeek.submitted = self.timesheetSubmittedConfirmation
         newWeek.totalHoursNormal = cards.addNormalHours()
         newWeek.totalHoursOvertime = cards.addOvertimeHours()
         newWeek.totalHours = cards.addTotalHours()
@@ -302,54 +361,54 @@ struct AddTimeCardView: View {
                     workExpense.image = data
                     workExpense.comment = expense.comment
                     workExpense.weekEnding = self.weekEnding
-                        } else {
-                            workExpense.expenseType = expense.expenseType
-                            workExpense.projectNumber = timecards.jobNumber
-                            workExpense.weekEnding = self.weekEnding
-                            workExpense.date = timecards.day
-                            workExpense.amount = expense.amount
-                            workExpense.image = nil
-                            workExpense.comment = expense.comment
-                        }
-//                print(workExpense)
-
-            }
-        }
-            dataController.save()
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                self.showAlert = true
-                self.activeAlert = .third
-            }
-        }
-     func render() -> URL {
-         let url = URL.documentsDirectory.appending(path: "for_\(weekEnding).pdf")
-         let renderer = ImageRenderer(content: PdfView(weekArray: $weekArray, cards: cards, employee: self.employee))
-         
-            renderer.render { size, context in
-                // 4: Tell SwiftUI our PDF should be the same size as the views we're rendering
-                var box = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-                
-                // 5: Create the CGContext for our PDF pages
-                guard let pdf = CGContext(url as CFURL, mediaBox: &box, nil) else {
-                    return
+                } else {
+                    workExpense.expenseType = expense.expenseType
+                    workExpense.projectNumber = timecards.jobNumber
+                    workExpense.weekEnding = self.weekEnding
+                    workExpense.date = timecards.day
+                    workExpense.amount = expense.amount
+                    workExpense.image = nil
+                    workExpense.comment = expense.comment
                 }
-                
-                // 6: Start a new PDF page
-                pdf.beginPDFPage(nil)
-                
-                // 7: Render the SwiftUI view data onto the page
-                context(pdf)
-                
-                // 8: End the page and close the file
-                pdf.endPDFPage()
-                pdf.closePDF()
-                
-
+                //                print(workExpense)
                 
             }
-//
-         return url
+        }
+        dataController.save()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.showAlert = true
+            self.activeAlert = .third
+        }
+    }
+    func render() -> URL {
+        let url = URL.documentsDirectory.appending(path: "for_\(weekEnding).pdf")
+        let renderer = ImageRenderer(content: PdfView(weekArray: $weekArray, cards: cards, employee: self.employee))
+        
+        renderer.render { size, context in
+            // 4: Tell SwiftUI our PDF should be the same size as the views we're rendering
+            var box = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+            
+            // 5: Create the CGContext for our PDF pages
+            guard let pdf = CGContext(url as CFURL, mediaBox: &box, nil) else {
+                return
+            }
+            
+            // 6: Start a new PDF page
+            pdf.beginPDFPage(nil)
+            
+            // 7: Render the SwiftUI view data onto the page
+            context(pdf)
+            
+            // 8: End the page and close the file
+            pdf.endPDFPage()
+            pdf.closePDF()
+            
+            
+            
+        }
+        //
+        return url
     }
 }
 
