@@ -8,13 +8,15 @@
 
 
 import SwiftUI
+import UIKit
+import MessageUI
 
 
 @MainActor
 struct AddTimeCardView: View {
     
     enum ActiveAlertTimecard {
-        case first, second, third, fourth, fifth, zero
+        case first, second, third, fourth, fifth, zero, emailSent
     }
     
     @Environment(\.presentationMode) var presentation
@@ -25,7 +27,7 @@ struct AddTimeCardView: View {
     var timesheets : [Timesheet]
     var weeks : [Week]
     var workExpenses: [WorkExpense]
-
+    
     
     var filteredArray: [Timesheet] {
         
@@ -44,6 +46,11 @@ struct AddTimeCardView: View {
     @State private var workDay = ""
     @State private var datePickerId: Int = 0
     @State private var timesheetSubmittedConfirmation: Bool = false
+    
+    @State private var pdfSent = false
+    @Binding var result: Result<MFMailComposeResult, Error>?
+    @State private var sendEmailSheet = false
+    
     
     @State private var selectedTemplate: String = ""
     @State private var showPicker: Bool = false
@@ -78,12 +85,37 @@ struct AddTimeCardView: View {
                 
                 SavedWeeklyCard(employee: employee, timesheets: timesheets, weeks: weeks, showPicker: $showPicker, selectedTemplate: $selectedTemplate)
                 
-                if temp.count >= 5 {
+                if temp.count >= 2 && showPicker == false {
                     Section {
-                        ShareLink("Submit", item: render())
-                            .fontWeight(.bold)
+                        Button {
+                            selectedTemplate = ""
+                            self.sendEmail()
+                            activeAlert = .emailSent
+                        } label: {
+                            HStack {
+                                Image(systemName: "envelope")
+                                    .foregroundColor(Color.accentColor)
+                                    .padding(7)
+                                Text("Submit")
+                            }
+                        }
+                        ShareLink("Share", item: render())
+                        
+                        Button {
+                            saveAlert()
+                        }
+                    label: {
+                        HStack {
+                            Image(systemName: "square.and.arrow.down")
+                                .foregroundColor(Color.accentColor)
+                                .padding(7)
+                            Text("Save")
+                        }
+                    }
+                        
                     }
                 }
+                
                 
                 if weekArray.isEmpty == false && showPicker == false {
                     CardTile
@@ -99,7 +131,7 @@ struct AddTimeCardView: View {
                     
                     SavedCardTile
                 }
-
+                
             }
             .alert(isPresented: $showAlert) {
                 switch activeAlert {
@@ -114,12 +146,9 @@ struct AddTimeCardView: View {
                         self.presentation.wrappedValue.dismiss()
                     })
                 case .fourth:
-                    return Alert(title: Text("Have you submitted your timesheet?"), message: Text("Please confirm you have submitted your timesheet before saving. Otherwise proceed with saving only."), primaryButton: .default(Text("Save")) {
+                    return Alert(title: Text("Have you submitted your timesheet?"), message: Text("Please confirm you have submitted your timesheet before saving. Otherwise proceed with saving only."), primaryButton: .default(Text("Confirm")) {
                         saveButton()
-                    }, secondaryButton: .default(Text("Confirm")) {
-                        timesheetSubmittedConfirmation = true
-                        saveButton()
-                    })
+                    }, secondaryButton: .cancel())
                 case .fifth:
                     return Alert(title: Text("Timesheet submitted."), message: Text("Timesheet submitted successfully on \(Date.now)"), dismissButton: .default(Text("OK")) {
                         cards.items.removeAll()
@@ -128,28 +157,58 @@ struct AddTimeCardView: View {
                     })
                 case .zero:
                     return Alert(title: Text("Incorrect data"), dismissButton: .default(Text("OK")))
+                    
+                case .emailSent:
+                    if let result = result {
+                        switch result {
+                        case.success(let mailComposeResult):
+                            let message: String
+                            switch mailComposeResult {
+                            case .sent:
+                                message = "Email sent successfully"
+                                timesheetSubmittedConfirmation = true
+                                pdfSent = true
+                            case .saved:
+                                message = "Email saved successfully"
+                            case .failed:
+                                message = "Email failed to send"
+                            case .cancelled:
+                                message = "Email cancelled"
+                                pdfSent = false
+                            default:
+                                message = "Unknown error"
+                                
+                            }
+                            return Alert(title: Text("Email Status"), message: Text(message), dismissButton: .default(Text("OK")))
+                        case .failure(let error):
+                            return Alert(title: Text("Email Error"), message: Text(error.localizedDescription), dismissButton: .default(Text("OK")))
+                        }
+                    } else {
+                        return Alert(title: Text("Email Error"), message: Text("An error occurred"), dismissButton: .default(Text("OK")))
+                    }
                 }
             }
             .navigationTitle("Add a new timesheet")
             .sheet(isPresented: $showingBottomSheet, content: {
                 DailyDetailView(employee: self.employee, cards: cards, weekArray: $weekArray, workDay: $workDay)
             })
+            .sheet(isPresented: $sendEmailSheet) {
+                if selectedTemplate == "" {
+                    let url = render()
+                    MailViewModel(pdfAttachment: url, result: $result, newSubject: "\(employee.name ?? "") timesheet week ending \(String(describing: weekArray.last!))", newMsgBody: "Hi, \n Please find my timesheet attached for the week ending \(String(describing: weekArray.last!)).")
+
+                } else  {
+                    let url2 = renderSaved()
+                    MailViewModel(pdfAttachment: url2, result: $result, newSubject: "\(employee.name ?? "") timesheet week ending \(String(describing: weekArray.last!))", newMsgBody: "Hi, \n Please find my timesheet attached for the week ending \(String(describing: weekArray.last!)).")
+
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
                         self.presentation.wrappedValue.dismiss()
                     } label: {
                         Text("Dismiss")
-                    }
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    if temp.count >= 1 {
-                        Button {
-                            saveAlert()
-                        }
-                    label: {
-                        Text("Save")
-                    }
                     }
                 }
             }
@@ -199,38 +258,49 @@ struct AddTimeCardView: View {
     }
     var SavedCardTile: some View {
         
-            List {
-                if selectedTemplate != "" {
-                    ShareLink("Submit", item: renderSaved())
-                        .fontWeight(.bold)
-
-                    ForEach(0..<weekArray.count, id: \.self) { i in
-                        let weekEndingDay = weekArray[i]
-                        let day = weekEndingDay.components(separatedBy: " ").first ?? ""
-                        Section(header: Text(weekArray[i])) {
-                            ForEach(filteredArray) { index in
-                                if let timesheetWeekEnding = index.day,
-                                   let firstWord = timesheetWeekEnding.components(separatedBy: " ").first,
-                                   firstWord == day {
-                                    VStack {
-                                        Spacer()
-                                        HStack {
-                                            Text("Dep: \(index.department ?? "")")
-                                            Text(index.projectNumber ?? "")
-                                            Text(index.jobCode?.uppercased() ?? "")
-                                            Text(index.projectName?.uppercased() ?? "")
-                                            Text("\(index.hours.formatted()) hrs".uppercased())
-                                            Text("\(index.overtime.formatted()) O/T".uppercased())
-                                        }
-                                        Spacer()
+        List {
+            if selectedTemplate != "" {
+                Button {
+                    self.sendEmail()
+                    activeAlert = .emailSent
+                } label: {
+                    HStack {
+                        Image(systemName: "envelope")
+                            .foregroundColor(Color.accentColor)
+                            .padding(7)
+                        Text("Submit")
+                    }
+                }
+                
+                ShareLink("Share", item: renderSaved())
+                
+                ForEach(0..<weekArray.count, id: \.self) { i in
+                    let weekEndingDay = weekArray[i]
+                    let day = weekEndingDay.components(separatedBy: " ").first ?? ""
+                    Section(header: Text(weekArray[i])) {
+                        ForEach(filteredArray) { index in
+                            if let timesheetWeekEnding = index.day,
+                               let firstWord = timesheetWeekEnding.components(separatedBy: " ").first,
+                               firstWord == day {
+                                VStack {
+                                    Spacer()
+                                    HStack {
+                                        Text("Dep: \(index.department ?? "")")
+                                        Text(index.projectNumber ?? "")
+                                        Text(index.jobCode?.uppercased() ?? "")
+                                        Text(index.projectName?.uppercased() ?? "")
+                                        Text("\(index.hours.formatted()) hrs".uppercased())
+                                        Text("\(index.overtime.formatted()) O/T".uppercased())
                                     }
-                                    .font(.caption)
-                                    .fontWeight(.semibold)
+                                    Spacer()
                                 }
+                                .font(.caption)
+                                .fontWeight(.semibold)
                             }
                         }
                     }
                 }
+            }
         }
     }
     
@@ -247,7 +317,14 @@ struct AddTimeCardView: View {
             }
         }
     }
-    
+    func sendEmail() {
+        if MFMailComposeViewController.canSendMail() {
+            self.sendEmailSheet = true
+        } else {
+            print("Error sending email")
+        }
+//        self.showAlert = true
+    }
     
     func dateStrings(for date: Date) -> String {
         let dateFormatter = DateFormatter()
@@ -371,8 +448,7 @@ struct AddTimeCardView: View {
                     workExpense.image = nil
                     workExpense.comment = expense.comment
                 }
-                //                print(workExpense)
-                
+
             }
         }
         dataController.save()
@@ -382,8 +458,9 @@ struct AddTimeCardView: View {
             self.activeAlert = .third
         }
     }
+    
     func render() -> URL {
-        let url = URL.documentsDirectory.appending(path: "for_\(weekEnding).pdf")
+        let url = URL.documentsDirectory.appending(path: "\(UUID()).pdf")
         let renderer = ImageRenderer(content: PdfView(weekArray: $weekArray, cards: cards, employee: self.employee))
         
         renderer.render { size, context in
@@ -395,6 +472,8 @@ struct AddTimeCardView: View {
                 return
             }
             
+            
+            
             // 6: Start a new PDF page
             pdf.beginPDFPage(nil)
             
@@ -406,13 +485,15 @@ struct AddTimeCardView: View {
             pdf.closePDF()
             
         }
+
         return url
     }
     
     func renderSaved() -> URL {
-        let url = URL.documentsDirectory.appending(path: "for_\(weekEnding).pdf")
+        let url = URL.documentsDirectory.appending(path: "\(UUID()).pdf")
         let renderer = ImageRenderer(content: PDFViewSaved(weekArray: $weekArray, employee: self.employee, timesheet: filteredArray))
-        
+                
+        print("renderSave: \(url)")
         renderer.render { size, context in
             // 4: Tell SwiftUI our PDF should be the same size as the views we're rendering
             var box = CGRect(x: 0, y: 0, width: size.width, height: size.height)
@@ -422,6 +503,7 @@ struct AddTimeCardView: View {
                 return
             }
             
+
             // 6: Start a new PDF page
             pdf.beginPDFPage(nil)
             
@@ -431,8 +513,9 @@ struct AddTimeCardView: View {
             // 8: End the page and close the file
             pdf.endPDFPage()
             pdf.closePDF()
-       
+            
         }
+
         return url
     }
 }

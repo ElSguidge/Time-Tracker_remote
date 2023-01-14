@@ -10,13 +10,19 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
 
+
 struct SettingsPage: View {
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var authenticationService: AuthenticationService
     
+    @State private var showSheet = false
+    
+    
+    
     var body: some View {
+        
         NavigationStack {
-            Text("Settings Page")
+            
             
             Button(action: {
                 signOutUser()
@@ -29,7 +35,8 @@ struct SettingsPage: View {
                     .foregroundColor(Color.white)
                     .cornerRadius(10)
             }
-            
+            .navigationTitle("Settings")
+
         }
     }
     func signOutUser() {
@@ -41,10 +48,11 @@ struct SettingsPage: View {
         }
         
     }
+    func testMail() {}
 }
 
-struct SettingsPage_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsPage()
-    }
-}
+//struct SettingsPage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SettingsPage()
+//    }
+//}

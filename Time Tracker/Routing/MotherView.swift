@@ -14,11 +14,11 @@ struct MotherView: View {
 
 
     var body: some View {
-        switch viewRouter.currentPage {
-        case .loginPage:
-            LoginPage().environmentObject(AuthenticationService())
-        case .homePage:
-            TabBarView()
+            switch viewRouter.currentPage {
+            case .loginPage:
+                LoginPage().environmentObject(AuthenticationService())
+            case .homePage:
+                TabBarView()
         }
     }
 }

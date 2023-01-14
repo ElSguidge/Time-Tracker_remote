@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import UIKit
+import MessageUI
 
 struct MainDetailView: View {
     @EnvironmentObject var dataController : DataController
@@ -22,6 +24,7 @@ struct MainDetailView: View {
     @StateObject var cards = Cards()
         
     @State private var showingAddTimecard : Bool = false
+    @State var result: Result<MFMailComposeResult, Error>? = nil
     
     init(employee : Employee){
         self.employee = employee
@@ -65,7 +68,7 @@ struct MainDetailView: View {
             .navigationTitle(self.employee.name ?? "Anonymous")
             .navigationBarTitleDisplayMode(.inline)
             .sheet(isPresented: $showingAddTimecard) {
-                AddTimeCardView(employee: self.employee, timesheets: self.timesheets, weeks: self.weeks, workExpenses: self.workExpenses, cards: cards).environmentObject(dataController)
+                AddTimeCardView(employee: self.employee, timesheets: self.timesheets, weeks: self.weeks, workExpenses: self.workExpenses, cards: cards, result: $result).environmentObject(dataController)
 
             }
         }

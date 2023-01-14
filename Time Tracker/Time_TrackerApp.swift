@@ -17,16 +17,12 @@ struct Time_TrackerApp: App {
     
     init() {
         FirebaseApp.configure()
-
     }
+    
     var body: some Scene {
         WindowGroup {
             
             MotherView().environmentObject(viewRouter)
-//            HomeView()
-//                .environment(\.managedObjectContext, dataController.container.viewContext)
-//                .environmentObject(dataController)
-//                .preferredColorScheme(.dark)
         }
     }
 }

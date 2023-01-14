@@ -17,7 +17,7 @@ struct TabBarView: View {
         }
     
     var body: some View {
-        NavigationStack {
+        
             TabView {
 
                 HomeView().environment(\.managedObjectContext, dataController.container.viewContext)
@@ -25,6 +25,7 @@ struct TabBarView: View {
                     .tabItem {
                         Label("Timesheets", systemImage: "person.badge.clock")
                     }
+                
                 MapViewTimeLine()
                     .tabItem {
                         Label("Location", systemImage: "mappin.and.ellipse")
@@ -33,7 +34,6 @@ struct TabBarView: View {
                     .tabItem {
                         Label("Settings", systemImage: "gearshape.fill")
                     }
-            }
         }
     }
 }
