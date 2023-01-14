@@ -47,6 +47,7 @@ struct AddTimeCardView: View {
     @State private var workDay = ""
     @State private var datePickerId: Int = 0
     @State private var timesheetSubmittedConfirmation: Bool = false
+    @State private var submitAndSave: Bool = false
     
     @State private var pdfSent = false
     @Binding var result: Result<MFMailComposeResult, Error>?
@@ -86,12 +87,11 @@ struct AddTimeCardView: View {
                 
                 
                 
-                if temp.count >= 2 && showPicker == false {
+                if temp.count >= 5 && showPicker == false {
                     Section {
                         Button {
                             selectedTemplate = ""
                             self.sendEmail()
-//                            activeAlert = .emailSent
                         } label: {
                             HStack {
                                 Image(systemName: "envelope")
@@ -100,17 +100,32 @@ struct AddTimeCardView: View {
                                 Text("Submit")
                             }
                         }
+                        Button {
+                            selectedTemplate = ""
+                            self.sendEmail()
+                            self.submitAndSave = true
+                            
+                        } label: {
+                            HStack {
+                                Image(systemName: "envelope")
+                                    .foregroundColor(Color.accentColor)
+                                    .padding(7)
+                                Text("Submit and Save")
+                            }
+                        }
+                        
                         ShareLink("Share", item: render())
                         
                         Button {
                             saveAlert()
                         }
+                        
                     label: {
                         HStack {
                             Image(systemName: "square.and.arrow.down")
                                 .foregroundColor(Color.accentColor)
                                 .padding(7)
-                            Text("Save")
+                            Text("Save only.")
                         }
                     }
                         
@@ -165,7 +180,11 @@ struct AddTimeCardView: View {
                     return Alert(title: Text("Incorrect data"), dismissButton: .default(Text("OK")))
                     
                 case .emailSent:
-                        return Alert(title: Text("Success"), message: Text("Timecard succesfully submitted.."), dismissButton: .default(Text("OK")))
+                    return Alert(title: Text("Success"), message: Text("Timecard succesfully submitted.."), dismissButton: .default(Text("OK")) {
+                        if self.submitAndSave == true {
+                            saveButton()
+                        } else {}
+                    })
                     
                 case .emailFailed:
                         return Alert(title: Text("Failed"), message: Text("Failed to send to recipient. Could not submit."), dismissButton: .default(Text("OK")))
@@ -187,11 +206,11 @@ struct AddTimeCardView: View {
             .sheet(isPresented: $sendEmailSheet) {
                 if selectedTemplate == "" {
                     let url = render()
-                    MailViewModel(activeAlert: $activeAlert, showAlert: $showAlert, pdfAttachment: url, result: $result, newSubject: "\(employee.name ?? "") timesheet week ending \(String(describing: weekArray.last!))", newMsgBody: "Hi, \n Please find my timesheet attached for the week ending \(String(describing: weekArray.last!)).")
+                    MailViewModel(activeAlert: $activeAlert, showAlert: $showAlert, timesheetSubmittedConfirmation: $timesheetSubmittedConfirmation, pdfAttachment: url, result: $result, newSubject: "\(employee.name ?? "") timesheet week ending \(String(describing: weekArray.last!))", newMsgBody: "Hi, \n Please find my timesheet attached for the week ending \(String(describing: weekArray.last!)).")
 
                 } else  {
                     let url2 = renderSaved()
-                    MailViewModel(activeAlert: $activeAlert, showAlert: $showAlert, pdfAttachment: url2, result: $result, newSubject: "\(employee.name ?? "") timesheet week ending \(String(describing: weekArray.last!))", newMsgBody: "Hi, \n Please find my timesheet attached for the week ending \(String(describing: weekArray.last!)).")
+                    MailViewModel(activeAlert: $activeAlert, showAlert: $showAlert, timesheetSubmittedConfirmation: $timesheetSubmittedConfirmation, pdfAttachment: url2, result: $result, newSubject: "\(employee.name ?? "") timesheet week ending \(String(describing: weekArray.last!))", newMsgBody: "Hi, \n Please find my timesheet attached for the week ending \(String(describing: weekArray.last!)).")
                 }
             }
             .toolbar {

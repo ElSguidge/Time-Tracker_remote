@@ -14,6 +14,7 @@ struct MailViewModel: UIViewControllerRepresentable {
     
     @Binding var activeAlert: AddTimeCardView.ActiveAlertTimecard
     @Binding var showAlert: Bool
+    @Binding var timesheetSubmittedConfirmation: Bool
 
     let pdfAttachment: URL
     
@@ -28,17 +29,20 @@ struct MailViewModel: UIViewControllerRepresentable {
         
         @Binding var activeAlert: AddTimeCardView.ActiveAlertTimecard
         @Binding var showAlert: Bool
+        @Binding var timesheetSubmittedConfirmation: Bool
         @Binding var presentation : PresentationMode
         @Binding var result : Result<MFMailComposeResult, Error>?
         
         init(
             activeAlert: Binding<AddTimeCardView.ActiveAlertTimecard>,
             showAlert: Binding<Bool>,
+            timesheetSubmittedConfirmation: Binding<Bool>,
             presentation: Binding<PresentationMode>,
             result: Binding<Result<MFMailComposeResult, Error>?>) {
                 
             _activeAlert = activeAlert
             _showAlert = showAlert
+            _timesheetSubmittedConfirmation = timesheetSubmittedConfirmation
             _presentation = presentation
             _result = result
         }
@@ -60,6 +64,7 @@ struct MailViewModel: UIViewControllerRepresentable {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         self.showAlert = true
                         self.activeAlert = .emailSent
+                        self.timesheetSubmittedConfirmation = true
                     }
                 case .saved:
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -87,7 +92,7 @@ struct MailViewModel: UIViewControllerRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        return Coordinator(activeAlert: $activeAlert, showAlert: $showAlert, presentation: presentation, result: $result)
+        return Coordinator(activeAlert: $activeAlert, showAlert: $showAlert, timesheetSubmittedConfirmation: $timesheetSubmittedConfirmation, presentation: presentation, result: $result)
     }
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<MailViewModel>) -> MFMailComposeViewController {
