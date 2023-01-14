@@ -167,7 +167,7 @@ struct AddTimeCardView: View {
                         self.presentation.wrappedValue.dismiss()
                     })
                 case .fourth:
-                    return Alert(title: Text("Have you submitted your timesheet?"), message: Text("Please confirm you have submitted your timesheet before saving. Otherwise proceed with saving only."), primaryButton: .default(Text("Confirm")) {
+                    return Alert(title: Text("Have you submitted your timesheet?"), message: Text("This action can not be undone."), primaryButton: .default(Text("Save")) {
                         saveButton()
                     }, secondaryButton: .cancel())
                 case .fifth:
@@ -187,13 +187,13 @@ struct AddTimeCardView: View {
                     })
                     
                 case .emailFailed:
-                        return Alert(title: Text("Failed"), message: Text("Failed to send to recipient. Could not submit."), dismissButton: .default(Text("OK")))
+                    return Alert(title: Text("Failed"), message: Text("Failed to send to recipient. Could not submit."), dismissButton: .default(Text("OK")))
                     
                 case .emailCancelled:
-                        return Alert(title: Text("Cancelled"), message: Text("Timesheet submittal cancelled."), dismissButton: .default(Text("OK")))
+                    return Alert(title: Text("Cancelled"), message: Text("Timesheet submittal cancelled."), dismissButton: .default(Text("OK")))
                     
                 case .emailSaved:
-                        return Alert(title: Text("Email Saved"), message: Text("Saved to drafts folder in your mail server."), dismissButton: .default(Text("OK")))
+                    return Alert(title: Text("Email Saved"), message: Text("Saved to drafts folder in your mail server."), dismissButton: .default(Text("OK")))
                     
                 case .emailError:
                     return Alert(title: Text("Error"), message: Text("Unknown Error sending email."), dismissButton: .default(Text("OK")))
@@ -207,7 +207,7 @@ struct AddTimeCardView: View {
                 if selectedTemplate == "" {
                     let url = render()
                     MailViewModel(activeAlert: $activeAlert, showAlert: $showAlert, timesheetSubmittedConfirmation: $timesheetSubmittedConfirmation, pdfAttachment: url, result: $result, newSubject: "\(employee.name ?? "") timesheet week ending \(String(describing: weekArray.last!))", newMsgBody: "Hi, \n Please find my timesheet attached for the week ending \(String(describing: weekArray.last!)).")
-
+                    
                 } else  {
                     let url2 = renderSaved()
                     MailViewModel(activeAlert: $activeAlert, showAlert: $showAlert, timesheetSubmittedConfirmation: $timesheetSubmittedConfirmation, pdfAttachment: url2, result: $result, newSubject: "\(employee.name ?? "") timesheet week ending \(String(describing: weekArray.last!))", newMsgBody: "Hi, \n Please find my timesheet attached for the week ending \(String(describing: weekArray.last!)).")
@@ -272,7 +272,7 @@ struct AddTimeCardView: View {
             if selectedTemplate != "" {
                 Button {
                     sendEmail()
-
+                    
                 } label: {
                     HStack {
                         Image(systemName: "envelope")
@@ -459,7 +459,7 @@ struct AddTimeCardView: View {
                     workExpense.image = nil
                     workExpense.comment = expense.comment
                 }
-
+                
             }
         }
         dataController.save()
@@ -496,15 +496,14 @@ struct AddTimeCardView: View {
             pdf.closePDF()
             
         }
-
+        
         return url
     }
     
     func renderSaved() -> URL {
         let url = URL.documentsDirectory.appending(path: "\(UUID()).pdf")
         let renderer = ImageRenderer(content: PDFViewSaved(weekArray: $weekArray, employee: self.employee, timesheet: filteredArray))
-                
-        print("renderSave: \(url)")
+        
         renderer.render { size, context in
             // 4: Tell SwiftUI our PDF should be the same size as the views we're rendering
             var box = CGRect(x: 0, y: 0, width: size.width, height: size.height)
@@ -514,7 +513,7 @@ struct AddTimeCardView: View {
                 return
             }
             
-
+            
             // 6: Start a new PDF page
             pdf.beginPDFPage(nil)
             
@@ -526,7 +525,7 @@ struct AddTimeCardView: View {
             pdf.closePDF()
             
         }
-
+        
         return url
     }
 }
