@@ -12,21 +12,33 @@ import MessageUI
 
 struct MailViewModel: UIViewControllerRepresentable {
     
-    let pdfAttachment: URL
+    @Binding var activeAlert: AddTimeCardView.ActiveAlertTimecard
+    @Binding var showAlert: Bool
 
+    let pdfAttachment: URL
+    
     @Environment(\.presentationMode) var presentation
     @Binding var result: Result<MFMailComposeResult, Error>?
     
     let newSubject : String
     let newMsgBody : String
-    
+//    @Binding var activeAlert: ActiveAlertTimecard
+//    @Binding var showAlert: Bool
     class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
         
+        @Binding var activeAlert: AddTimeCardView.ActiveAlertTimecard
+        @Binding var showAlert: Bool
         @Binding var presentation : PresentationMode
         @Binding var result : Result<MFMailComposeResult, Error>?
         
-        init(presentation: Binding<PresentationMode>,
-             result: Binding<Result<MFMailComposeResult, Error>?>) {
+        init(
+            activeAlert: Binding<AddTimeCardView.ActiveAlertTimecard>,
+            showAlert: Binding<Bool>,
+            presentation: Binding<PresentationMode>,
+            result: Binding<Result<MFMailComposeResult, Error>?>) {
+                
+            _activeAlert = activeAlert
+            _showAlert = showAlert
             _presentation = presentation
             _result = result
         }
@@ -41,11 +53,41 @@ struct MailViewModel: UIViewControllerRepresentable {
                 return
             }
             self.result = .success(result)
+            
+            if !showAlert {
+                switch result {
+                case .sent:
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.showAlert = true
+                        self.activeAlert = .emailSent
+                    }
+                case .saved:
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.showAlert = true
+                        self.activeAlert = .emailSaved
+                    }
+                case .failed:
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.showAlert = true
+                        self.activeAlert = .emailFailed
+                    }
+                case .cancelled:
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.showAlert = true
+                        self.activeAlert = .emailCancelled
+                    }
+                default:
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.showAlert = true
+                        self.activeAlert = .emailError
+                    }
+                }
+            }
         }
     }
     
     func makeCoordinator() -> Coordinator {
-        return Coordinator(presentation: presentation, result: $result)
+        return Coordinator(activeAlert: $activeAlert, showAlert: $showAlert, presentation: presentation, result: $result)
     }
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<MailViewModel>) -> MFMailComposeViewController {

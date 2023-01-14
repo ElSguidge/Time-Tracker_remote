@@ -12,11 +12,12 @@ import UIKit
 import MessageUI
 
 
+
 @MainActor
 struct AddTimeCardView: View {
     
     enum ActiveAlertTimecard {
-        case first, second, third, fourth, fifth, zero, emailSent
+        case first, second, third, fourth, fifth, zero, emailSent, emailSaved, emailFailed, emailCancelled, emailError
     }
     
     @Environment(\.presentationMode) var presentation
@@ -83,14 +84,14 @@ struct AddTimeCardView: View {
                 
                 DatePickerView
                 
-                SavedWeeklyCard(employee: employee, timesheets: timesheets, weeks: weeks, showPicker: $showPicker, selectedTemplate: $selectedTemplate)
+                
                 
                 if temp.count >= 2 && showPicker == false {
                     Section {
                         Button {
                             selectedTemplate = ""
                             self.sendEmail()
-                            activeAlert = .emailSent
+//                            activeAlert = .emailSent
                         } label: {
                             HStack {
                                 Image(systemName: "envelope")
@@ -118,6 +119,9 @@ struct AddTimeCardView: View {
                 
                 
                 if weekArray.isEmpty == false && showPicker == false {
+                    
+                    SavedWeeklyCard(employee: employee, timesheets: timesheets, weeks: weeks, showPicker: $showPicker, selectedTemplate: $selectedTemplate)
+                    
                     CardTile
                     
                         .onChange(of: cards.items) { newValue in
@@ -128,6 +132,8 @@ struct AddTimeCardView: View {
                     
                 }
                 else if weekArray.isEmpty == false && showPicker == true {
+                    
+                    SavedWeeklyCard(employee: employee, timesheets: timesheets, weeks: weeks, showPicker: $showPicker, selectedTemplate: $selectedTemplate)
                     
                     SavedCardTile
                 }
@@ -159,33 +165,19 @@ struct AddTimeCardView: View {
                     return Alert(title: Text("Incorrect data"), dismissButton: .default(Text("OK")))
                     
                 case .emailSent:
-                    if let result = result {
-                        switch result {
-                        case.success(let mailComposeResult):
-                            let message: String
-                            switch mailComposeResult {
-                            case .sent:
-                                message = "Email sent successfully"
-                                timesheetSubmittedConfirmation = true
-                                pdfSent = true
-                            case .saved:
-                                message = "Email saved successfully"
-                            case .failed:
-                                message = "Email failed to send"
-                            case .cancelled:
-                                message = "Email cancelled"
-                                pdfSent = false
-                            default:
-                                message = "Unknown error"
-                                
-                            }
-                            return Alert(title: Text("Email Status"), message: Text(message), dismissButton: .default(Text("OK")))
-                        case .failure(let error):
-                            return Alert(title: Text("Email Error"), message: Text(error.localizedDescription), dismissButton: .default(Text("OK")))
-                        }
-                    } else {
-                        return Alert(title: Text("Email Error"), message: Text("An error occurred"), dismissButton: .default(Text("OK")))
-                    }
+                        return Alert(title: Text("Success"), message: Text("Timecard succesfully submitted.."), dismissButton: .default(Text("OK")))
+                    
+                case .emailFailed:
+                        return Alert(title: Text("Failed"), message: Text("Failed to send to recipient. Could not submit."), dismissButton: .default(Text("OK")))
+                    
+                case .emailCancelled:
+                        return Alert(title: Text("Cancelled"), message: Text("Timesheet submittal cancelled."), dismissButton: .default(Text("OK")))
+                    
+                case .emailSaved:
+                        return Alert(title: Text("Email Saved"), message: Text("Saved to drafts folder in your mail server."), dismissButton: .default(Text("OK")))
+                    
+                case .emailError:
+                    return Alert(title: Text("Error"), message: Text("Unknown Error sending email."), dismissButton: .default(Text("OK")))
                 }
             }
             .navigationTitle("Add a new timesheet")
@@ -195,12 +187,11 @@ struct AddTimeCardView: View {
             .sheet(isPresented: $sendEmailSheet) {
                 if selectedTemplate == "" {
                     let url = render()
-                    MailViewModel(pdfAttachment: url, result: $result, newSubject: "\(employee.name ?? "") timesheet week ending \(String(describing: weekArray.last!))", newMsgBody: "Hi, \n Please find my timesheet attached for the week ending \(String(describing: weekArray.last!)).")
+                    MailViewModel(activeAlert: $activeAlert, showAlert: $showAlert, pdfAttachment: url, result: $result, newSubject: "\(employee.name ?? "") timesheet week ending \(String(describing: weekArray.last!))", newMsgBody: "Hi, \n Please find my timesheet attached for the week ending \(String(describing: weekArray.last!)).")
 
                 } else  {
                     let url2 = renderSaved()
-                    MailViewModel(pdfAttachment: url2, result: $result, newSubject: "\(employee.name ?? "") timesheet week ending \(String(describing: weekArray.last!))", newMsgBody: "Hi, \n Please find my timesheet attached for the week ending \(String(describing: weekArray.last!)).")
-
+                    MailViewModel(activeAlert: $activeAlert, showAlert: $showAlert, pdfAttachment: url2, result: $result, newSubject: "\(employee.name ?? "") timesheet week ending \(String(describing: weekArray.last!))", newMsgBody: "Hi, \n Please find my timesheet attached for the week ending \(String(describing: weekArray.last!)).")
                 }
             }
             .toolbar {
@@ -261,8 +252,8 @@ struct AddTimeCardView: View {
         List {
             if selectedTemplate != "" {
                 Button {
-                    self.sendEmail()
-                    activeAlert = .emailSent
+                    sendEmail()
+
                 } label: {
                     HStack {
                         Image(systemName: "envelope")
@@ -317,14 +308,15 @@ struct AddTimeCardView: View {
             }
         }
     }
+    
     func sendEmail() {
         if MFMailComposeViewController.canSendMail() {
             self.sendEmailSheet = true
         } else {
-            print("Error sending email")
+            print("error in sending email")
         }
-//        self.showAlert = true
     }
+    
     
     func dateStrings(for date: Date) -> String {
         let dateFormatter = DateFormatter()
