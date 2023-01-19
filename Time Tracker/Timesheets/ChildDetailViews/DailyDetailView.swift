@@ -32,51 +32,54 @@ struct DailyDetailView: View {
     
     var body: some View {
         NavigationStack {
-            Form {
-                Section {
-                    Picker("Day", selection: $workDay) {
-                        ForEach(weekArray, id: \.self) {
-                            Text($0)
-                        }
-                    }
-                }
-                Section {
-                    Button {
-                        withAnimation {
-                            onAdd()
-                        }
-                    } label: {
-                        Label("Add entries", systemImage: "plus.circle.fill")
-                    }
-                    if $card.count > 1 {
-                        Button {
-                            withAnimation {
-                                deleteEntry()
+            ZStack {
+                Form {
+                    Section {
+                        Picker("Day", selection: $workDay) {
+                            ForEach(weekArray, id: \.self) {
+                                Text($0)
                             }
+                        }
+                    }
+                        Timecard(card: $card, workDay: $workDay, isInputActive: $isInputActive, showExpenses: $showExpenses)
+                }
+                .navigationBarTitle("Add a daily timecard")
+                
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button {
+                            self.presentationMode.wrappedValue.dismiss()
                         } label: {
-                            Label("Delete entries", systemImage: "minus.circle.fill")
-                                .foregroundColor(.red)
+                            Text("Dismiss")
+                        }
+                    }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button {
+                            saveButton()
+                        } label: {
+                            Text("Save")
                         }
                     }
                 }
-                Timecard(card: $card, workDay: $workDay, isInputActive: $isInputActive)
-            
-            }
-            .navigationBarTitle("Add a daily timecard")
-
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        self.presentationMode.wrappedValue.dismiss()
-                    } label: {
-                        Text("Dismiss")
-                    }
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        saveButton()
-                    } label: {
-                        Text("Save")
+                VStack {
+                    Spacer()
+                    
+                    HStack {
+                         Spacer()
+                        
+                        Button {
+                            onAdd()
+                        } label: {
+                            Text("+")
+                                .font(.system(.largeTitle))
+                                .frame(width: 40, height: 35)
+                                .foregroundColor(Color.white)
+                                .padding(.bottom, 7)
+                        }
+                        .background(Color.blue.opacity(0.6))
+                        .cornerRadius(38.5)
+                        .padding()
+                        .shadow(color: Color.black.opacity(0.3), radius: 3, x: 3, y: 3)
                     }
                 }
             }
@@ -112,9 +115,10 @@ struct DailyDetailView: View {
             self.presentationMode.wrappedValue.dismiss()
         }
     
-        func deleteEntry() {
-            $card.wrappedValue.removeLast()
-        }
+//        func deleteEntry() {
+//            $card.wrappedValue.removeLast()
+//        }
+    
     }
     
     //struct DailyDetailView_Previews: PreviewProvider {

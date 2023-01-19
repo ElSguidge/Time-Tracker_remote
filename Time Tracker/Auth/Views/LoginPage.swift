@@ -24,7 +24,7 @@ struct LoginPage: View {
     @EnvironmentObject var authenticationService: AuthenticationService
     @StateObject var viewModel = LoginViewModel()
     @StateObject var regViewModel = RegisterViewModel()
-    @State var showSignUpForm = true
+    @State var showSignUpForm = false
     @FocusState private var focus: FocusableField?
     
     private func signInWithEmailPassword() {

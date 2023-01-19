@@ -22,19 +22,6 @@ struct Card: Identifiable, Equatable {
     var day: String
     var expenses: [Expense]
     
-//    init(id: UUID = UUID(), department: String = "31", jobNumber: String, jobCode: String = "9999", jobName: String, hours: Double = 0.0, overtime: Double = 0.0, day: String, expenses: [Expense]) {
-//        self.id = id
-//        self.department = department
-//        self.jobNumber = jobNumber
-//        self.jobCode = jobCode
-//        self.jobName = jobName
-//        self.hours = hours
-//        self.overtime = overtime
-//        self.day = day
-//        self.expenses = expenses
-//    }
-
-    
     mutating func addExpenses() {
         expenses.append(Expense(expenseType: "Parking", amount: 0.0, comment: ""))
     }
@@ -52,13 +39,6 @@ struct Expense: Identifiable, Equatable {
     var image: UIImage?
     var comment: String
     
-//    init(id: UUID = UUID(), expenseType: String, amount: Double = 0.0, image: UIImage?, comment: String) {
-//        self.id = id
-//        self.expenseType = expenseType
-//        self.amount = amount
-//        self.image = image
-//        self.comment = comment
-//    }
 }
 
 
