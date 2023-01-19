@@ -18,7 +18,7 @@ extension UIImage {
         }
     }
     
-    func compress(to kb: Int, allowedMargin: CGFloat = 0.2) -> Data {
+    func compress(to kb: Int, allowedMargin: CGFloat = 0.2) -> Data? {
         guard kb > 10 else { return Data() } // Prevents user from compressing below a limit (10kb in this case).
         let bytes = kb * 1024
         var compression: CGFloat = 1.0

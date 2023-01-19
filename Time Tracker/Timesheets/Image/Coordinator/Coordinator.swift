@@ -19,11 +19,16 @@ class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerContro
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let selectedImage = info[.originalImage] as? UIImage {
-            guard let data = selectedImage.jpegData(compressionQuality: 0.1), let compressedImage = UIImage(data: data) else {
+            guard let data = selectedImage.compress(to: 400) else {
                 return
             }
+            guard let compressedImage = UIImage(data: data) else {
+                            // handle error
+                            return
+                        }
             self.picker.selectedImage = compressedImage
             self.picker.isPresented.wrappedValue.dismiss()
+            
         } else {
             
             return
