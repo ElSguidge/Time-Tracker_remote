@@ -24,6 +24,9 @@
 		842288412947302A00467096 /* TimecardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842288402947302A00467096 /* TimecardModel.swift */; };
 		843345002952FBA200E79DBE /* HCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843344FF2952FBA200E79DBE /* HCard.swift */; };
 		844D23A5295CE82E00AD5191 /* SavedTimecardEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D23A4295CE82E00AD5191 /* SavedTimecardEditView.swift */; };
+		84794649297930DA000FFBB9 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84794648297930DA000FFBB9 /* Project.swift */; };
+		8479464B297A5E97000FFBB9 /* CreateProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479464A297A5E97000FFBB9 /* CreateProjectView.swift */; };
+		8479464D297CF3D8000FFBB9 /* CreateProjectMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479464C297CF3D8000FFBB9 /* CreateProjectMapView.swift */; };
 		847A3CC5296D123800BF6793 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CC4296D123800BF6793 /* MapViewModel.swift */; };
 		847A3CCB296D12B900BF6793 /* MapViewTimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CCA296D12B900BF6793 /* MapViewTimeLine.swift */; };
 		847A3CCD296D134C00BF6793 /* ObserverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CCC296D134C00BF6793 /* ObserverModel.swift */; };
@@ -72,6 +75,9 @@
 		842288402947302A00467096 /* TimecardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimecardModel.swift; sourceTree = "<group>"; };
 		843344FF2952FBA200E79DBE /* HCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCard.swift; sourceTree = "<group>"; };
 		844D23A4295CE82E00AD5191 /* SavedTimecardEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTimecardEditView.swift; sourceTree = "<group>"; };
+		84794648297930DA000FFBB9 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		8479464A297A5E97000FFBB9 /* CreateProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectView.swift; sourceTree = "<group>"; };
+		8479464C297CF3D8000FFBB9 /* CreateProjectMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectMapView.swift; sourceTree = "<group>"; };
 		847A3CC4296D123800BF6793 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		847A3CCA296D12B900BF6793 /* MapViewTimeLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewTimeLine.swift; sourceTree = "<group>"; };
 		847A3CCC296D134C00BF6793 /* ObserverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverModel.swift; sourceTree = "<group>"; };
@@ -273,6 +279,7 @@
 		844D23A1295CDE8D00AD5191 /* Location */ = {
 			isa = PBXGroup;
 			children = (
+				84794647297930C7000FFBB9 /* Models */,
 				847A3CC7296D128600BF6793 /* Views */,
 				847A3CC6296D127C00BF6793 /* ViewModels */,
 			);
@@ -297,11 +304,20 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		84794647297930C7000FFBB9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				84794648297930DA000FFBB9 /* Project.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		847A3CC6296D127C00BF6793 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				847A3CC4296D123800BF6793 /* MapViewModel.swift */,
 				847A3CCC296D134C00BF6793 /* ObserverModel.swift */,
+				8479464C297CF3D8000FFBB9 /* CreateProjectMapView.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -310,6 +326,7 @@
 			isa = PBXGroup;
 			children = (
 				847A3CCA296D12B900BF6793 /* MapViewTimeLine.swift */,
+				8479464A297A5E97000FFBB9 /* CreateProjectView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -557,6 +574,7 @@
 				842288412947302A00467096 /* TimecardModel.swift in Sources */,
 				844D23A5295CE82E00AD5191 /* SavedTimecardEditView.swift in Sources */,
 				847A3CDF296D15C400BF6793 /* LoginViewModel.swift in Sources */,
+				84794649297930DA000FFBB9 /* Project.swift in Sources */,
 				8422883F2946DC6F00467096 /* TimecardEditView.swift in Sources */,
 				841701D9294204D000FA9658 /* DailyDetailView.swift in Sources */,
 				840BCC36296EC07F00738A06 /* PDFViewSaved.swift in Sources */,
@@ -564,7 +582,9 @@
 				847A3CE3296D163300BF6793 /* AuthViewModel.swift in Sources */,
 				841701D12941937500FA9658 /* MainDetailView.swift in Sources */,
 				849C83942950636100132B03 /* Coordinator.swift in Sources */,
+				8479464B297A5E97000FFBB9 /* CreateProjectView.swift in Sources */,
 				8499C3422956CD0F00522178 /* TotalsCard.swift in Sources */,
+				8479464D297CF3D8000FFBB9 /* CreateProjectMapView.swift in Sources */,
 				841701D72941C62F00FA9658 /* AddTimeCardView.swift in Sources */,
 				841701D52941AE1F00FA9658 /* SavedTimecardDetailView.swift in Sources */,
 				847A3CEC296D192800BF6793 /* SettingsPage.swift in Sources */,
