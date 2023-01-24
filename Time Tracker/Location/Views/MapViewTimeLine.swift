@@ -14,17 +14,17 @@ import MapKit
 struct MapViewTimeLine: View {
     
     @ObservedObject var authViewModel = AuthViewModel()
-    
     @ObservedObject var obs = observer()
     @StateObject private var viewModel = MapViewModel()
     @State private var showingUserPage = false
     @State private var annotations: [MKPointAnnotation] = []
     @State private var showingCreateProject = false
-
+    
     @State private var name = ""
     @State private var location: CLLocationCoordinate2D?
     @State private var address = ""
     @State private var jobNumber = ""
+    @State private var level = ""
     
     @State private var title = ""
     @State private var subtitle = ""
@@ -33,63 +33,70 @@ struct MapViewTimeLine: View {
         
         NavigationStack {
             ZStack {
-                mapView(userProfiles: viewModel.userProfiles, geopoints: self.obs.data as! [String : GeoPoint], annotations: annotations)
+                mapView(userProfiles: viewModel.userProfiles, geopoints: self.obs.data as! [String : GeoPoint], annotations: annotations, projects: viewModel.projects)
                     .edgesIgnoringSafeArea(.top)
-                HStack {
-                    Button(action: {
-                        // show an action sheet or a modal view to create a project
-                        showingCreateProject = true
-                    }) {
-                        HStack {
-                            Label("Create Project", systemImage: "plus")
-                        }
-                        .padding()
-                        .background(Color.blue.opacity(0.7))
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                    }
-
-                }
-                VStack(alignment: .trailing) {
+                HStack(alignment: .top) {
                     Spacer()
-                    Button(action: {
-                        showingUserPage = true
-                    }) {
+                    VStack(alignment: .trailing) {
                         HStack {
-                            Label("My Team", systemImage: "person")
+                            Button(action: {
+                                showingCreateProject = true
+                            }) {
+                                HStack {
+                                    Image(systemName: "plus")
+                                }
+                                .padding()
+                                .background(Color.blue.opacity(0.7))
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
+                            }
+                            
                         }
                         .padding()
-                        .background(Color.pink.opacity(0.7))
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                        
+
+                        HStack(alignment: .top) {
+                            Button(action: {
+                                showingUserPage = true
+                            }) {
+                                HStack {
+                                    Image(systemName: "person.3.fill")
+                                }
+                                .padding()
+                                .background(Color.pink.opacity(0.7))
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
+                            }
+                        }
+                        .padding()
+                        Spacer()
+                        Spacer()
+                        Spacer()
                     }
+                    
                     .sheet(isPresented: $showingUserPage) {
                         UserListView(userProfiles: viewModel.userProfiles)
                     }
                     .sheet(isPresented: $showingCreateProject) {
-                        CreateProjectView(viewModel: self.viewModel, location: $location, title: $title, subtitle: $subtitle, name: $name, address: $address, jobNumber: $jobNumber, showingCreateProject: $showingCreateProject)
+                        CreateProjectView(viewModel: self.viewModel, location: $location, title: $title, subtitle: $subtitle, name: $name, address: $address, jobNumber: $jobNumber, level: $level, showingCreateProject: $showingCreateProject)
                     }
                 }
-            }
-            .onAppear {
-                viewModel.checkIfLocationServicesIsEnabled()
-                annotations = createAnnotations()
+                .onAppear {
+                    viewModel.checkIfLocationServicesIsEnabled()
+                    annotations = createAnnotations()
+                }
             }
         }
-        
     }
-    
+
     private func createAnnotations() -> [MKPointAnnotation] {
         var annotations: [MKPointAnnotation] = []
-            for(uid, geoPoint) in obs.data as! [String : GeoPoint] {
-                if uid != authViewModel.userSession?.uid {
-                    let userProfile = viewModel.userProfiles.first { $0.uid == uid }
-                    let annotation = MKPointAnnotation()
-                    annotation.coordinate = CLLocationCoordinate2D(latitude: geoPoint.latitude, longitude: geoPoint.longitude)
-                    annotation.title = userProfile?.fullName
-                    annotations.append(annotation)
-                }
+        for project in viewModel.projects {
+            
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = CLLocationCoordinate2D(latitude: project.location.latitude, longitude: project.location.longitude)
+                annotation.title = project.name
+                annotations.append(annotation)
+            
         }
         return annotations
     }
@@ -102,6 +109,7 @@ struct mapView: UIViewRepresentable {
     var userProfiles: [UserProfile]
     var geopoints : [String: GeoPoint]
     var annotations: [MKPointAnnotation]
+    var projects: [Project]
     
     func makeCoordinator() -> Coordinator {
         
@@ -113,22 +121,31 @@ struct mapView: UIViewRepresentable {
     //
     func makeUIView(context: Context) -> MKMapView {
         
+        
         manager.delegate = context.coordinator
         manager.startUpdatingLocation()
         map.showsUserLocation = true
         let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: -37.8136, longitude: 144.9631), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.5))
         map.region = region
         map.addAnnotations(annotations)
+        
+        for project in projects {
+                let point = MKPointAnnotation()
+                point.coordinate = CLLocationCoordinate2D(latitude: project.location.latitude, longitude: project.location.longitude)
+                point.title = project.name
+                point.subtitle = project.address
+                map.addAnnotation(point)
+            }
+        
         return map
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
         
-//        uiView.addAnnotations(annotations)
         for i in geopoints {
-
+            
             let point = MKPointAnnotation()
-
+            
             if i.key != authViewModel.userSession?.uid {
                 let userProfile = userProfiles.first { $0.uid == i.key }
                 point.coordinate = CLLocationCoordinate2D(latitude: i.value.latitude, longitude: i.value.longitude)
@@ -138,6 +155,13 @@ struct mapView: UIViewRepresentable {
                 uiView.addAnnotation(point)
             }
         }
+        for project in projects {
+                let point = MKPointAnnotation()
+                point.coordinate = CLLocationCoordinate2D(latitude: project.location.latitude, longitude: project.location.longitude)
+                point.title = project.name
+                point.subtitle = project.address
+                uiView.addAnnotation(point)
+            }
     }
     
     class Coordinator: NSObject, CLLocationManagerDelegate {

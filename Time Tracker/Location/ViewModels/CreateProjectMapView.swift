@@ -28,7 +28,7 @@ struct CreateProjectMapView: UIViewRepresentable {
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
         map.delegate = context.coordinator
-
+        
         map.addAnnotation(annotation)
         return map
     }
@@ -38,7 +38,7 @@ struct CreateProjectMapView: UIViewRepresentable {
     
     class Coordinator: NSObject, MKMapViewDelegate {
         var parent: CreateProjectMapView
-
+        
         init(parent1: CreateProjectMapView) {
             parent = parent1
         }
@@ -52,9 +52,9 @@ struct CreateProjectMapView: UIViewRepresentable {
         func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationView.DragState, fromOldState oldState: MKAnnotationView.DragState) {
             
             if newState == .ending {
-                   self.parent.location = CLLocationCoordinate2D(latitude: (view.annotation?.coordinate.latitude)!, longitude: (view.annotation?.coordinate.longitude)!)
-               }
-
+                self.parent.location = CLLocationCoordinate2D(latitude: (view.annotation?.coordinate.latitude)!, longitude: (view.annotation?.coordinate.longitude)!)
+            }
+            
             
             CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: (view.annotation?.coordinate.latitude)!, longitude: (view.annotation?.coordinate.longitude)!)) { (places, err) in
                 
@@ -63,12 +63,12 @@ struct CreateProjectMapView: UIViewRepresentable {
                     print((err?.localizedDescription)!)
                     return
                 }
-
+                
                 self.parent.title = (places?.first?.name ?? places?.first?.postalCode)!
                 self.parent.subtitle = (places?.first?.locality ?? places?.first?.country ?? "None")
             }
         }
     }
-
+    
 }
 

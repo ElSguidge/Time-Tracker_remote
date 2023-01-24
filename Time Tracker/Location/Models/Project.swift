@@ -16,10 +16,13 @@ struct Project: Codable {
     let location: GeoPoint
     let address: String
     let jobNumber: String
+    let level: String
 }
 
 extension Project {
     func toDict() -> [String: Any] {
-        return ["name": name, "location": location, "address": address, "jobNumber": jobNumber]
+        return ["name": name, "location": location, "address": address, "jobNumber": jobNumber, "level": level]
     }
 }
+
+

@@ -25,11 +25,13 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     var locationManager: CLLocationManager?
     
+    var projects: [Project] = []
+    
     let db = Firestore.firestore()
     
-    func createProject(name: String, location: CLLocationCoordinate2D, address: String, jobNumber: String) {
+    func createProject(name: String, location: CLLocationCoordinate2D, address: String, jobNumber: String, level: String) {
         guard let _ = self.authViewModel.userSession?.uid else { return }
-        let project = Project(name: name, location: GeoPoint(latitude: location.latitude, longitude: location.longitude), address: address, jobNumber: jobNumber)
+        let project = Project(name: name, location: GeoPoint(latitude: location.latitude, longitude: location.longitude), address: address, jobNumber: jobNumber, level: level)
         let projectRef = db.collection("projects").document()
         projectRef.setData(project.toDict()) { (error) in
             if error != nil {
@@ -37,13 +39,29 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                 return
             }
             print("Project created")
+            self.fetchProjects()
         }
     }
 
+    func fetchProjects() {
+        db.collection("projects").getDocuments{ (snapshot, error) in
+            if error != nil {
+                print((error?.localizedDescription as Any))
+                return
+            }
+            for document in snapshot!.documents {
+                let data = document.data()
+                let project = Project(name: data["name"] as! String, location: data["location"] as! GeoPoint, address: data["address"] as! String, jobNumber: data["jobNumber"] as! String, level: data["level"] as! String)
+                self.projects.append(project)
+            }
+        }
+    }
     
     func checkIfLocationServicesIsEnabled() {
         
         if CLLocationManager.locationServicesEnabled() {
+            
+            fetchProjects()
             
             profileRepository.fetchAllProfiles { (profiles, error) in
                 if let error = error {
