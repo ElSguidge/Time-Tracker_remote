@@ -19,6 +19,7 @@ struct MapViewTimeLine: View {
     @State private var showingUserPage = false
     @State private var annotations: [ProjectClass] = []
     @State private var showingCreateProject = false
+    @State private var showingCheckInPage = false
     
     @State private var name = ""
     @State private var location: CLLocationCoordinate2D?
@@ -29,16 +30,21 @@ struct MapViewTimeLine: View {
     @State private var subtitle = ""
     
     @State private var showingProjectInfo = false
+    @State private var selectedProject: ProjectClass?
+    @State private var settingsDetent = PresentationDetent.medium
     
     var body: some View {
         
         NavigationStack {
             ZStack {
-                MapView(userProfiles: viewModel.userProfiles, geopoints: self.obs.data as! [String : GeoPoint], annotations: annotations, projects: viewModel.projects, showingProjectInfo: $showingProjectInfo)
+                MapView(userProfiles: viewModel.userProfiles, geopoints: self.obs.data as! [String : GeoPoint], annotations: annotations, projects: viewModel.projects, showingProjectInfo: $showingProjectInfo, selectedProject: $selectedProject)
                     .edgesIgnoringSafeArea(.top)
                     .sheet(isPresented: $showingProjectInfo) {
                         withAnimation {
-                            ProjectView()
+                            ProjectView(project: self.selectedProject)
+                                .presentationDetents(
+                                    [.medium, .large],
+                                    selection: $settingsDetent)
                         }
                     }
                 HStack(alignment: .top) {
@@ -50,6 +56,8 @@ struct MapViewTimeLine: View {
                             }) {
                                 HStack {
                                     Image(systemName: "plus")
+                                        .font(.system(size: 25))
+                                        .fontWeight(.bold)
                                 }
                                 .padding()
                                 .background(Color.blue.opacity(0.7))
@@ -76,9 +84,32 @@ struct MapViewTimeLine: View {
                             }
                         }
                         .padding()
+                        HStack(alignment: .top) {
+                            Button(action: {
+                                withAnimation {
+                                    showingCheckInPage = true
+                                }
+                            }) {
+                                HStack {
+                                    Image(systemName: "person.crop.circle.badge.checkmark")
+                                        .font(.system(size: 25))
+                                        .fontWeight(.bold)
+                                }
+                                .padding()
+                                .background(Color.yellow.opacity(0.7))
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
+                            }
+                        }
+                        .padding()
                         Spacer()
                         Spacer()
                         Spacer()
+                    }
+                    .sheet(isPresented: $showingCheckInPage) {
+                        withAnimation {
+                            CheckInView()
+                        }
                     }
                     
                     .sheet(isPresented: $showingUserPage) {
@@ -125,6 +156,7 @@ struct MapView: UIViewRepresentable {
     var annotations: [ProjectClass]
     var projects: [Project]
     @Binding var showingProjectInfo: Bool
+    @Binding var selectedProject: ProjectClass?
     
     func makeCoordinator() -> Coordinator {
         
@@ -153,6 +185,8 @@ struct MapView: UIViewRepresentable {
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
         
+        uiView.removeAnnotations(uiView.annotations)
+        
         for i in geopoints {
             
             let point = MKPointAnnotation()
@@ -161,10 +195,11 @@ struct MapView: UIViewRepresentable {
                 let userProfile = userProfiles.first { $0.uid == i.key }
                 point.coordinate = CLLocationCoordinate2D(latitude: i.value.latitude, longitude: i.value.longitude)
                 point.title = userProfile?.fullName
-                uiView.removeAnnotations(uiView.annotations)
                 uiView.addAnnotation(point)
             }
+            
         }
+        
         for project in projects {
             let projectClass = project.toProjectClass()
             uiView.addAnnotation(projectClass)
@@ -196,10 +231,10 @@ struct MapView: UIViewRepresentable {
         }
         
         func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-//            if let projectAnnotation = view.annotation as? ProjectClass {
-//                self.parent.selectedProject = ProjectView(project: projectAnnotation)
+            if let projectAnnotation = view.annotation as? ProjectClass {
+                self.parent.selectedProject = projectAnnotation
                 self.parent.showingProjectInfo = true
-//            }
+            }
         }
         
     }

@@ -25,7 +25,7 @@ struct CreateProjectView: View {
         
         ZStack(alignment: .bottom, content: {
                 CreateProjectMapView(location: $location, title:  self.$title, subtitle: self.$subtitle)
-                        .frame(height: 250)
+                        .frame(height: 300)
                 })
         
         NavigationStack {
@@ -57,14 +57,15 @@ struct CreateProjectView: View {
                             Text("Cancel")
                         }
                     }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button {
-                            viewModel.createProject(name: name, location: location!, address: "\(self.title), \(self.subtitle)", jobNumber: jobNumber)
-                            showingCreateProject = false
-                        } label: {
-                            Text("Save")
+                    
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button {
+                                viewModel.createProject(name: name, location: location!, address: "\(self.title), \(self.subtitle)", jobNumber: jobNumber)
+                                showingCreateProject = false
+                            } label: {
+                                Text("Save")
+                            }
                         }
-                    }
                 }
         }
         

@@ -9,10 +9,27 @@ import SwiftUI
 
 struct ProjectView: View {
     
-//    var project: ProjectClass
+    var project: ProjectClass?
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            VStack(alignment: .leading) {
+                
+                Text(project?.address ?? "")
+                    .fontWeight(.bold)
+                VStack(alignment: .leading) {
+                    Text("Job number: \(project?.jobNumber ?? "")")
+                }
+            }
+            Button("Check in") {}
+            .frame(maxWidth: .infinity)
+            .buttonStyle(.borderedProminent)
+            .controlSize(.large)
+            
+            
+            .navigationTitle(project?.name ?? "")
+        }
+        
     }
 }
 

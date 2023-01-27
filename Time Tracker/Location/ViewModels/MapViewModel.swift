@@ -59,9 +59,13 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func checkIfLocationServicesIsEnabled() {
         
+        fetchProjects()
+        
         if CLLocationManager.locationServicesEnabled() {
             
-            fetchProjects()
+            
+            
+            
             
             profileRepository.fetchAllProfiles { (profiles, error) in
                 if let error = error {
@@ -75,6 +79,9 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             locationManager = CLLocationManager()
             locationManager!.delegate = self
             locationManager?.startUpdatingLocation()
+            
+            checkInToProject(currentLocation: locationManager?.location)
+            
         } else {
             
             let locationAlert = UIAlertController(title: "Location Services Disabled", message: "Please enable location services in settings to use this feature", preferredStyle: .alert)
@@ -143,7 +150,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                 // check in to project
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            UIApplication.shared.windows.first?.rootViewController?.present(alert, animated: true, completion: nil)
+            UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
         }
         
         
@@ -216,7 +223,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                                 }
                             }))
                             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                            UIApplication.shared.windows.first?.rootViewController?.present(alert, animated: true, completion: nil)
+                            UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
                             return
                         }
                     }

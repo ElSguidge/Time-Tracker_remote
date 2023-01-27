@@ -28,6 +28,7 @@
 		8479464B297A5E97000FFBB9 /* CreateProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479464A297A5E97000FFBB9 /* CreateProjectView.swift */; };
 		8479464D297CF3D8000FFBB9 /* CreateProjectMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479464C297CF3D8000FFBB9 /* CreateProjectMapView.swift */; };
 		8479465429834390000FFBB9 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479465329834390000FFBB9 /* ProjectView.swift */; };
+		8479465629837A92000FFBB9 /* CheckInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479465529837A92000FFBB9 /* CheckInView.swift */; };
 		847A3CC5296D123800BF6793 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CC4296D123800BF6793 /* MapViewModel.swift */; };
 		847A3CCB296D12B900BF6793 /* MapViewTimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CCA296D12B900BF6793 /* MapViewTimeLine.swift */; };
 		847A3CCD296D134C00BF6793 /* ObserverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CCC296D134C00BF6793 /* ObserverModel.swift */; };
@@ -80,6 +81,7 @@
 		8479464A297A5E97000FFBB9 /* CreateProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectView.swift; sourceTree = "<group>"; };
 		8479464C297CF3D8000FFBB9 /* CreateProjectMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectMapView.swift; sourceTree = "<group>"; };
 		8479465329834390000FFBB9 /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
+		8479465529837A92000FFBB9 /* CheckInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInView.swift; sourceTree = "<group>"; };
 		847A3CC4296D123800BF6793 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		847A3CCA296D12B900BF6793 /* MapViewTimeLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewTimeLine.swift; sourceTree = "<group>"; };
 		847A3CCC296D134C00BF6793 /* ObserverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverModel.swift; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 				847A3CCA296D12B900BF6793 /* MapViewTimeLine.swift */,
 				8479464A297A5E97000FFBB9 /* CreateProjectView.swift */,
 				8479465329834390000FFBB9 /* ProjectView.swift */,
+				8479465529837A92000FFBB9 /* CheckInView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -584,6 +587,7 @@
 				843345002952FBA200E79DBE /* HCard.swift in Sources */,
 				847A3CE3296D163300BF6793 /* AuthViewModel.swift in Sources */,
 				841701D12941937500FA9658 /* MainDetailView.swift in Sources */,
+				8479465629837A92000FFBB9 /* CheckInView.swift in Sources */,
 				849C83942950636100132B03 /* Coordinator.swift in Sources */,
 				8479464B297A5E97000FFBB9 /* CreateProjectView.swift in Sources */,
 				8499C3422956CD0F00522178 /* TotalsCard.swift in Sources */,
