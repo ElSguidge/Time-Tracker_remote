@@ -21,6 +21,7 @@ struct UserProfile: Codable, Hashable {
 }
 
 
+
 class UserProfileRepository: ObservableObject {
     
     private var db = Firestore.firestore()

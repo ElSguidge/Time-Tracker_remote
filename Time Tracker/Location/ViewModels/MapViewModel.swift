@@ -29,9 +29,9 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     let db = Firestore.firestore()
     
-    func createProject(name: String, location: CLLocationCoordinate2D, address: String, jobNumber: String, level: String) {
+    func createProject(name: String, location: CLLocationCoordinate2D, address: String, jobNumber: String) {
         guard let _ = self.authViewModel.userSession?.uid else { return }
-        let project = Project(name: name, location: GeoPoint(latitude: location.latitude, longitude: location.longitude), address: address, jobNumber: jobNumber, level: level)
+        let project = Project(name: name, location: GeoPoint(latitude: location.latitude, longitude: location.longitude), address: address, jobNumber: jobNumber)
         let projectRef = db.collection("projects").document()
         projectRef.setData(project.toDict()) { (error) in
             if error != nil {
@@ -51,7 +51,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             }
             for document in snapshot!.documents {
                 let data = document.data()
-                let project = Project(name: data["name"] as! String, location: data["location"] as! GeoPoint, address: data["address"] as! String, jobNumber: data["jobNumber"] as! String, level: data["level"] as! String)
+                let project = Project(name: data["name"] as! String, location: data["location"] as! GeoPoint, address: data["address"] as! String, jobNumber: data["jobNumber"] as! String)
                 self.projects.append(project)
             }
         }

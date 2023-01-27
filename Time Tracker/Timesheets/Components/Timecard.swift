@@ -25,7 +25,8 @@ struct Timecard: View {
             
             Section {
                 HStack {
-                    Text("Delete")
+                    Text("Delete card")
+                        .foregroundColor(.red)
                     Spacer()
                     Button {
                         withAnimation {
@@ -36,12 +37,13 @@ struct Timecard: View {
                         
                     } label: {
                         Image(systemName: "xmark.circle")
-                            .foregroundColor(.gray)
+                            .font(.system(.title3))
+                            .foregroundColor(.red)
                             .padding(.trailing, 10)
                     }
                     
                 }
-                .listRowBackground(Color.red.opacity(0.3))
+//                .listRowBackground(Color.red.opacity(0.3))
                 
                 Picker("Department", selection: self.$card[item].department) {
                     ForEach(departments, id: \.self) {
@@ -70,7 +72,7 @@ struct Timecard: View {
                 Text("Total Hours: \(calculateTotal(normal: self.$card[item].hours.wrappedValue, overtime: self.$card[item].overtime.wrappedValue))")
                     .foregroundColor(.black)
                     .fontWeight(.bold)
-                    .listRowBackground(Color.green.opacity(0.5))
+//                    .listRowBackground(Color.green.opacity(0.5))
                 
                 Button {
                     self.$card[item].wrappedValue.addExpenses()
@@ -79,13 +81,32 @@ struct Timecard: View {
                 } label: {
                     Label("Add expenses", systemImage: "plus.circle.fill")
                 }
+
             }
             
             List($card[item].expenses) { $expense in
-                ExpenseCard(expense: $expense, workDay: self.$workDay, isInputActive: isInputActive, jobNumber: $card[item].jobNumber)
+                    ExpenseCard(expense: $expense, workDay: self.$workDay, isInputActive: isInputActive, jobNumber: $card[item].jobNumber)
+                    HStack {
+                        Button {
+                            withAnimation {
+                                self.deleteExpense(at: expense.id)
+                            }
+                        } label: {
+                            Text("Delete expense")
+                                .padding(.trailing, 10)
+                        }
+                    }
             }
         }
     }
+    
+    func deleteExpense(at id: UUID) {
+        for index in 0..<self.card.count {
+            let expenses = self.card[index].expenses.filter { $0.id != id }
+            self.card[index].expenses = expenses
+        }
+    }
+
     func dismissKeyboardAndDeleteCard(at index: Int) {
         UIApplication.shared.keyWindow?.endEditing(true)
         deleteCard(at: index)

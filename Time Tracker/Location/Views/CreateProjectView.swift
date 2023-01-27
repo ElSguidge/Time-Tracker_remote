@@ -19,38 +19,18 @@ struct CreateProjectView: View {
     @Binding var name: String
     @Binding var address: String
     @Binding var jobNumber: String
-    @Binding var level: String
     @Binding var showingCreateProject: Bool
     
     var body: some View {
         
-
-                ZStack(alignment: .bottom, content: {
-                    CreateProjectMapView(location: $location, title:  self.$title, subtitle: self.$subtitle)
-                        .frame(height: 220)
-                    
-                    if self.title != "" {
-                        HStack(spacing: 12) {
-                            Image(systemName: "info.circle.fill").font(.body).foregroundColor(.black)
-                            
-                            VStack(alignment: .leading, spacing: 12) {
-                                
-                                Text(self.title).font(.body).foregroundColor(.black)
-                                Text(self.subtitle).font(.caption).foregroundColor(.gray)
-                            }
-                        }
-                        .padding()
-                        .background(Color(.white))
-                        .cornerRadius(15)
-                    }
-                    
+        ZStack(alignment: .bottom, content: {
+                CreateProjectMapView(location: $location, title:  self.$title, subtitle: self.$subtitle)
+                        .frame(height: 250)
                 })
+        
         NavigationStack {
             Form {
-
-                Section {
-                    TextField("Project Name", text: $name)
-                }
+                
                 Section(header: Text("Address")) {
                     if self.title != "" {
                         Text("\(self.title), \(self.subtitle)")
@@ -58,9 +38,11 @@ struct CreateProjectView: View {
                         Text("")
                     }
                 }
+                
                 Section {
-                    TextField("Level", text: $level)
+                    TextField("Project Name", text: $name)
                 }
+
                 Section {
                     TextField("Job Number", text: $jobNumber)
                 }
@@ -72,12 +54,12 @@ struct CreateProjectView: View {
                         Button {
                             self.presentationMode.wrappedValue.dismiss()
                         } label: {
-                            Text("Dismiss")
+                            Text("Cancel")
                         }
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
-                            viewModel.createProject(name: name, location: location!, address: "\(self.title), \(self.subtitle)", jobNumber: jobNumber, level: level)
+                            viewModel.createProject(name: name, location: location!, address: "\(self.title), \(self.subtitle)", jobNumber: jobNumber)
                             showingCreateProject = false
                         } label: {
                             Text("Save")

@@ -27,8 +27,7 @@ struct CreateProjectMapView: UIViewRepresentable {
         map.region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.5))
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
-        map.delegate = context.coordinator
-        
+        map.delegate = context.coordinator        
         map.addAnnotation(annotation)
         return map
     }
@@ -44,6 +43,7 @@ struct CreateProjectMapView: UIViewRepresentable {
         }
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
             let pin = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+            pin.markerTintColor = .blue
             pin.isDraggable = true
             
             return pin

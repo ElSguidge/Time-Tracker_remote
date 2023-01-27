@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import UIKit
 
 
 struct Card: Identifiable, Equatable {
@@ -40,7 +39,6 @@ struct Expense: Identifiable, Equatable {
     var comment: String
     
 }
-
 
 
 class Cards: ObservableObject {
