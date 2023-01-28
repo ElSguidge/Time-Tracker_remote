@@ -8,6 +8,7 @@
 import SwiftUI
 import FirebaseCore
 import FirebaseFirestore
+import GoogleMaps
 
 @main
 struct Time_TrackerApp: App {
@@ -17,6 +18,8 @@ struct Time_TrackerApp: App {
     
     init() {
         FirebaseApp.configure()
+        guard let clientID = ProcessInfo.processInfo.environment["GOOGLE_MAPS_API_KEY"] else { return }
+        GMSServices.provideAPIKey(clientID)
     }
     
     var body: some Scene {

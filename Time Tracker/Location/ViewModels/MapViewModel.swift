@@ -59,14 +59,13 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func checkIfLocationServicesIsEnabled() {
         
-        fetchProjects()
+        
         
         if CLLocationManager.locationServicesEnabled() {
             
-            
-            
-            
-            
+            fetchProjects()
+            self.checkInToProject(currentLocation: self.locationManager?.location)
+
             profileRepository.fetchAllProfiles { (profiles, error) in
                 if let error = error {
                     print("Error fetching user profiles: \(error)")
@@ -80,7 +79,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             locationManager!.delegate = self
             locationManager?.startUpdatingLocation()
             
-            checkInToProject(currentLocation: locationManager?.location)
+            
             
         } else {
             

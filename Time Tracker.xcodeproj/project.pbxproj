@@ -24,6 +24,7 @@
 		842288412947302A00467096 /* TimecardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842288402947302A00467096 /* TimecardModel.swift */; };
 		843345002952FBA200E79DBE /* HCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843344FF2952FBA200E79DBE /* HCard.swift */; };
 		844D23A5295CE82E00AD5191 /* SavedTimecardEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D23A4295CE82E00AD5191 /* SavedTimecardEditView.swift */; };
+		844F28742983926B007A075E /* ProjectStreetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844F28732983926B007A075E /* ProjectStreetViewModel.swift */; };
 		84794649297930DA000FFBB9 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84794648297930DA000FFBB9 /* Project.swift */; };
 		8479464B297A5E97000FFBB9 /* CreateProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479464A297A5E97000FFBB9 /* CreateProjectView.swift */; };
 		8479464D297CF3D8000FFBB9 /* CreateProjectMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479464C297CF3D8000FFBB9 /* CreateProjectMapView.swift */; };
@@ -77,6 +78,7 @@
 		842288402947302A00467096 /* TimecardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimecardModel.swift; sourceTree = "<group>"; };
 		843344FF2952FBA200E79DBE /* HCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCard.swift; sourceTree = "<group>"; };
 		844D23A4295CE82E00AD5191 /* SavedTimecardEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTimecardEditView.swift; sourceTree = "<group>"; };
+		844F28732983926B007A075E /* ProjectStreetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectStreetViewModel.swift; sourceTree = "<group>"; };
 		84794648297930DA000FFBB9 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		8479464A297A5E97000FFBB9 /* CreateProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectView.swift; sourceTree = "<group>"; };
 		8479464C297CF3D8000FFBB9 /* CreateProjectMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectMapView.swift; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 				847A3CC4296D123800BF6793 /* MapViewModel.swift */,
 				847A3CCC296D134C00BF6793 /* ObserverModel.swift */,
 				8479464C297CF3D8000FFBB9 /* CreateProjectMapView.swift */,
+				844F28732983926B007A075E /* ProjectStreetViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 				841701B32940A4C100FA9658 /* Frameworks */,
 				841701B42940A4C100FA9658 /* Resources */,
 				4384C42F8C3160411375AF6F /* [CP] Embed Pods Frameworks */,
+				A19623F75239F2CD1A7BE57C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -563,6 +567,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		A19623F75239F2CD1A7BE57C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Time Tracker/Pods-Time Tracker-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Time Tracker/Pods-Time Tracker-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Time Tracker/Pods-Time Tracker-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -615,6 +636,7 @@
 				841701BA2940A4C100FA9658 /* Time_TrackerApp.swift in Sources */,
 				847A3CDB296D14EC00BF6793 /* AuthenticationService.swift in Sources */,
 				840BCC39296FC0DD00738A06 /* MailViewModel.swift in Sources */,
+				844F28742983926B007A075E /* ProjectStreetViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

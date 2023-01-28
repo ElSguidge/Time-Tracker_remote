@@ -6,13 +6,24 @@
 //
 
 import SwiftUI
+import GoogleMaps
 
 struct ProjectView: View {
     
     var project: ProjectClass?
     
     var body: some View {
-        NavigationStack {
+        
+
+            Spacer()
+            Spacer()
+            Spacer()
+            
+            StreetViewRepresentable(project: project ?? ProjectClass(coordinate: CLLocationCoordinate2D(latitude: -33.732, longitude: 150.312), name: "", address: "", jobNumber: ""))
+        
+        Text(project?.name ?? "")
+            .font(.system(size: 30))
+            .fontWeight(.bold)
             VStack(alignment: .leading) {
                 
                 Text(project?.address ?? "")
@@ -22,13 +33,11 @@ struct ProjectView: View {
                 }
             }
             Button("Check in") {}
-            .frame(maxWidth: .infinity)
-            .buttonStyle(.borderedProminent)
-            .controlSize(.large)
+                .frame(maxWidth: .infinity)
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
             
-            
-            .navigationTitle(project?.name ?? "")
-        }
+
         
     }
 }

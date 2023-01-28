@@ -634,6 +634,11 @@ PODS:
     - FirebaseFirestore (~> 10.0)
     - FirebaseSharedSwift (~> 10.0)
   - FirebaseSharedSwift (10.3.0)
+  - GoogleMaps (7.3.0):
+    - GoogleMaps/Maps (= 7.3.0)
+  - GoogleMaps/Base (7.3.0)
+  - GoogleMaps/Maps (7.3.0):
+    - GoogleMaps/Base
   - GoogleUtilities/AppDelegateSwizzler (7.10.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -719,6 +724,7 @@ DEPENDENCIES:
   - FirebaseAuth
   - FirebaseFirestore
   - FirebaseFirestoreSwift
+  - GoogleMaps
 
 SPEC REPOS:
   trunk:
@@ -731,6 +737,7 @@ SPEC REPOS:
     - FirebaseFirestore
     - FirebaseFirestoreSwift
     - FirebaseSharedSwift
+    - GoogleMaps
     - GoogleUtilities
     - "gRPC-C++"
     - gRPC-Core
@@ -750,6 +757,7 @@ SPEC CHECKSUMS:
   FirebaseFirestore: 244f71ff14ef44f39e00b44d356eac708ce03103
   FirebaseFirestoreSwift: 55098402529ce59ba54a2ce1ad5798ae1ba563ef
   FirebaseSharedSwift: d82ad66b3f8de9dda19c77b9627cbcaad71e245e
+  GoogleMaps: a146f275ee429d14822178c7a841c03366ec92a1
   GoogleUtilities: bad72cb363809015b1f7f19beb1f1cd23c589f95
   "gRPC-C++": 9675f953ace2b3de7c506039d77be1f2e77a8db2
   gRPC-Core: 943e491cb0d45598b0b0eb9e910c88080369290b
@@ -759,6 +767,6 @@ SPEC CHECKSUMS:
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
 
-PODFILE CHECKSUM: 29c142386f6635903e6a321cf09edcaf27b49405
+PODFILE CHECKSUM: 7800dd1c15ed6d82de3efacfdefa6132c116397e
 
 COCOAPODS: 1.11.3

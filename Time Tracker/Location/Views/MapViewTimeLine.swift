@@ -40,11 +40,20 @@ struct MapViewTimeLine: View {
                 MapView(userProfiles: viewModel.userProfiles, geopoints: self.obs.data as! [String : GeoPoint], annotations: annotations, projects: viewModel.projects, showingProjectInfo: $showingProjectInfo, selectedProject: $selectedProject)
                     .edgesIgnoringSafeArea(.top)
                     .sheet(isPresented: $showingProjectInfo) {
-                        withAnimation {
-                            ProjectView(project: self.selectedProject)
-                                .presentationDetents(
-                                    [.medium, .large],
-                                    selection: $settingsDetent)
+                        if selectedProject != nil {
+                            withAnimation {
+                                ProjectView(project: self.selectedProject)
+                                    .presentationDetents(
+                                        [.medium, .large],
+                                        selection: $settingsDetent)
+                            }
+                        } else {
+                            withAnimation {
+                                ProgressView("Fetching project from database...")
+                                    .presentationDetents(
+                                        [.medium, .large],
+                                        selection: $settingsDetent)
+                            }
                         }
                     }
                 HStack(alignment: .top) {
@@ -165,9 +174,8 @@ struct MapView: UIViewRepresentable {
     
     let map = MKMapView()
     let manager = CLLocationManager()
-    //
+    
     func makeUIView(context: Context) -> MKMapView {
-        
         
         map.delegate = context.coordinator
         manager.startUpdatingLocation()
@@ -175,17 +183,16 @@ struct MapView: UIViewRepresentable {
         let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: -37.8136, longitude: 144.9631), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.5))
         map.region = region
         
-        for project in projects {
-            let projectClass = project.toProjectClass()
-            map.addAnnotation(projectClass)
-        }
+//        for project in projects {
+//            let projectClass = project.toProjectClass()
+//            map.addAnnotation(projectClass)
+//        }
         
         return map
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
         
-        uiView.removeAnnotations(uiView.annotations)
         
         for i in geopoints {
             
@@ -196,6 +203,7 @@ struct MapView: UIViewRepresentable {
                 point.coordinate = CLLocationCoordinate2D(latitude: i.value.latitude, longitude: i.value.longitude)
                 point.title = userProfile?.fullName
                 uiView.addAnnotation(point)
+                uiView.removeAnnotations(uiView.annotations)
             }
             
         }
@@ -234,6 +242,7 @@ struct MapView: UIViewRepresentable {
             if let projectAnnotation = view.annotation as? ProjectClass {
                 self.parent.selectedProject = projectAnnotation
                 self.parent.showingProjectInfo = true
+                
             }
         }
         
