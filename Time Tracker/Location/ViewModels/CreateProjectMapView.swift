@@ -24,6 +24,7 @@ struct CreateProjectMapView: UIViewRepresentable {
         
         let map = MKMapView()
         let coordinate = CLLocationCoordinate2D(latitude: -37.8136, longitude: 144.9631)
+        map.showsUserLocation = true
         map.region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.5))
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
@@ -35,7 +36,7 @@ struct CreateProjectMapView: UIViewRepresentable {
     func updateUIView(_ uiView: MKMapView, context: UIViewRepresentableContext<CreateProjectMapView>) {
     }
     
-    class Coordinator: NSObject, MKMapViewDelegate {
+    class Coordinator: NSObject, MKMapViewDelegate, CLLocationManagerDelegate {
         var parent: CreateProjectMapView
         
         init(parent1: CreateProjectMapView) {
@@ -43,10 +44,15 @@ struct CreateProjectMapView: UIViewRepresentable {
         }
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
             let pin = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "pin")
-            pin.markerTintColor = .blue
-            pin.isDraggable = true
             
-            return pin
+            if annotation is MKUserLocation {
+                return nil
+            } else {
+                pin.markerTintColor = .blue
+                pin.isDraggable = true
+                
+                return pin
+            }
         }
         
         func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationView.DragState, fromOldState oldState: MKAnnotationView.DragState) {
