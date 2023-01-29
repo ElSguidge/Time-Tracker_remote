@@ -18,8 +18,13 @@ struct Time_TrackerApp: App {
     
     init() {
         FirebaseApp.configure()
-        guard let clientID = ProcessInfo.processInfo.environment["GOOGLE_MAPS_API_KEY"] else { return }
-        GMSServices.provideAPIKey(clientID)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            if let clientID = ProcessInfo.processInfo.environment["GOOGLE_MAPS_API_KEY"] {
+                GMSServices.provideAPIKey(clientID)
+            } else {
+                print("Google maps api key not set")
+            }
+        }
     }
     
     var body: some Scene {

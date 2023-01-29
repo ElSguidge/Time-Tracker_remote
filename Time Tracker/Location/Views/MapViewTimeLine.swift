@@ -195,19 +195,20 @@ struct MapView: UIViewRepresentable {
         
         
         for i in geopoints {
-            
+
             let point = MKPointAnnotation()
-            
+
             if i.key != authViewModel.userSession?.uid {
                 let userProfile = userProfiles.first { $0.uid == i.key }
                 point.coordinate = CLLocationCoordinate2D(latitude: i.value.latitude, longitude: i.value.longitude)
                 point.title = userProfile?.fullName
-                uiView.addAnnotation(point)
+
                 uiView.removeAnnotations(uiView.annotations)
+                uiView.addAnnotation(point)
             }
-            
+
         }
-        
+
         for project in projects {
             let projectClass = project.toProjectClass()
             uiView.addAnnotation(projectClass)
