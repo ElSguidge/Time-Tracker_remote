@@ -79,6 +79,8 @@
 		843344FF2952FBA200E79DBE /* HCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCard.swift; sourceTree = "<group>"; };
 		844D23A4295CE82E00AD5191 /* SavedTimecardEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTimecardEditView.swift; sourceTree = "<group>"; };
 		844F28732983926B007A075E /* ProjectStreetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectStreetViewModel.swift; sourceTree = "<group>"; };
+		844F287629877EFF007A075E /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
+		844F2877298785B0007A075E /* Time-Tracker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Time-Tracker-Info.plist"; sourceTree = SOURCE_ROOT; };
 		84794648297930DA000FFBB9 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		8479464A297A5E97000FFBB9 /* CreateProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectView.swift; sourceTree = "<group>"; };
 		8479464C297CF3D8000FFBB9 /* CreateProjectMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectMapView.swift; sourceTree = "<group>"; };
@@ -165,6 +167,8 @@
 		841701B82940A4C100FA9658 /* Time Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				844F2877298785B0007A075E /* Time-Tracker-Info.plist */,
+				844F287529877EDB007A075E /* Configs */,
 				847A3CE9296D190D00BF6793 /* Settings */,
 				847A3CE6296D182F00BF6793 /* Tab Bar */,
 				84B6222A296CCE9C00567125 /* Routing */,
@@ -308,6 +312,14 @@
 				849C83902950624700132B03 /* ImagePickerView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		844F287529877EDB007A075E /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				844F287629877EFF007A075E /* debug.xcconfig */,
+			);
+			path = Configs;
 			sourceTree = "<group>";
 		};
 		84794647297930C7000FFBB9 /* Models */ = {
@@ -645,6 +657,7 @@
 /* Begin XCBuildConfiguration section */
 		841701C22940A4C300FA9658 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 844F287629877EFF007A075E /* debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -705,6 +718,7 @@
 		};
 		841701C32940A4C300FA9658 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 844F287629877EFF007A075E /* debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -769,6 +783,7 @@
 				DEVELOPMENT_TEAM = HBJP4B48D7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Time-Tracker-Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "TimeTracker would like to access your camera and photo library.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs to know your location.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -803,6 +818,7 @@
 				DEVELOPMENT_TEAM = HBJP4B48D7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Time-Tracker-Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "TimeTracker would like to access your camera and photo library.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs to know your location.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

@@ -64,7 +64,7 @@ class AuthenticationService: ObservableObject {
         do {
             
             try await Auth.auth().createUser(withEmail: email, password: password)
-            let userProfile = UserProfile(uid: user?.uid ?? "unknown", fullName: fullName, email: email, isLoggedIn: true, location: GeoPoint(latitude: 0, longitude: 0))
+            let userProfile = UserProfile(uid: user?.uid ?? "unknown", fullName: fullName, email: email, isLoggedIn: true, location: GeoPoint(latitude: 0, longitude: 0), checkedIn: CheckIn(isCheckedIn: false, project: Project(name: "", location: GeoPoint(latitude: 0, longitude: 0), address: "", jobNumber: ""), date: Date()))
             profileRepository.createProfile(profile: userProfile) { (profile, error) in
                 
                 if let error = error {

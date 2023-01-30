@@ -11,7 +11,7 @@ import FirebaseFirestoreSwift
 import MapKit
 
 
-struct Project: Codable {
+struct Project: Codable, Equatable, Hashable {
     @DocumentID var id: String?
     let name: String
     let location: GeoPoint

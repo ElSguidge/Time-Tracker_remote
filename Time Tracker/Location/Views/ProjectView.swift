@@ -36,9 +36,6 @@ struct ProjectView: View {
                 .frame(maxWidth: .infinity)
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
-            
-
-        
     }
 }
 

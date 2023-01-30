@@ -18,13 +18,19 @@ struct Time_TrackerApp: App {
     
     init() {
         FirebaseApp.configure()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            if let clientID = ProcessInfo.processInfo.environment["GOOGLE_MAPS_API_KEY"] {
-                GMSServices.provideAPIKey(clientID)
-            } else {
-                print("Google maps api key not set")
-            }
+        
+        if let clientId = Bundle.main.infoDictionary?["GOOGLE_MAPS_API_KEY"] as? String {
+            GMSServices.provideAPIKey(clientId)
+        } else {
+            print("Google maps api key not set")
         }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//            if let clientID = ProcessInfo.processInfo.environment["GOOGLE_MAPS_API_KEY"] {
+//                GMSServices.provideAPIKey(clientID)
+//            } else {
+//                print("Google maps api key not set")
+//            }
+//        }
     }
     
     var body: some Scene {

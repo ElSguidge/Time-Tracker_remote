@@ -1,0 +1,11 @@
+//
+//  debug.xcconfig
+//  Time Tracker
+//
+//  Created by Mark McKeon on 30/1/2023.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+GOOGLE_MAPS_API_KEY=AIzaSyCET7tU5vyCkytE6pB7Z5xEoYBH6WuCNlA

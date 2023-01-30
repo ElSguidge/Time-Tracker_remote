@@ -18,6 +18,20 @@ struct UserProfile: Codable, Hashable {
     var email: String
     var isLoggedIn: Bool
     var location: GeoPoint
+    var checkedIn: CheckIn
+}
+
+struct CheckIn: Codable, Hashable, Equatable {
+    var isCheckedIn: Bool
+    var project: Project
+    var date: Date
+    
+    init(isCheckedIn: Bool, project: Project, date: Date) {
+        self.isCheckedIn = isCheckedIn
+        self.project = project
+        self.date = date
+    }
+    
 }
 
 
@@ -48,6 +62,18 @@ class UserProfileRepository: ObservableObject {
             }
         }
     }
+    
+    func isCheckedIn(userId: String, project: ProjectClass) {
+        db.collection("profiles").whereField("uid", isEqualTo: userId).getDocuments { result, error in
+            if error == nil {
+                for document in result!.documents {
+                    document.reference.setData(["checkedIn.isCheckedIn": true, "checkedIn.date": Date(), "project": project])
+                }
+            }
+        }
+    }
+    
+    func isCheckedOut(userId: String) {}
         
     func isLoggedIn(userId: String) {
         db.collection("profiles").whereField("uid", isEqualTo: userId).getDocuments { result, error in
