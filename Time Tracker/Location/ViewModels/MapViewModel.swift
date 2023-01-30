@@ -63,29 +63,29 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         
         if CLLocationManager.locationServicesEnabled() {
             
-            fetchProjects()
-            self.checkInToProject(currentLocation: self.locationManager?.location)
 
-            profileRepository.fetchAllProfiles { (profiles, error) in
-                if let error = error {
-                    print("Error fetching user profiles: \(error)")
-                    return
-                }
-                if let profiles = profiles {
-                    self.userProfiles = profiles
-                }
-            }
             locationManager = CLLocationManager()
             locationManager!.delegate = self
             locationManager?.startUpdatingLocation()
             
+            fetchProjects()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+
+                self.checkInToProject(currentLocation: self.locationManager?.location)
+
+                self.profileRepository.fetchAllProfiles { (profiles, error) in
+                    if let error = error {
+                        print("Error fetching user profiles: \(error)")
+                        return
+                    }
+                    if let profiles = profiles {
+                        self.userProfiles = profiles
+                    }
+                }
+            }
             
             
-        } else {
-            
-            let locationAlert = UIAlertController(title: "Location Services Disabled", message: "Please enable location services in settings to use this feature", preferredStyle: .alert)
-            locationAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            UIApplication.shared.keyWindow?.rootViewController?.present(locationAlert, animated: true, completion: nil)
         }
     }
     
@@ -98,7 +98,19 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         case .restricted:
             print("Your location is restricted")
         case .denied:
-            print("You have denied.....")
+            let locationAlert = UIAlertController(title: "Location Services Disabled", message: "Please enable location services in settings to use this feature", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Ok", style: .default) { _ in
+                let notificationSettingsURL = URL(string: UIApplication.openSettingsURLString)!.appendingPathComponent("location")
+                UIApplication.shared.open(notificationSettingsURL, options: [:], completionHandler: nil)
+            }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            locationAlert.addAction(okAction)
+            locationAlert.addAction(cancelAction)
+            
+            let windowScene = UIApplication.shared.connectedScenes.first as! UIWindowScene
+            windowScene.windows.first!.rootViewController?.present(locationAlert, animated: true, completion: nil)
+//            locationAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//            UIApplication.shared.keyWindow?.rootViewController?.present(locationAlert, animated: true, completion: nil)
         case .authorizedAlways, .authorizedWhenInUse:
             region = MKCoordinateRegion(center: locationManager.location!.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
             
@@ -159,14 +171,15 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             checkLocationAuthorization()
         }
         
-        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-            
-            guard let currentLocation = locations.last else { return }
-            guard let uid = self.authViewModel.userSession?.uid else { return }
-            
-            
-            let last = locations.last
-            
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+//        guard let currentLocation = locations.last else { return }
+        guard let uid = self.authViewModel.userSession?.uid else { return }
+        
+        
+        let last = locations.last
+        
+        if authViewModel.userSession != nil {
             self.profileRepository.addCoordinatesToProfile(last: last!, userId: uid)
             
             db.collection("locations").document("coordinate").setData(["updates" : [uid : GeoPoint(latitude: (last?.coordinate.latitude)!, longitude: (last?.coordinate.longitude)!)]],merge: true) { (err) in
@@ -177,58 +190,59 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                     return
                 }
             }
-            let userRef = db.collection("users").document(uid)
-            userRef.getDocument { (document, error) in
-                if let error = error {
-                    print("Error getting user document: \(error)")
-                    return
-                }
-                guard let document = document,
-                      let data = document.data(),
-                      let checkedInProjectId = data["checkedInProjectId"] as? String else {
-                    return
-                }
-                if !checkedInProjectId.isEmpty {
-                    // user has already checked in, do not prompt again
-                    return
-                }
-                
-                // query projects collection to check if user's current location is within a certain radius of any existing projects
-                let projectsRef = self.db.collection("projects")
-                projectsRef.getDocuments { (snapshot, error) in
-                    if let error = error {
-                        print("Error getting projects: \(error)")
-                        return
-                    }
-                    for document in snapshot!.documents {
-                        let data = document.data()
-                        let projectLocation = data["location"] as? GeoPoint
-                        let projectId = document.documentID
-                        
-                        // calculate distance between user's current location and project location
-                        let projectCoordinate = CLLocation(latitude: projectLocation!.latitude, longitude: projectLocation!.longitude)
-                        let distanceInMeters = currentLocation.distance(from: projectCoordinate)
-                        
-                        if distanceInMeters <= 50 {
-                            // show alert to check in to project
-                            let alert = UIAlertController(title: "Check in to project?", message: "You are within 50 meters of a project. Would you like to check in?", preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: "Check in", style: .default, handler: { _ in
-                                // update user's document with checked in project id
-                                userRef.updateData(["checkedInProjectId": projectId]) { (error) in
-                                    if let error = error {
-                                        print("Error updating user document: \(error)")
-                                        return
-                                    }
-                                }
-                            }))
-                            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                            UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
-                            return
-                        }
-                    }
-                }
-            }
+//            let userRef = db.collection("users").document(uid)
+//            userRef.getDocument { (document, error) in
+//                if let error = error {
+//                    print("Error getting user document: \(error)")
+//                    return
+//                }
+//                guard let document = document,
+//                      let data = document.data(),
+//                      let checkedInProjectId = data["checkedInProjectId"] as? String else {
+//                    return
+//                }
+//                if !checkedInProjectId.isEmpty {
+//                    // user has already checked in, do not prompt again
+//                    return
+//                }
+//
+//                // query projects collection to check if user's current location is within a certain radius of any existing projects
+//                let projectsRef = self.db.collection("projects")
+//                projectsRef.getDocuments { (snapshot, error) in
+//                    if let error = error {
+//                        print("Error getting projects: \(error)")
+//                        return
+//                    }
+//                    for document in snapshot!.documents {
+//                        let data = document.data()
+//                        let projectLocation = data["location"] as? GeoPoint
+//                        let projectId = document.documentID
+//
+//                        // calculate distance between user's current location and project location
+//                        let projectCoordinate = CLLocation(latitude: projectLocation!.latitude, longitude: projectLocation!.longitude)
+//                        let distanceInMeters = currentLocation.distance(from: projectCoordinate)
+//
+//                        if distanceInMeters <= 50 {
+//                            // show alert to check in to project
+//                            let alert = UIAlertController(title: "Check in to project?", message: "You are within 50 meters of a project. Would you like to check in?", preferredStyle: .alert)
+//                            alert.addAction(UIAlertAction(title: "Check in", style: .default, handler: { _ in
+//                                // update user's document with checked in project id
+//                                userRef.updateData(["checkedInProjectId": projectId]) { (error) in
+//                                    if let error = error {
+//                                        print("Error updating user document: \(error)")
+//                                        return
+//                                    }
+//                                }
+//                            }))
+//                            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+//                            UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+//                            return
+//                        }
+//                    }
+//                }
+//            }
         }
+    }
 }
 
 
