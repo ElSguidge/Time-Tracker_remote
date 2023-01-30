@@ -14,6 +14,7 @@ import SwiftUI
 class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
     
     var viewController: UIViewController?
+    var authViewModel =  AuthViewModel()
     
     static let shared = NotificationDelegate()
     
@@ -58,51 +59,53 @@ class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
     
     func scheduleDailyNotification() {
         
-        let center = UNUserNotificationCenter.current()
-        
-        let content = UNMutableNotificationContent()
-        content.title = "Are you working today?"
-        content.body = "Don't forget to sign in for the day."
-        content.sound = .default
-        content.categoryIdentifier = "daily_notification"
-        
-        let signInAction = UNNotificationAction(identifier: "sign_in", title: "Sign In", options: [.foreground])
-        let notWorkingAction = UNNotificationAction(identifier: "not_working", title: "Not working today", options: [])
-        let dailyCategory = UNNotificationCategory(identifier: "daily_notification", actions: [signInAction, notWorkingAction], intentIdentifiers: [], options: [.customDismissAction])
-        
-        center.setNotificationCategories([dailyCategory])
-        
-        // Schedule a notification for Monday
-        var dateComponents = DateComponents()
-        dateComponents.hour = 7 // hour of the day to fire the notification
-        dateComponents.weekday = 2 // Monday
-        let mondayTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-        let mondayRequest = UNNotificationRequest(identifier: "daily_notification_monday", content: content, trigger: mondayTrigger)
-        center.add(mondayRequest)
-        
-        // Schedule a notification for Tuesday
-        dateComponents.weekday = 3 // Tuesday
-        let tuesdayTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-        let tuesdayRequest = UNNotificationRequest(identifier: "daily_notification_tuesday", content: content, trigger: tuesdayTrigger)
-        center.add(tuesdayRequest)
-        
-        // Schedule a notification for Wednesday
-        dateComponents.weekday = 4 // Wednesday
-        let wednesdayTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-        let wednesdayRequest = UNNotificationRequest(identifier: "daily_notification_wednesday", content: content, trigger: wednesdayTrigger)
-        center.add(wednesdayRequest)
-        
-        // Schedule a notification for Thursday
-        dateComponents.weekday = 5 // Thursday
-        let thursdayTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-        let thursdayRequest = UNNotificationRequest(identifier: "daily_notification_thursday", content: content, trigger: thursdayTrigger)
-        center.add(thursdayRequest)
-        
-        // Schedule a notification for Friday
-        dateComponents.weekday = 6 // Friday
-        let fridayTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-        let fridayRequest = UNNotificationRequest(identifier: "daily_notification_friday", content: content, trigger: fridayTrigger)
-        center.add(fridayRequest)
+        if authViewModel.userSession == nil {
+            let center = UNUserNotificationCenter.current()
+            
+            let content = UNMutableNotificationContent()
+            content.title = "Are you working today?"
+            content.body = "Don't forget to sign in for the day."
+            content.sound = .default
+            content.categoryIdentifier = "daily_notification"
+            
+            let signInAction = UNNotificationAction(identifier: "sign_in", title: "Sign In", options: [.foreground])
+            let notWorkingAction = UNNotificationAction(identifier: "not_working", title: "Not working today", options: [])
+            let dailyCategory = UNNotificationCategory(identifier: "daily_notification", actions: [signInAction, notWorkingAction], intentIdentifiers: [], options: [.customDismissAction])
+            
+            center.setNotificationCategories([dailyCategory])
+            
+            // Schedule a notification for Monday
+            var dateComponents = DateComponents()
+            dateComponents.hour = 7 // hour of the day to fire the notification
+            dateComponents.weekday = 2 // Monday
+            let mondayTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+            let mondayRequest = UNNotificationRequest(identifier: "daily_notification_monday", content: content, trigger: mondayTrigger)
+            center.add(mondayRequest)
+            
+            // Schedule a notification for Tuesday
+            dateComponents.weekday = 3 // Tuesday
+            let tuesdayTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+            let tuesdayRequest = UNNotificationRequest(identifier: "daily_notification_tuesday", content: content, trigger: tuesdayTrigger)
+            center.add(tuesdayRequest)
+            
+            // Schedule a notification for Wednesday
+            dateComponents.weekday = 4 // Wednesday
+            let wednesdayTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+            let wednesdayRequest = UNNotificationRequest(identifier: "daily_notification_wednesday", content: content, trigger: wednesdayTrigger)
+            center.add(wednesdayRequest)
+            
+            // Schedule a notification for Thursday
+            dateComponents.weekday = 5 // Thursday
+            let thursdayTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+            let thursdayRequest = UNNotificationRequest(identifier: "daily_notification_thursday", content: content, trigger: thursdayTrigger)
+            center.add(thursdayRequest)
+            
+            // Schedule a notification for Friday
+            dateComponents.weekday = 6 // Friday
+            let fridayTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+            let fridayRequest = UNNotificationRequest(identifier: "daily_notification_friday", content: content, trigger: fridayTrigger)
+            center.add(fridayRequest)
+        }
     }
     
     
