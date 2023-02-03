@@ -12,7 +12,8 @@ import FirebaseFirestoreSwift
 import MapKit
 
 struct UserProfile: Codable, Hashable {
-    var id = UUID()
+    @DocumentID var id: String?
+//    var id = UUID()
     var uid: String
     var fullName: String
     var email: String
@@ -22,18 +23,36 @@ struct UserProfile: Codable, Hashable {
 }
 
 struct CheckIn: Codable, Hashable, Equatable {
+    
     var isCheckedIn: Bool
-    var project: Project
+    var projectName: String
+    var projectLocation: GeoPoint
+    var projectAddress: String
+    var projectJobNumber: String
     var date: Date
     
-    init(isCheckedIn: Bool, project: Project, date: Date) {
+    init(isCheckedIn: Bool=false, projectName: String = "", projectLocation: GeoPoint=GeoPoint(latitude: 0.0, longitude: 0.0), projectAddress: String="", projectJobNumber: String="", date: Date=Date()) {
         self.isCheckedIn = isCheckedIn
-        self.project = project
+        self.projectName = projectName
+        self.projectLocation = projectLocation
+        self.projectAddress = projectAddress
+        self.projectJobNumber = projectJobNumber
         self.date = date
     }
-    
+
 }
 
+extension CheckIn {
+    func toDict() -> [String: Any] {
+        return [
+            "isCheckedIn": self.isCheckedIn,
+            "projectName": self.projectName,
+            "projectLocation": self.projectLocation,
+            "projectAddress": self.projectAddress,
+            "projectJobNumber": self.projectJobNumber,
+            "date": self.date]
+    }
+}
 
 
 class UserProfileRepository: ObservableObject {
@@ -63,17 +82,16 @@ class UserProfileRepository: ObservableObject {
         }
     }
     
-    func isCheckedIn(userId: String, project: ProjectClass) {
+    func isCheckedIn(checkIn: CheckIn, userId: String) {
         db.collection("profiles").whereField("uid", isEqualTo: userId).getDocuments { result, error in
             if error == nil {
                 for document in result!.documents {
-                    document.reference.setData(["checkedIn.isCheckedIn": true, "checkedIn.date": Date(), "project": project])
+                    let data: [String: Any] = ["checkedIn": checkIn.toDict()]
+                    document.reference.setData(data, merge: true)
                 }
             }
         }
     }
-    
-    func isCheckedOut(userId: String) {}
         
     func isLoggedIn(userId: String) {
         db.collection("profiles").whereField("uid", isEqualTo: userId).getDocuments { result, error in

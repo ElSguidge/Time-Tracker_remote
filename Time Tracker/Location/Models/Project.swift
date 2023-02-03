@@ -29,6 +29,7 @@ extension Project {
     }
 }
 
+
 class ProjectClass: NSObject, MKAnnotation {
     
     var coordinate: CLLocationCoordinate2D
@@ -56,5 +57,10 @@ class ProjectClass: NSObject, MKAnnotation {
     var subtitle: String? {
         return address
     }
+    
+    func toProject() -> Project {
+        return Project(name: name, location: GeoPoint(latitude: coordinate.latitude, longitude: coordinate.longitude), address: address, jobNumber: jobNumber)
+    }
+
 }
 

@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
 import GoogleMaps
 
 struct ProjectView: View {
     
-    var project: ProjectClass?
+    @ObservedObject var authViewModel = AuthViewModel()
+
+    var projectClass: ProjectClass?
     
     var body: some View {
         
@@ -19,23 +22,30 @@ struct ProjectView: View {
             Spacer()
             Spacer()
             
-            StreetViewRepresentable(project: project ?? ProjectClass(coordinate: CLLocationCoordinate2D(latitude: -33.732, longitude: 150.312), name: "", address: "", jobNumber: ""))
+            StreetViewRepresentable(project: projectClass ?? ProjectClass(coordinate: CLLocationCoordinate2D(latitude: -33.732, longitude: 150.312), name: "", address: "", jobNumber: ""))
         
-        Text(project?.name ?? "")
+        Text(projectClass?.name ?? "")
             .font(.system(size: 30))
             .fontWeight(.bold)
             VStack(alignment: .leading) {
                 
-                Text(project?.address ?? "")
+                Text(projectClass?.address ?? "")
                     .fontWeight(.bold)
                 VStack(alignment: .leading) {
-                    Text("Job number: \(project?.jobNumber ?? "")")
+                    Text("Job number: \(projectClass?.jobNumber ?? "")")
                 }
             }
-            Button("Check in") {}
-                .frame(maxWidth: .infinity)
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
+        if projectClass != nil {
+            Button("Check in") {
+                let checkIn = CheckIn(isCheckedIn: true, projectName: projectClass!.name, projectLocation: GeoPoint(latitude: projectClass!.coordinate.latitude, longitude: projectClass!.coordinate.longitude), projectAddress: projectClass!.address, projectJobNumber: projectClass!.jobNumber, date: Date())
+                print(checkIn)
+                UserProfileRepository().isCheckedIn(checkIn: checkIn, userId: authViewModel.userSession!.uid)
+            }
+            
+            .frame(maxWidth: .infinity)
+            .buttonStyle(.borderedProminent)
+            .controlSize(.large)
+        }
     }
 }
 

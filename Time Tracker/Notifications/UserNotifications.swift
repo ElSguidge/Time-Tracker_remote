@@ -59,7 +59,6 @@ class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
     
     func scheduleDailyNotification() {
         
-        if authViewModel.userSession == nil {
             let center = UNUserNotificationCenter.current()
             
             let content = UNMutableNotificationContent()
@@ -105,7 +104,6 @@ class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
             let fridayTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
             let fridayRequest = UNNotificationRequest(identifier: "daily_notification_friday", content: content, trigger: fridayTrigger)
             center.add(fridayRequest)
-        }
     }
     
     

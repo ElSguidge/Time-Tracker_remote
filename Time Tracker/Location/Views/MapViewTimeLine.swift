@@ -42,7 +42,7 @@ struct MapViewTimeLine: View {
                     .sheet(isPresented: $showingProjectInfo) {
                         if selectedProject != nil {
                             withAnimation {
-                                ProjectView(project: self.selectedProject)
+                                ProjectView(projectClass: self.selectedProject)
                                     .presentationDetents(
                                         [.medium, .large],
                                         selection: $settingsDetent)
