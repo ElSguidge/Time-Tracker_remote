@@ -29,7 +29,7 @@
 		8479464B297A5E97000FFBB9 /* CreateProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479464A297A5E97000FFBB9 /* CreateProjectView.swift */; };
 		8479464D297CF3D8000FFBB9 /* CreateProjectMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479464C297CF3D8000FFBB9 /* CreateProjectMapView.swift */; };
 		8479465429834390000FFBB9 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479465329834390000FFBB9 /* ProjectView.swift */; };
-		8479465629837A92000FFBB9 /* CheckInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479465529837A92000FFBB9 /* CheckInView.swift */; };
+		8479465629837A92000FFBB9 /* HomeCheckInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479465529837A92000FFBB9 /* HomeCheckInView.swift */; };
 		847A3CC5296D123800BF6793 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CC4296D123800BF6793 /* MapViewModel.swift */; };
 		847A3CCB296D12B900BF6793 /* MapViewTimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CCA296D12B900BF6793 /* MapViewTimeLine.swift */; };
 		847A3CCD296D134C00BF6793 /* ObserverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CCC296D134C00BF6793 /* ObserverModel.swift */; };
@@ -56,6 +56,9 @@
 		849C83912950624700132B03 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C83902950624700132B03 /* ImagePickerView.swift */; };
 		849C83942950636100132B03 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C83932950636100132B03 /* Coordinator.swift */; };
 		84B6222C296D098400567125 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6222B296D098400567125 /* ViewRouter.swift */; };
+		84C85C2A298D01C800C1B607 /* CheckIntoProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C85C29298D01C800C1B607 /* CheckIntoProjectView.swift */; };
+		84C85C2D298D023C00C1B607 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C85C2C298D023C00C1B607 /* Checkbox.swift */; };
+		84C85C2F298D07EC00C1B607 /* Checkmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C85C2E298D07EC00C1B607 /* Checkmark.swift */; };
 		F7C20B68A44BCF132E05BA5A /* Pods_Time_Tracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F865BFFB60107AAE0492A9F /* Pods_Time_Tracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -85,7 +88,7 @@
 		8479464A297A5E97000FFBB9 /* CreateProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectView.swift; sourceTree = "<group>"; };
 		8479464C297CF3D8000FFBB9 /* CreateProjectMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectMapView.swift; sourceTree = "<group>"; };
 		8479465329834390000FFBB9 /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
-		8479465529837A92000FFBB9 /* CheckInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInView.swift; sourceTree = "<group>"; };
+		8479465529837A92000FFBB9 /* HomeCheckInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCheckInView.swift; sourceTree = "<group>"; };
 		847A3CC4296D123800BF6793 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		847A3CCA296D12B900BF6793 /* MapViewTimeLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewTimeLine.swift; sourceTree = "<group>"; };
 		847A3CCC296D134C00BF6793 /* ObserverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverModel.swift; sourceTree = "<group>"; };
@@ -112,6 +115,9 @@
 		849C83902950624700132B03 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		849C83932950636100132B03 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		84B6222B296D098400567125 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
+		84C85C29298D01C800C1B607 /* CheckIntoProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckIntoProjectView.swift; sourceTree = "<group>"; };
+		84C85C2C298D023C00C1B607 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
+		84C85C2E298D07EC00C1B607 /* Checkmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkmark.swift; sourceTree = "<group>"; };
 		9F865BFFB60107AAE0492A9F /* Pods_Time_Tracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Time_Tracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5339EA2062E7EAEFF2D111B /* Pods-Time Tracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Time Tracker.release.xcconfig"; path = "Target Support Files/Pods-Time Tracker/Pods-Time Tracker.release.xcconfig"; sourceTree = "<group>"; };
 		F7476E082EB53B8699D93975 /* Pods-Time Tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Time Tracker.debug.xcconfig"; path = "Target Support Files/Pods-Time Tracker/Pods-Time Tracker.debug.xcconfig"; sourceTree = "<group>"; };
@@ -167,6 +173,7 @@
 		841701B82940A4C100FA9658 /* Time Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				842288492947E92600467096 /* Components */,
 				844F2877298785B0007A075E /* Time-Tracker-Info.plist */,
 				844F287529877EDB007A075E /* Configs */,
 				847A3CE9296D190D00BF6793 /* Settings */,
@@ -256,6 +263,8 @@
 				8499C3412956CD0F00522178 /* TotalsCard.swift */,
 				8499C3432956DC5700522178 /* ExpenseCard.swift */,
 				840BCC35296EC07F00738A06 /* PDFViewSaved.swift */,
+				84C85C2C298D023C00C1B607 /* Checkbox.swift */,
+				84C85C2E298D07EC00C1B607 /* Checkmark.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -270,7 +279,6 @@
 				8422884429474E3D00467096 /* ChildDetailViews */,
 				8422884329474E0A00467096 /* AddViews */,
 				842288332944275100467096 /* Parent Views */,
-				842288492947E92600467096 /* Components */,
 			);
 			path = Timesheets;
 			sourceTree = "<group>";
@@ -347,7 +355,8 @@
 				847A3CCA296D12B900BF6793 /* MapViewTimeLine.swift */,
 				8479464A297A5E97000FFBB9 /* CreateProjectView.swift */,
 				8479465329834390000FFBB9 /* ProjectView.swift */,
-				8479465529837A92000FFBB9 /* CheckInView.swift */,
+				8479465529837A92000FFBB9 /* HomeCheckInView.swift */,
+				84C85C29298D01C800C1B607 /* CheckIntoProjectView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -609,6 +618,7 @@
 				847A3CD3296D143000BF6793 /* UserProfileRepository.swift in Sources */,
 				847A3CCD296D134C00BF6793 /* ObserverModel.swift in Sources */,
 				841701CB2940A5DF00FA9658 /* Time Tracker.xcdatamodeld in Sources */,
+				84C85C2F298D07EC00C1B607 /* Checkmark.swift in Sources */,
 				847A3CD6296D147E00BF6793 /* UserDetailView.swift in Sources */,
 				842288412947302A00467096 /* TimecardModel.swift in Sources */,
 				844D23A5295CE82E00AD5191 /* SavedTimecardEditView.swift in Sources */,
@@ -620,7 +630,7 @@
 				843345002952FBA200E79DBE /* HCard.swift in Sources */,
 				847A3CE3296D163300BF6793 /* AuthViewModel.swift in Sources */,
 				841701D12941937500FA9658 /* MainDetailView.swift in Sources */,
-				8479465629837A92000FFBB9 /* CheckInView.swift in Sources */,
+				8479465629837A92000FFBB9 /* HomeCheckInView.swift in Sources */,
 				849C83942950636100132B03 /* Coordinator.swift in Sources */,
 				8479464B297A5E97000FFBB9 /* CreateProjectView.swift in Sources */,
 				8499C3422956CD0F00522178 /* TotalsCard.swift in Sources */,
@@ -635,12 +645,14 @@
 				84B6222C296D098400567125 /* ViewRouter.swift in Sources */,
 				847A3CD8296D149E00BF6793 /* UserListView.swift in Sources */,
 				847A3CCB296D12B900BF6793 /* MapViewTimeLine.swift in Sources */,
+				84C85C2D298D023C00C1B607 /* Checkbox.swift in Sources */,
 				8499C3442956DC5700522178 /* ExpenseCard.swift in Sources */,
 				847A3CEE296D198F00BF6793 /* LoginPage.swift in Sources */,
 				847A3CF0296D19E200BF6793 /* RegisterPage.swift in Sources */,
 				8479465429834390000FFBB9 /* ProjectView.swift in Sources */,
 				847A3CF2296D5B7300BF6793 /* SavedWeeklyCard.swift in Sources */,
 				847A3CC5296D123800BF6793 /* MapViewModel.swift in Sources */,
+				84C85C2A298D01C800C1B607 /* CheckIntoProjectView.swift in Sources */,
 				8499C33B2955A61D00522178 /* PdfView.swift in Sources */,
 				847A3CE5296D169600BF6793 /* MotherView.swift in Sources */,
 				841701C82940A50200FA9658 /* DataController.swift in Sources */,

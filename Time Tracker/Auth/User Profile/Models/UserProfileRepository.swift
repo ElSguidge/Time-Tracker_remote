@@ -118,7 +118,7 @@ class UserProfileRepository: ObservableObject {
             }
             
             let document = documents[0]
-            document.reference.updateData(["isLoggedIn": false]) { error in
+            document.reference.updateData(["isLoggedIn": false, "checkedIn.isCheckedIn": false]) { error in
                 if let error = error {
                     print("Error updating document: \(error)")
                     completion(false)
@@ -132,15 +132,23 @@ class UserProfileRepository: ObservableObject {
     }
     
     func fetchProfile(userId: String, completion: @escaping (_ profile: UserProfile?, _ error: Error?) -> Void) {
-        db.collection("profiles").document(userId).getDocument { (snapshot, error) in
-            
-            let profile = try? snapshot?.data(as: UserProfile.self)
-            completion(profile, error)
+        let profileRef = db.collection("profiles").document(userId)
+        profileRef.addSnapshotListener { (snapshot, error) in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+            guard let snapshot = snapshot, snapshot.exists else {
+                completion(nil, nil)
+                return
+            }
+            let profile = try? snapshot.data(as: UserProfile.self)
+            completion(profile, nil)
         }
     }
     
     func fetchAllProfiles(completion: @escaping (_ profiles: [UserProfile]?, _ error: Error?) -> Void) {
-        db.collection("profiles").getDocuments { (snapshot, error) in
+        db.collection("profiles").addSnapshotListener { (snapshot, error) in
             if let error = error {
                 completion(nil, error)
                 return

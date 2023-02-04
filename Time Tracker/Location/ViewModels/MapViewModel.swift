@@ -16,6 +16,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     @Published var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.331517, longitude: -121.891054), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     @Published var userProfiles: [UserProfile] = []
+    @Published var userProfile: UserProfile? = nil
     @Published var currentProject: Project? = nil
     @Published var alreadyCheckedIn: Bool = false
     
@@ -80,9 +81,15 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                     self.userProfiles = profiles
                 }
             }
-            
-            
-            
+            self.profileRepository.fetchProfile(userId: authViewModel.userSession!.uid) { (profile, error) in
+                if let error = error {
+                    print("Error fetching user profile: \(error)")
+                    return
+                }
+                if let profile = profile {
+                    self.userProfile = profile
+                }
+            }
         }
     }
     

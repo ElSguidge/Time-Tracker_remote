@@ -12,39 +12,54 @@ import GoogleMaps
 struct ProjectView: View {
     
     @ObservedObject var authViewModel = AuthViewModel()
-
+    var userProfile: UserProfile
+    
     var projectClass: ProjectClass?
+    @State private var showingCheckinPage: Bool = false
     
     var body: some View {
         
-
-            Spacer()
-            Spacer()
-            Spacer()
-            
-            StreetViewRepresentable(project: projectClass ?? ProjectClass(coordinate: CLLocationCoordinate2D(latitude: -33.732, longitude: 150.312), name: "", address: "", jobNumber: ""))
+        
+        Spacer()
+        Spacer()
+        Spacer()
+        
+        StreetViewRepresentable(project: projectClass ?? ProjectClass(coordinate: CLLocationCoordinate2D(latitude: -33.732, longitude: 150.312), name: "", address: "", jobNumber: ""))
         
         Text(projectClass?.name ?? "")
             .font(.system(size: 30))
             .fontWeight(.bold)
-            VStack(alignment: .leading) {
-                
-                Text(projectClass?.address ?? "")
-                    .fontWeight(.bold)
-                VStack(alignment: .leading) {
-                    Text("Job number: \(projectClass?.jobNumber ?? "")")
-                }
-            }
-        if projectClass != nil {
-            Button("Check in") {
-                let checkIn = CheckIn(isCheckedIn: true, projectName: projectClass!.name, projectLocation: GeoPoint(latitude: projectClass!.coordinate.latitude, longitude: projectClass!.coordinate.longitude), projectAddress: projectClass!.address, projectJobNumber: projectClass!.jobNumber, date: Date())
-                print(checkIn)
-                UserProfileRepository().isCheckedIn(checkIn: checkIn, userId: authViewModel.userSession!.uid)
-            }
+        VStack(alignment: .leading) {
             
-            .frame(maxWidth: .infinity)
-            .buttonStyle(.borderedProminent)
-            .controlSize(.large)
+            Text(projectClass?.address ?? "")
+                .fontWeight(.bold)
+            VStack(alignment: .leading) {
+                Text("Job number: \(projectClass?.jobNumber ?? "")")
+            }
+        }
+        if projectClass != nil {
+            
+            if userProfile.checkedIn.projectAddress != projectClass?.address ?? "" || userProfile.checkedIn.projectAddress == projectClass?.address ?? "" && userProfile.checkedIn.isCheckedIn == false {
+                Button("Check in") {
+                    self.showingCheckinPage = true
+                }
+                .frame(maxWidth: .infinity)
+                .fontWeight(.semibold)
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
+                .sheet(isPresented: $showingCheckinPage) {
+                    CheckIntoProjectView(userProfile: userProfile, projectClass: projectClass!)
+                }
+            } else {
+                Button("Check out") {
+                    let checkout = CheckIn(isCheckedIn: false, projectName: projectClass!.name, projectLocation: GeoPoint(latitude: projectClass!.coordinate.latitude, longitude: projectClass!.coordinate.longitude), projectAddress: projectClass!.address, projectJobNumber: projectClass!.jobNumber, date: Date())
+                    UserProfileRepository().isCheckedIn(checkIn: checkout, userId: authViewModel.userSession!.uid)
+                }
+                .frame(maxWidth: .infinity)
+                .fontWeight(.semibold)
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
+            }
         }
     }
 }

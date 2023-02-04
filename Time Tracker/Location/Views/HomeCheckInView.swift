@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CheckInView: View {
+struct HomeCheckInView: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
@@ -15,6 +15,6 @@ struct CheckInView: View {
 
 struct CheckInView_Previews: PreviewProvider {
     static var previews: some View {
-        CheckInView()
+        HomeCheckInView()
     }
 }
