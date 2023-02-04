@@ -6,12 +6,103 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct UserDetailView: View {
     
     var user: UserProfile
     
+    @State private var currentLocationAddress: String = "Loading..."
+    
     var body: some View {
-        Text(user.fullName)
+        NavigationStack {
+            Form {
+                Section {
+                    HStack(spacing: 40) {
+                        Text("Name:")
+                        Text("\(user.fullName)")
+                    }
+                    HStack(spacing: 40) {
+                        Text("Email:")
+                        Text(user.email)
+                    }
+                    HStack(spacing: 40) {
+                        Text("Log in status:")
+                        Image(systemName: user.isLoggedIn ? "checkmark.circle.fill" : "x.circle.fill")
+                            .foregroundColor(user.isLoggedIn ? .green : .gray)
+                    }
+                    HStack(spacing: 40) {
+                        Text("Check in status:")
+                        Image(systemName: user.checkedIn.isCheckedIn ? "checkmark.circle.fill" : "x.circle.fill")
+                            .foregroundColor(user.checkedIn.isCheckedIn ? .green : .gray)
+                    }
+                    HStack(spacing: 40) {
+                        Text("Last checked in project:")
+                        Text("\(user.checkedIn.projectName)")
+                    }
+                    HStack(spacing: 40) {
+                        Text("Last checked in project number:")
+                        Text("\(user.checkedIn.projectJobNumber)")
+                    }
+                    HStack(spacing: 40) {
+                        Text("Last check in address:")
+                        Text(user.checkedIn.projectAddress)
+                    }
+                    HStack(spacing: 40) {
+                        Text("Date last checked in:")
+                        Text("\(user.checkedIn.date)")
+                    }
+                    HStack(spacing: 40) {
+                        Text("Last logged location:")
+                        Text("\(currentLocationAddress)")
+                    }
+                }
+            }
+            .navigationTitle("\(user.fullName)")
+        }
+        .onAppear {
+            self.getAddressFromLatLon(latitude: user.location.latitude, longitude: user.location.longitude) { (address) in
+                self.currentLocationAddress = address ?? "Unable to retrieve address"
+            }
+        }
     }
+    
+    func getAddressFromLatLon(latitude: CLLocationDegrees, longitude: CLLocationDegrees, completion: @escaping (String?) -> ()) {
+        let location = CLLocation(latitude: latitude, longitude: longitude)
+        let geocoder = CLGeocoder()
+        
+        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+            if let error = error {
+                print("Reverse geocode failed with error: \(error)")
+                completion(nil)
+                return
+            }
+            
+            if let placemarks = placemarks, let placemark = placemarks.first {
+                var addressString = ""
+                
+                if let subThoroughfare = placemark.subThoroughfare {
+                                addressString += subThoroughfare + ", "
+                            }
+                
+                if let thoroughfare = placemark.thoroughfare {
+                    addressString += thoroughfare + ", "
+                }
+
+                if let locality = placemark.locality {
+                    addressString += locality + ", "
+                }
+
+                if let postalCode = placemark.postalCode {
+                    addressString += postalCode + " "
+                }
+                
+                completion(addressString)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+
 }
+

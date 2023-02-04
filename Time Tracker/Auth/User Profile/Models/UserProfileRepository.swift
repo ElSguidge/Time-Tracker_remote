@@ -92,6 +92,15 @@ class UserProfileRepository: ObservableObject {
             }
         }
     }
+    func checkOut(userId: String) {
+        db.collection("profiles").whereField("uid", isEqualTo: userId).getDocuments { result, error in
+            if error == nil {
+                for document in result!.documents {
+                    document.reference.updateData(["checkedIn.isCheckedIn": false])
+                }
+            }
+        }
+    }
         
     func isLoggedIn(userId: String) {
         db.collection("profiles").whereField("uid", isEqualTo: userId).getDocuments { result, error in

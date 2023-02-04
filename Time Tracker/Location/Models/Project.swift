@@ -30,7 +30,7 @@ extension Project {
 }
 
 
-class ProjectClass: NSObject, MKAnnotation {
+class ProjectClass: NSObject, MKAnnotation, ObservableObject {
     
     var coordinate: CLLocationCoordinate2D
     let name: String

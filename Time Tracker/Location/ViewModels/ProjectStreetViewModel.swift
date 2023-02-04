@@ -30,7 +30,6 @@ struct StreetViewRepresentable: UIViewControllerRepresentable {
         let streetViewController = StreetView()
         streetViewController.loadView()
         streetViewController.updateCoordinates(coordinate: CLLocationCoordinate2D(latitude: project.coordinate.latitude, longitude: project.coordinate.longitude))
-//        (streetViewController.view as! GMSPanoramaView).moveNearCoordinate(CLLocationCoordinate2D(latitude: project.coordinate.latitude, longitude: project.coordinate.longitude))
         return streetViewController
     }
 

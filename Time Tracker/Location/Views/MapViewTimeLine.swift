@@ -117,8 +117,8 @@ struct MapViewTimeLine: View {
                     }
                     .sheet(isPresented: $showingCheckInPage) {
                         withAnimation {
-                            HomeCheckInView()
-                        }
+                            HomeCheckInView(userProfile: viewModel.userProfile!)
+                            }
                     }
                     
                     .sheet(isPresented: $showingUserPage) {
@@ -182,12 +182,6 @@ struct MapView: UIViewRepresentable {
         map.showsUserLocation = true
         let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: -37.8136, longitude: 144.9631), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.5))
         map.region = region
-        
-//        for project in projects {
-//            let projectClass = project.toProjectClass()
-//            map.addAnnotation(projectClass)
-//        }
-        
         return map
     }
     
