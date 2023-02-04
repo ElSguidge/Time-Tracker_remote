@@ -9,6 +9,7 @@ import SwiftUI
 import FirebaseFirestore
 
 struct CheckIntoProjectView: View {
+    @Environment(\.presentationMode) var presentationMode
     @ObservedObject var authViewModel = AuthViewModel()
     var userProfile: UserProfile
     var projectClass: ProjectClass
@@ -32,6 +33,7 @@ struct CheckIntoProjectView: View {
                         let checkIn = CheckIn(isCheckedIn: true, projectName: projectClass.name, projectLocation: GeoPoint(latitude: projectClass.coordinate.latitude, longitude: projectClass.coordinate.longitude), projectAddress: projectClass.address, projectJobNumber: projectClass.jobNumber, date: Date())
                         print(checkIn)
                         UserProfileRepository().isCheckedIn(checkIn: checkIn, userId: authViewModel.userSession!.uid)
+                        self.presentationMode.wrappedValue.dismiss()
                     }
                     .frame(maxWidth: .infinity)
                     .fontWeight(.semibold)

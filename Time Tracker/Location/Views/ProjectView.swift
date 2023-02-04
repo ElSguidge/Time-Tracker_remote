@@ -10,7 +10,7 @@ import FirebaseFirestore
 import GoogleMaps
 
 struct ProjectView: View {
-    
+    @Environment(\.presentationMode) var presentationMode
     @ObservedObject var authViewModel = AuthViewModel()
     var userProfile: UserProfile
     
@@ -54,6 +54,7 @@ struct ProjectView: View {
                 Button("Check out") {
                     let checkout = CheckIn(isCheckedIn: false, projectName: projectClass!.name, projectLocation: GeoPoint(latitude: projectClass!.coordinate.latitude, longitude: projectClass!.coordinate.longitude), projectAddress: projectClass!.address, projectJobNumber: projectClass!.jobNumber, date: Date())
                     UserProfileRepository().isCheckedIn(checkIn: checkout, userId: authViewModel.userSession!.uid)
+                    self.presentationMode.wrappedValue.dismiss()
                 }
                 .frame(maxWidth: .infinity)
                 .fontWeight(.semibold)

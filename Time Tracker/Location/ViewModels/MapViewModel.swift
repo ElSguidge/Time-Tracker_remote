@@ -17,8 +17,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.331517, longitude: -121.891054), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     @Published var userProfiles: [UserProfile] = []
     @Published var userProfile: UserProfile? = nil
-    @Published var currentProject: Project? = nil
-    @Published var alreadyCheckedIn: Bool = false
+//    @Published var currentProject: Project? = nil
     
     let profileRepository = UserProfileRepository()
     
@@ -117,7 +116,9 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             
         case .authorizedAlways, .authorizedWhenInUse:
             region = MKCoordinateRegion(center: locationManager.location!.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
-            self.checkInToProject(currentLocation: self.locationManager?.location)
+            if authViewModel.userSession != nil {
+                self.checkInToProject(currentLocation: self.locationManager?.location)
+            }
             
         @unknown default:
             break
@@ -127,7 +128,8 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     private func checkInToProject(currentLocation: CLLocation?) {
         
         guard let currentLocation = currentLocation else { return }
-        
+        guard let _ = authViewModel.userSession else { return }
+
         let currentLocationCoordinate = currentLocation.coordinate
         let center = GeoPoint(latitude: currentLocationCoordinate.latitude, longitude: currentLocationCoordinate.longitude)
         let radius = 1000.0 // 1km
@@ -149,9 +151,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                             if distance <= radius {
                                 // project is within the radius, show alert to check in
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                                    
-                                    self.showCheckInAlert(project: project)
-                                    
+                                        self.showCheckInAlert(project: project)
                                 }
                                 break
                             }
@@ -166,7 +166,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func showCheckInAlert(project: Project) {
         
-        if userProfile?.checkedIn.isCheckedIn == false {
+        if userProfile?.isLoggedIn != false {
             let alert = UIAlertController(title: "Check in to project", message: "Do you want to check in to project \(project.name)?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Check in", style: .default, handler: { action in
                 // check in to project
