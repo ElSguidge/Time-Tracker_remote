@@ -165,12 +165,18 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func showCheckInAlert(project: Project) {
-        let alert = UIAlertController(title: "Check in to project", message: "Do you want to check in to project \(project.name)?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Check in", style: .default, handler: { action in
-            // check in to project
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+        
+        if userProfile?.checkedIn.isCheckedIn == false {
+            let alert = UIAlertController(title: "Check in to project", message: "Do you want to check in to project \(project.name)?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Check in", style: .default, handler: { action in
+                // check in to project
+                let checkIntoProjectView = CheckIntoProjectView(userProfile: self.userProfile!, projectClass: project.toProjectClass())
+                let hostingController = UIHostingController(rootView: checkIntoProjectView)
+                UIApplication.shared.keyWindow?.rootViewController?.present(hostingController, animated: true, completion: nil)
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+        }
     }
     
     
