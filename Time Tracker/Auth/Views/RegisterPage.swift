@@ -37,10 +37,6 @@ struct RegisterPage: View {
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
                 .focused(focus, equals: .email)
-                .submitLabel(.next)
-                .onSubmit {
-                    focus.wrappedValue = .password
-                }
         }
         .padding(.vertical, 6)
         .background(Divider(), alignment: .bottom)
@@ -50,10 +46,6 @@ struct RegisterPage: View {
             Image(systemName: "lock")
             SecureField("Password", text: $regViewModel.password)
                 .focused(focus, equals: .password)
-                .submitLabel(.next)
-                .onSubmit {
-                    focus.wrappedValue = .fullname
-                }
         }
         .padding(.vertical, 6)
         .background(Divider(), alignment: .bottom)
