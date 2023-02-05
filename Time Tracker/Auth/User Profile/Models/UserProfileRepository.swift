@@ -12,8 +12,7 @@ import FirebaseFirestoreSwift
 import MapKit
 
 struct UserProfile: Codable, Hashable {
-    @DocumentID var id: String?
-//    var id = UUID()
+    var id = UUID()
     var uid: String
     var fullName: String
     var email: String
@@ -141,39 +140,39 @@ class UserProfileRepository: ObservableObject {
     }
     
     func fetchProfile(userId: String, completion: @escaping (_ profile: UserProfile?, _ error: Error?) -> Void) {
-        let profileRef = db.collection("profiles").document(userId)
-        profileRef.addSnapshotListener { (snapshot, error) in
-            if let error = error {
-                completion(nil, error)
-                return
+            let profileRef = db.collection("profiles").document(userId)
+            profileRef.addSnapshotListener { (snapshot, error) in
+                if let error = error {
+                    completion(nil, error)
+                    return
+                }
+                guard let snapshot = snapshot, snapshot.exists else {
+                    completion(nil, nil)
+                    return
+                }
+                let profile = try? snapshot.data(as: UserProfile.self)
+                completion(profile, nil)
             }
-            guard let snapshot = snapshot, snapshot.exists else {
-                completion(nil, nil)
-                return
-            }
-            let profile = try? snapshot.data(as: UserProfile.self)
-            completion(profile, nil)
         }
-    }
-    
-    func fetchAllProfiles(completion: @escaping (_ profiles: [UserProfile]?, _ error: Error?) -> Void) {
-        db.collection("profiles").addSnapshotListener { (snapshot, error) in
-            if let error = error {
-                completion(nil, error)
-                return
+        
+        func fetchAllProfiles(completion: @escaping (_ profiles: [UserProfile]?, _ error: Error?) -> Void) {
+            db.collection("profiles").addSnapshotListener { (snapshot, error) in
+                if let error = error {
+                    completion(nil, error)
+                    return
+                }
+                
+                guard let snapshot = snapshot else {
+                    completion(nil, nil)
+                    return
+                }
+                
+                let profiles = snapshot.documents.compactMap { (document) -> UserProfile? in
+                    return try? document.data(as: UserProfile.self)
+                }
+                completion(profiles, nil)
             }
-            
-            guard let snapshot = snapshot else {
-                completion(nil, nil)
-                return
-            }
-            
-            let profiles = snapshot.documents.compactMap { (document) -> UserProfile? in
-                return try? document.data(as: UserProfile.self)
-            }
-            completion(profiles, nil)
         }
-    }
     
 }
 

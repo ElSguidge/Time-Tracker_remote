@@ -11,7 +11,7 @@ import MapKit
 
 struct CreateProjectView: View {
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var viewModel = MapViewModel()
+    @ObservedObject var viewModel: MapViewModel
     @Binding var location: CLLocationCoordinate2D?
     
     @Binding var title: String

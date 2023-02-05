@@ -15,7 +15,7 @@ struct MapViewTimeLine: View {
     
     @ObservedObject var authViewModel = AuthViewModel()
     @ObservedObject var obs = observer()
-    @StateObject private var viewModel = MapViewModel()
+    @StateObject var viewModel = MapViewModel()
     @State private var showingUserPage = false
     @State private var annotations: [ProjectClass] = []
     @State private var showingCreateProject = false
@@ -40,9 +40,9 @@ struct MapViewTimeLine: View {
                 MapView(userProfiles: viewModel.userProfiles, geopoints: self.obs.data as! [String : GeoPoint], annotations: annotations, projects: viewModel.projects, showingProjectInfo: $showingProjectInfo, selectedProject: $selectedProject)
                     .edgesIgnoringSafeArea(.top)
                     .sheet(isPresented: $showingProjectInfo) {
-                        if selectedProject != nil && viewModel.userProfile != nil {
+                        if selectedProject != nil {
                             withAnimation {
-                                ProjectView(userProfile: viewModel.userProfile!, projectClass: self.selectedProject)
+                                ProjectView(userProfile: viewModel.userProfile, projectClass: self.selectedProject)
                                     .presentationDetents(
                                         [.medium, .large],
                                         selection: $settingsDetent)
@@ -115,9 +115,10 @@ struct MapViewTimeLine: View {
                         Spacer()
                         Spacer()
                     }
+                    
                     .sheet(isPresented: $showingCheckInPage) {
                         withAnimation {
-                            HomeCheckInView(userProfile: viewModel.userProfile!)
+                            HomeCheckInView(userProfile: viewModel.userProfile)
                             }
                     }
                     

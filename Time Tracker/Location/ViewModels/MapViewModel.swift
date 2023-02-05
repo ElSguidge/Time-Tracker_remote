@@ -16,8 +16,9 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     @Published var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.331517, longitude: -121.891054), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     @Published var userProfiles: [UserProfile] = []
-    @Published var userProfile: UserProfile? = nil
-    @Published var selectedProjectPub: ProjectClass?
+    @Published var userProfile: UserProfile = UserProfile(uid: "", fullName: "", email: "", isLoggedIn: false, location: GeoPoint(latitude: 0.0, longitude: 0.0), checkedIn: CheckIn())
+    
+
     
     let profileRepository = UserProfileRepository()
     
@@ -40,7 +41,9 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             }
             print("Project created")
             self.fetchProjects()
-            self.checkInToProject(currentLocation: self.locationManager?.location)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                self.checkInToProject(currentLocation: self.locationManager?.location)
+            }
         }
     }
     
@@ -59,40 +62,43 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func checkIfLocationServicesIsEnabled() {
-        
-        
-        
+
         if CLLocationManager.locationServicesEnabled() {
-            
-            
-            locationManager = CLLocationManager()
-            locationManager!.delegate = self
-            locationManager?.startUpdatingLocation()
-            
-            fetchProjects()
-            
-            self.profileRepository.fetchAllProfiles { (profiles, error) in
-                if let error = error {
-                    print("Error fetching user profiles: \(error)")
-                    return
-                }
-                if let profiles = profiles {
-                    self.userProfiles = profiles
+                    
+                    
+                    locationManager = CLLocationManager()
+                    locationManager!.delegate = self
+                    locationManager?.startUpdatingLocation()
+                    
+                    fetchProjects()
+                    
+                    self.profileRepository.fetchAllProfiles { (profiles, error) in
+                        if let error = error {
+                            print("Error fetching user profiles: \(error)")
+                            return
+                        }
+                        if let profiles = profiles {
+                            DispatchQueue.main.async {
+                                self.userProfiles = profiles
+                            }
+                        }
+                    }
+                    self.profileRepository.fetchProfile(userId: authViewModel.userSession!.uid) { (profile, error) in
+                        if let error = error {
+                            print("Error fetching user profile: \(error)")
+                            return
+                        }
+                        if let profile = profile {
+                            DispatchQueue.main.async {
+                                self.userProfile = profile
+                            }
+                        }
+                    }
                 }
             }
-            self.profileRepository.fetchProfile(userId: authViewModel.userSession!.uid) { (profile, error) in
-                if let error = error {
-                    print("Error fetching user profile: \(error)")
-                    return
-                }
-                if let profile = profile {
-                    self.userProfile = profile
-                }
-            }
-        }
-    }
     
     private func checkLocationAuthorization() {
+        
         guard let locationManager = locationManager else { return }
         
         switch locationManager.authorizationStatus {
@@ -116,9 +122,8 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             
         case .authorizedAlways, .authorizedWhenInUse:
             region = MKCoordinateRegion(center: locationManager.location!.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
-            if userProfile?.checkedIn.isCheckedIn == false {
-                self.checkInToProject(currentLocation: self.locationManager?.location)
-            }
+            
+            self.checkInToProject(currentLocation: self.locationManager?.location)
             
         @unknown default:
             break
@@ -166,11 +171,11 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func showCheckInAlert(project: Project) {
         
-        if userProfile?.isLoggedIn != false {
+        if userProfile.isLoggedIn != false {
             let alert = UIAlertController(title: "Check in to project", message: "Do you want to check in to project \(project.name)?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Check in", style: .default, handler: { action in
-                // check in to project
-                let checkIntoProjectView = CheckIntoProjectView(userProfile: self.userProfile!, projectClass: project.toProjectClass())
+//                 check in to project
+                let checkIntoProjectView = CheckIntoProjectView(userProfile: self.userProfile, projectClass: project.toProjectClass())
                 let hostingController = UIHostingController(rootView: checkIntoProjectView)
                 UIApplication.shared.keyWindow?.rootViewController?.present(hostingController, animated: true, completion: nil)
             }))
@@ -193,18 +198,19 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         
         let last = locations.last
         
-        if authViewModel.userSession != nil {
-            self.profileRepository.addCoordinatesToProfile(last: last!, userId: uid)
-            
-            db.collection("locations").document("coordinate").setData(["updates" : [uid : GeoPoint(latitude: (last?.coordinate.latitude)!, longitude: (last?.coordinate.longitude)!)]],merge: true) { (err) in
-                
-                if err != nil{
+        if authViewModel.userSession != nil && uid == userProfile.uid {
+            DispatchQueue.main.async {
+                self.profileRepository.addCoordinatesToProfile(last: last!, userId: uid)
+
+                self.db.collection("locations").document("coordinate").setData(["updates" : [uid : GeoPoint(latitude: (last?.coordinate.latitude)!, longitude: (last?.coordinate.longitude)!)]],merge: true) { (err) in
                     
-                    print((err?.localizedDescription)!)
-                    return
+                    if err != nil{
+                        
+                        print((err?.localizedDescription)!)
+                        return
+                    }
                 }
             }
-          
         }
     }
 }

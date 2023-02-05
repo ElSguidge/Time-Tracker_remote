@@ -20,40 +20,49 @@ struct UserDetailView: View {
                 Section {
                     HStack(spacing: 40) {
                         Text("Name:")
+                            .fontWeight(.semibold)
                         Text("\(user.fullName)")
                     }
                     HStack(spacing: 40) {
                         Text("Email:")
+                            .fontWeight(.semibold)
                         Text(user.email)
                     }
                     HStack(spacing: 40) {
                         Text("Log in status:")
+                            .fontWeight(.semibold)
                         Image(systemName: user.isLoggedIn ? "checkmark.circle.fill" : "x.circle.fill")
                             .foregroundColor(user.isLoggedIn ? .green : .gray)
                     }
                     HStack(spacing: 40) {
                         Text("Check in status:")
+                            .fontWeight(.semibold)
                         Image(systemName: user.checkedIn.isCheckedIn ? "checkmark.circle.fill" : "x.circle.fill")
                             .foregroundColor(user.checkedIn.isCheckedIn ? .green : .gray)
                     }
                     HStack(spacing: 40) {
                         Text("Last checked in project:")
+                            .fontWeight(.semibold)
                         Text("\(user.checkedIn.projectName)")
                     }
                     HStack(spacing: 40) {
                         Text("Last checked in project number:")
+                            .fontWeight(.semibold)
                         Text("\(user.checkedIn.projectJobNumber)")
                     }
                     HStack(spacing: 40) {
                         Text("Last check in address:")
+                            .fontWeight(.semibold)
                         Text(user.checkedIn.projectAddress)
                     }
                     HStack(spacing: 40) {
                         Text("Date last checked in:")
+                            .fontWeight(.semibold)
                         Text("\(user.checkedIn.date)")
                     }
                     HStack(spacing: 40) {
                         Text("Last logged location:")
+                            .fontWeight(.semibold)
                         Text("\(currentLocationAddress)")
                     }
                 }
