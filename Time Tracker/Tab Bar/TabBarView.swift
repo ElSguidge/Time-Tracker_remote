@@ -10,8 +10,7 @@ import SwiftUI
 struct TabBarView: View {
     
     @StateObject var dataController : DataController
-        
-        init() {
+    init() {
             let dataController = DataController()
             _dataController = StateObject(wrappedValue: dataController)
         }

@@ -24,6 +24,12 @@
 		842288412947302A00467096 /* TimecardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842288402947302A00467096 /* TimecardModel.swift */; };
 		843345002952FBA200E79DBE /* HCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843344FF2952FBA200E79DBE /* HCard.swift */; };
 		844D23A5295CE82E00AD5191 /* SavedTimecardEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D23A4295CE82E00AD5191 /* SavedTimecardEditView.swift */; };
+		844F28742983926B007A075E /* ProjectStreetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844F28732983926B007A075E /* ProjectStreetViewModel.swift */; };
+		84794649297930DA000FFBB9 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84794648297930DA000FFBB9 /* Project.swift */; };
+		8479464B297A5E97000FFBB9 /* CreateProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479464A297A5E97000FFBB9 /* CreateProjectView.swift */; };
+		8479464D297CF3D8000FFBB9 /* CreateProjectMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479464C297CF3D8000FFBB9 /* CreateProjectMapView.swift */; };
+		8479465429834390000FFBB9 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479465329834390000FFBB9 /* ProjectView.swift */; };
+		8479465629837A92000FFBB9 /* HomeCheckInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479465529837A92000FFBB9 /* HomeCheckInView.swift */; };
 		847A3CC5296D123800BF6793 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CC4296D123800BF6793 /* MapViewModel.swift */; };
 		847A3CCB296D12B900BF6793 /* MapViewTimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CCA296D12B900BF6793 /* MapViewTimeLine.swift */; };
 		847A3CCD296D134C00BF6793 /* ObserverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A3CCC296D134C00BF6793 /* ObserverModel.swift */; };
@@ -50,6 +56,10 @@
 		849C83912950624700132B03 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C83902950624700132B03 /* ImagePickerView.swift */; };
 		849C83942950636100132B03 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C83932950636100132B03 /* Coordinator.swift */; };
 		84B6222C296D098400567125 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6222B296D098400567125 /* ViewRouter.swift */; };
+		84C85C2A298D01C800C1B607 /* CheckIntoProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C85C29298D01C800C1B607 /* CheckIntoProjectView.swift */; };
+		84C85C2D298D023C00C1B607 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C85C2C298D023C00C1B607 /* Checkbox.swift */; };
+		84C85C2F298D07EC00C1B607 /* Checkmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C85C2E298D07EC00C1B607 /* Checkmark.swift */; };
+		84DE0BB8298E5CF000CDC8E9 /* CheckedInModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE0BB7298E5CF000CDC8E9 /* CheckedInModal.swift */; };
 		F7C20B68A44BCF132E05BA5A /* Pods_Time_Tracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F865BFFB60107AAE0492A9F /* Pods_Time_Tracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +82,14 @@
 		842288402947302A00467096 /* TimecardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimecardModel.swift; sourceTree = "<group>"; };
 		843344FF2952FBA200E79DBE /* HCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCard.swift; sourceTree = "<group>"; };
 		844D23A4295CE82E00AD5191 /* SavedTimecardEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTimecardEditView.swift; sourceTree = "<group>"; };
+		844F28732983926B007A075E /* ProjectStreetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectStreetViewModel.swift; sourceTree = "<group>"; };
+		844F287629877EFF007A075E /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
+		844F2877298785B0007A075E /* Time-Tracker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Time-Tracker-Info.plist"; sourceTree = SOURCE_ROOT; };
+		84794648297930DA000FFBB9 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		8479464A297A5E97000FFBB9 /* CreateProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectView.swift; sourceTree = "<group>"; };
+		8479464C297CF3D8000FFBB9 /* CreateProjectMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectMapView.swift; sourceTree = "<group>"; };
+		8479465329834390000FFBB9 /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
+		8479465529837A92000FFBB9 /* HomeCheckInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCheckInView.swift; sourceTree = "<group>"; };
 		847A3CC4296D123800BF6793 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		847A3CCA296D12B900BF6793 /* MapViewTimeLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewTimeLine.swift; sourceTree = "<group>"; };
 		847A3CCC296D134C00BF6793 /* ObserverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverModel.swift; sourceTree = "<group>"; };
@@ -98,6 +116,10 @@
 		849C83902950624700132B03 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		849C83932950636100132B03 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		84B6222B296D098400567125 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
+		84C85C29298D01C800C1B607 /* CheckIntoProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckIntoProjectView.swift; sourceTree = "<group>"; };
+		84C85C2C298D023C00C1B607 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
+		84C85C2E298D07EC00C1B607 /* Checkmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkmark.swift; sourceTree = "<group>"; };
+		84DE0BB7298E5CF000CDC8E9 /* CheckedInModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedInModal.swift; sourceTree = "<group>"; };
 		9F865BFFB60107AAE0492A9F /* Pods_Time_Tracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Time_Tracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5339EA2062E7EAEFF2D111B /* Pods-Time Tracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Time Tracker.release.xcconfig"; path = "Target Support Files/Pods-Time Tracker/Pods-Time Tracker.release.xcconfig"; sourceTree = "<group>"; };
 		F7476E082EB53B8699D93975 /* Pods-Time Tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Time Tracker.debug.xcconfig"; path = "Target Support Files/Pods-Time Tracker/Pods-Time Tracker.debug.xcconfig"; sourceTree = "<group>"; };
@@ -153,6 +175,9 @@
 		841701B82940A4C100FA9658 /* Time Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				842288492947E92600467096 /* Components */,
+				844F2877298785B0007A075E /* Time-Tracker-Info.plist */,
+				844F287529877EDB007A075E /* Configs */,
 				847A3CE9296D190D00BF6793 /* Settings */,
 				847A3CE6296D182F00BF6793 /* Tab Bar */,
 				84B6222A296CCE9C00567125 /* Routing */,
@@ -240,6 +265,9 @@
 				8499C3412956CD0F00522178 /* TotalsCard.swift */,
 				8499C3432956DC5700522178 /* ExpenseCard.swift */,
 				840BCC35296EC07F00738A06 /* PDFViewSaved.swift */,
+				84C85C2C298D023C00C1B607 /* Checkbox.swift */,
+				84C85C2E298D07EC00C1B607 /* Checkmark.swift */,
+				84DE0BB7298E5CF000CDC8E9 /* CheckedInModal.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -254,7 +282,6 @@
 				8422884429474E3D00467096 /* ChildDetailViews */,
 				8422884329474E0A00467096 /* AddViews */,
 				842288332944275100467096 /* Parent Views */,
-				842288492947E92600467096 /* Components */,
 			);
 			path = Timesheets;
 			sourceTree = "<group>";
@@ -273,6 +300,7 @@
 		844D23A1295CDE8D00AD5191 /* Location */ = {
 			isa = PBXGroup;
 			children = (
+				84794647297930C7000FFBB9 /* Models */,
 				847A3CC7296D128600BF6793 /* Views */,
 				847A3CC6296D127C00BF6793 /* ViewModels */,
 			);
@@ -297,11 +325,29 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		844F287529877EDB007A075E /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				844F287629877EFF007A075E /* debug.xcconfig */,
+			);
+			path = Configs;
+			sourceTree = "<group>";
+		};
+		84794647297930C7000FFBB9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				84794648297930DA000FFBB9 /* Project.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		847A3CC6296D127C00BF6793 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				847A3CC4296D123800BF6793 /* MapViewModel.swift */,
 				847A3CCC296D134C00BF6793 /* ObserverModel.swift */,
+				8479464C297CF3D8000FFBB9 /* CreateProjectMapView.swift */,
+				844F28732983926B007A075E /* ProjectStreetViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -310,6 +356,10 @@
 			isa = PBXGroup;
 			children = (
 				847A3CCA296D12B900BF6793 /* MapViewTimeLine.swift */,
+				8479464A297A5E97000FFBB9 /* CreateProjectView.swift */,
+				8479465329834390000FFBB9 /* ProjectView.swift */,
+				8479465529837A92000FFBB9 /* HomeCheckInView.swift */,
+				84C85C29298D01C800C1B607 /* CheckIntoProjectView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -444,6 +494,7 @@
 				841701B32940A4C100FA9658 /* Frameworks */,
 				841701B42940A4C100FA9658 /* Resources */,
 				4384C42F8C3160411375AF6F /* [CP] Embed Pods Frameworks */,
+				A19623F75239F2CD1A7BE57C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -540,6 +591,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		A19623F75239F2CD1A7BE57C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Time Tracker/Pods-Time Tracker-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Time Tracker/Pods-Time Tracker-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Time Tracker/Pods-Time Tracker-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -553,18 +621,24 @@
 				847A3CD3296D143000BF6793 /* UserProfileRepository.swift in Sources */,
 				847A3CCD296D134C00BF6793 /* ObserverModel.swift in Sources */,
 				841701CB2940A5DF00FA9658 /* Time Tracker.xcdatamodeld in Sources */,
+				84C85C2F298D07EC00C1B607 /* Checkmark.swift in Sources */,
 				847A3CD6296D147E00BF6793 /* UserDetailView.swift in Sources */,
 				842288412947302A00467096 /* TimecardModel.swift in Sources */,
 				844D23A5295CE82E00AD5191 /* SavedTimecardEditView.swift in Sources */,
 				847A3CDF296D15C400BF6793 /* LoginViewModel.swift in Sources */,
+				84794649297930DA000FFBB9 /* Project.swift in Sources */,
 				8422883F2946DC6F00467096 /* TimecardEditView.swift in Sources */,
+				84DE0BB8298E5CF000CDC8E9 /* CheckedInModal.swift in Sources */,
 				841701D9294204D000FA9658 /* DailyDetailView.swift in Sources */,
 				840BCC36296EC07F00738A06 /* PDFViewSaved.swift in Sources */,
 				843345002952FBA200E79DBE /* HCard.swift in Sources */,
 				847A3CE3296D163300BF6793 /* AuthViewModel.swift in Sources */,
 				841701D12941937500FA9658 /* MainDetailView.swift in Sources */,
+				8479465629837A92000FFBB9 /* HomeCheckInView.swift in Sources */,
 				849C83942950636100132B03 /* Coordinator.swift in Sources */,
+				8479464B297A5E97000FFBB9 /* CreateProjectView.swift in Sources */,
 				8499C3422956CD0F00522178 /* TotalsCard.swift in Sources */,
+				8479464D297CF3D8000FFBB9 /* CreateProjectMapView.swift in Sources */,
 				841701D72941C62F00FA9658 /* AddTimeCardView.swift in Sources */,
 				841701D52941AE1F00FA9658 /* SavedTimecardDetailView.swift in Sources */,
 				847A3CEC296D192800BF6793 /* SettingsPage.swift in Sources */,
@@ -575,11 +649,14 @@
 				84B6222C296D098400567125 /* ViewRouter.swift in Sources */,
 				847A3CD8296D149E00BF6793 /* UserListView.swift in Sources */,
 				847A3CCB296D12B900BF6793 /* MapViewTimeLine.swift in Sources */,
+				84C85C2D298D023C00C1B607 /* Checkbox.swift in Sources */,
 				8499C3442956DC5700522178 /* ExpenseCard.swift in Sources */,
 				847A3CEE296D198F00BF6793 /* LoginPage.swift in Sources */,
 				847A3CF0296D19E200BF6793 /* RegisterPage.swift in Sources */,
+				8479465429834390000FFBB9 /* ProjectView.swift in Sources */,
 				847A3CF2296D5B7300BF6793 /* SavedWeeklyCard.swift in Sources */,
 				847A3CC5296D123800BF6793 /* MapViewModel.swift in Sources */,
+				84C85C2A298D01C800C1B607 /* CheckIntoProjectView.swift in Sources */,
 				8499C33B2955A61D00522178 /* PdfView.swift in Sources */,
 				847A3CE5296D169600BF6793 /* MotherView.swift in Sources */,
 				841701C82940A50200FA9658 /* DataController.swift in Sources */,
@@ -587,6 +664,7 @@
 				841701BA2940A4C100FA9658 /* Time_TrackerApp.swift in Sources */,
 				847A3CDB296D14EC00BF6793 /* AuthenticationService.swift in Sources */,
 				840BCC39296FC0DD00738A06 /* MailViewModel.swift in Sources */,
+				844F28742983926B007A075E /* ProjectStreetViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,6 +673,7 @@
 /* Begin XCBuildConfiguration section */
 		841701C22940A4C300FA9658 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 844F287629877EFF007A075E /* debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -643,7 +722,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -655,6 +734,7 @@
 		};
 		841701C32940A4C300FA9658 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 844F287629877EFF007A075E /* debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -697,7 +777,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -719,6 +799,7 @@
 				DEVELOPMENT_TEAM = HBJP4B48D7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Time-Tracker-Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "TimeTracker would like to access your camera and photo library.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs to know your location.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -753,6 +834,7 @@
 				DEVELOPMENT_TEAM = HBJP4B48D7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Time-Tracker-Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "TimeTracker would like to access your camera and photo library.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app needs to know your location.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

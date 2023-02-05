@@ -57,6 +57,7 @@ class AuthenticationService: ObservableObject {
             return false
         }
     }
+    
     @MainActor
     func signUp(withEmail email: String, password: String, fullName: String) async -> Bool {
         authenticationState = .authenticating
@@ -64,7 +65,7 @@ class AuthenticationService: ObservableObject {
         do {
             
             try await Auth.auth().createUser(withEmail: email, password: password)
-            let userProfile = UserProfile(uid: user?.uid ?? "unknown", fullName: fullName, email: email, isLoggedIn: true, location: GeoPoint(latitude: 0, longitude: 0))
+            let userProfile = UserProfile(uid: user?.uid ?? "unknown", fullName: fullName, email: email, isLoggedIn: true, location: GeoPoint(latitude: 0, longitude: 0), checkedIn: CheckIn())
             profileRepository.createProfile(profile: userProfile) { (profile, error) in
                 
                 if let error = error {

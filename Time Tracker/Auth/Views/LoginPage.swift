@@ -11,7 +11,6 @@ import FirebaseFirestore
 import FirebaseAuth
 
 
-
 struct LoginPage: View {
     
     enum FocusableField: Hashable {
@@ -26,7 +25,7 @@ struct LoginPage: View {
     @StateObject var regViewModel = RegisterViewModel()
     @State var showSignUpForm = false
     @FocusState private var focus: FocusableField?
-    
+    @FocusState var isInputActive: Bool
     private func signInWithEmailPassword() {
         Task {
             if await viewModel.signInWithEmailPassword() == true {
@@ -60,14 +59,11 @@ struct LoginPage: View {
                         .textInputAutocapitalization(.never)
                         .disableAutocorrection(true)
                         .focused($focus, equals: .email)
-                        .submitLabel(.next)
-                        .onSubmit {
-                            self.focus = .password
-                        }
                 }
                 .padding(.vertical, 6)
                 .background(Divider(), alignment: .bottom)
                 .padding(.bottom, 4)
+ 
 
                 HStack {
                     Image(systemName: "lock")
@@ -77,6 +73,7 @@ struct LoginPage: View {
                         .onSubmit {
                             signInWithEmailPassword()
                         }
+                    
                 }
                 .padding(.vertical, 6)
                 .background(Divider(), alignment: .bottom)
@@ -133,7 +130,9 @@ struct LoginPage: View {
             }
             .listStyle(.plain)
             .padding()
+
         }
+
     }
 }
 

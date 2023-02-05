@@ -32,8 +32,13 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "44"
             endingLineNumber = "44"
+<<<<<<< HEAD
             landmarkName = "addCoordinatesToProfile(last:userId:)"
             landmarkType = "7">
+=======
+            landmarkName = "CheckIn"
+            landmarkType = "21">
+>>>>>>> user_location
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -47,7 +52,13 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "141"
+<<<<<<< HEAD
             endingLineNumber = "141">
+=======
+            endingLineNumber = "141"
+            landmarkName = "UserProfileRepository"
+            landmarkType = "3">
+>>>>>>> user_location
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -9,6 +9,7 @@ target 'Time Tracker' do
   pod 'FirebaseFirestoreSwift'
   pod 'FirebaseFirestore'
   pod 'FirebaseAuth'
+  pod 'GoogleMaps'
   # Pods for Time Tracker
 
 end
