@@ -25,7 +25,7 @@ class AuthenticationService: ObservableObject {
     @Published var profile: UserProfile?
     @Published var users: [User] = []
     private var profileRepository = UserProfileRepository()
-    
+    static let shared = AuthenticationService()
     
     init() {
         registerAuthStateListener()

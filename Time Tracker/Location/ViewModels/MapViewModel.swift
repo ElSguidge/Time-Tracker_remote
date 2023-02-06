@@ -17,12 +17,12 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.331517, longitude: -121.891054), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     @Published var userProfiles: [UserProfile] = []
     @Published var userProfile: UserProfile = UserProfile(uid: "", fullName: "", email: "", isLoggedIn: false, location: GeoPoint(latitude: 0.0, longitude: 0.0), checkedIn: CheckIn())
-    
 
-    
     let profileRepository = UserProfileRepository()
     
     let authViewModel = AuthViewModel.shared
+    
+    let user = AuthenticationService.shared
     
     var locationManager: CLLocationManager?
     
@@ -42,7 +42,9 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             print("Project created")
             self.fetchProjects()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                self.checkInToProject(currentLocation: self.locationManager?.location)
+                if self.userProfile.checkedIn.isCheckedIn == false {
+                    self.checkInToProject(currentLocation: self.locationManager?.location)
+                }
             }
         }
     }
@@ -64,38 +66,35 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     func checkIfLocationServicesIsEnabled() {
 
         if CLLocationManager.locationServicesEnabled() {
-                    
-                    
-                    locationManager = CLLocationManager()
-                    locationManager!.delegate = self
-                    locationManager?.startUpdatingLocation()
-                    
-                    fetchProjects()
-                    
-                    self.profileRepository.fetchAllProfiles { (profiles, error) in
-                        if let error = error {
-                            print("Error fetching user profiles: \(error)")
-                            return
-                        }
-                        if let profiles = profiles {
-                            DispatchQueue.main.async {
-                                self.userProfiles = profiles
-                            }
-                        }
+            
+            DispatchQueue.main.async {
+                self.locationManager = CLLocationManager()
+                self.locationManager!.delegate = self
+                self.locationManager?.startUpdatingLocation()
+                
+                self.fetchProjects()
+                
+                self.profileRepository.fetchAllProfiles { (profiles, error) in
+                    if let error = error {
+                        print("Error fetching user profiles: \(error)")
+                        return
                     }
-                    self.profileRepository.fetchProfile(userId: authViewModel.userSession!.uid) { (profile, error) in
-                        if let error = error {
-                            print("Error fetching user profile: \(error)")
-                            return
-                        }
-                        if let profile = profile {
-                            DispatchQueue.main.async {
-                                self.userProfile = profile
+                    if let profiles = profiles {
+                        self.userProfiles = profiles
+                        if let uid = self.user.user?.uid {
+                            if let userProfile = profiles.first(where: { $0.uid == uid }) {
+                                self.userProfile = userProfile
+                            } else {
+                                print("No profile found for user with UID: \(uid)")
                             }
+                        } else {
+                            print("No UID found for user")
                         }
                     }
                 }
             }
+        }
+    }
     
     private func checkLocationAuthorization() {
         
@@ -122,9 +121,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             
         case .authorizedAlways, .authorizedWhenInUse:
             region = MKCoordinateRegion(center: locationManager.location!.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
-            
             self.checkInToProject(currentLocation: self.locationManager?.location)
-            
         @unknown default:
             break
         }
@@ -171,7 +168,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func showCheckInAlert(project: Project) {
         
-        if userProfile.isLoggedIn != false {
+        if userProfile.isLoggedIn != false && userProfile.checkedIn.isCheckedIn == false {
             let alert = UIAlertController(title: "Check in to project", message: "Do you want to check in to project \(project.name)?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Check in", style: .default, handler: { action in
 //                 check in to project
@@ -193,12 +190,10 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        guard let uid = self.authViewModel.userSession?.uid else { return }
-        
-        
+        guard let uid = self.user.user?.uid else {return}
+    
         let last = locations.last
         
-        if authViewModel.userSession != nil && uid == userProfile.uid {
             DispatchQueue.main.async {
                 self.profileRepository.addCoordinatesToProfile(last: last!, userId: uid)
 
@@ -209,7 +204,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                         print((err?.localizedDescription)!)
                         return
                     }
-                }
+                
             }
         }
     }

@@ -12,8 +12,9 @@ import FirebaseFirestoreSwift
 import MapKit
 
 struct UserProfile: Codable, Hashable {
+//    @DocumentID var uid: String?
     var id = UUID()
-    var uid: String
+    var uid: String?
     var fullName: String
     var email: String
     var isLoggedIn: Bool
@@ -63,7 +64,7 @@ class UserProfileRepository: ObservableObject {
     
     func createProfile(profile: UserProfile, completion: @escaping (_ profile: UserProfile?, _ error: Error?) -> Void) {
         do {
-            let _ = try db.collection("profiles").document(profile.uid).setData(from: profile)
+            let _ = try db.collection("profiles").document(profile.uid ?? "unknown").setData(from: profile)
             completion(profile, nil)
         }
         catch let error {
@@ -138,22 +139,6 @@ class UserProfileRepository: ObservableObject {
             }
         }
     }
-    
-    func fetchProfile(userId: String, completion: @escaping (_ profile: UserProfile?, _ error: Error?) -> Void) {
-            let profileRef = db.collection("profiles").document(userId)
-            profileRef.addSnapshotListener { (snapshot, error) in
-                if let error = error {
-                    completion(nil, error)
-                    return
-                }
-                guard let snapshot = snapshot, snapshot.exists else {
-                    completion(nil, nil)
-                    return
-                }
-                let profile = try? snapshot.data(as: UserProfile.self)
-                completion(profile, nil)
-            }
-        }
         
         func fetchAllProfiles(completion: @escaping (_ profiles: [UserProfile]?, _ error: Error?) -> Void) {
             db.collection("profiles").addSnapshotListener { (snapshot, error) in

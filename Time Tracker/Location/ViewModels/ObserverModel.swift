@@ -9,7 +9,7 @@ import Foundation
 import FirebaseCore
 import FirebaseFirestore
 
-class observer : ObservableObject{
+class observer : ObservableObject {
     
     @Published var data = [String : Any]()
     
@@ -17,17 +17,17 @@ class observer : ObservableObject{
         
         let db = Firestore.firestore()
         
-        db.collection("locations").document("coordinate").addSnapshotListener { [self](snap, err) in
-            
-            if err != nil{
+            db.collection("locations").document("coordinate").addSnapshotListener { [self](snap, err) in
                 
-                print((err?.localizedDescription)!)
-                return
+                if err != nil{
+                    
+                    print((err?.localizedDescription)!)
+                    return
+                }
+                
+                if let updates = snap?.get("updates") as? [String : GeoPoint] {
+                    self.data = updates
+                }
             }
-            
-            if let updates = snap?.get("updates") as? [String : GeoPoint] {
-                self.data = updates
-            }
-        }
     }
 }
