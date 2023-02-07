@@ -10,6 +10,7 @@ target 'Time Tracker' do
   pod 'FirebaseFirestore'
   pod 'FirebaseAuth'
   pod 'GoogleMaps'
+  pod 'RiveRuntime'
   # Pods for Time Tracker
 
 end

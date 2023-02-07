@@ -15,6 +15,9 @@ struct MotherView: View {
 
     var body: some View {
             switch viewRouter.currentPage {
+            case .onBoardingPage:
+                OnboardingView()
+                    .background(.white)
             case .loginPage:
                 LoginPage().environmentObject(AuthenticationService())
             case .homePage:

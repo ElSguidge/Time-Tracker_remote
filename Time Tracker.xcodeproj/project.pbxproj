@@ -7,8 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84035C4329920944004EE5C6 /* button.riv in Resources */ = {isa = PBXBuildFile; fileRef = 84035C4229920944004EE5C6 /* button.riv */; };
+		84035C4729921049004EE5C6 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84035C4629921049004EE5C6 /* SignUpView.swift */; };
 		840BCC36296EC07F00738A06 /* PDFViewSaved.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840BCC35296EC07F00738A06 /* PDFViewSaved.swift */; };
 		840BCC39296FC0DD00738A06 /* MailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840BCC38296FC0DD00738A06 /* MailViewModel.swift */; };
+		8412BFD92991EB7F0089AF70 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84F7D299299101CE00D69279 /* Poppins-Bold.ttf */; };
+		8412BFDA2991EB820089AF70 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84F7D298299101BE00D69279 /* Inter-Regular.ttf */; };
+		8412BFDB2991EB880089AF70 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84F7D29A299101CF00D69279 /* Inter-SemiBold.ttf */; };
+		8412BFDD2991F1100089AF70 /* shapes.riv in Resources */ = {isa = PBXBuildFile; fileRef = 8412BFDC2991F1100089AF70 /* shapes.riv */; };
+		8412BFE32991FD150089AF70 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8412BFE22991FD150089AF70 /* SignInView.swift */; };
+		8412BFE52991FE620089AF70 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8412BFE42991FE620089AF70 /* CustomTextField.swift */; };
+		8412BFE72991FE890089AF70 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8412BFE62991FE890089AF70 /* CustomButton.swift */; };
 		841701BA2940A4C100FA9658 /* Time_TrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841701B92940A4C100FA9658 /* Time_TrackerApp.swift */; };
 		841701BC2940A4C100FA9658 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841701BB2940A4C100FA9658 /* HomeView.swift */; };
 		841701BE2940A4C300FA9658 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 841701BD2940A4C300FA9658 /* Assets.xcassets */; };
@@ -55,17 +64,30 @@
 		8499C3442956DC5700522178 /* ExpenseCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499C3432956DC5700522178 /* ExpenseCard.swift */; };
 		849C83912950624700132B03 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C83902950624700132B03 /* ImagePickerView.swift */; };
 		849C83942950636100132B03 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849C83932950636100132B03 /* Coordinator.swift */; };
+		84A57DB729910786003F6579 /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A57DB629910786003F6579 /* CustomFont.swift */; };
 		84B6222C296D098400567125 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6222B296D098400567125 /* ViewRouter.swift */; };
 		84C85C2A298D01C800C1B607 /* CheckIntoProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C85C29298D01C800C1B607 /* CheckIntoProjectView.swift */; };
 		84C85C2D298D023C00C1B607 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C85C2C298D023C00C1B607 /* Checkbox.swift */; };
 		84C85C2F298D07EC00C1B607 /* Checkmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C85C2E298D07EC00C1B607 /* Checkmark.swift */; };
 		84DE0BB8298E5CF000CDC8E9 /* CheckedInModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE0BB7298E5CF000CDC8E9 /* CheckedInModal.swift */; };
+		84F7D2962991002300D69279 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7D2952991002300D69279 /* OnboardingView.swift */; };
+		84F7D2A32991022400D69279 /* house.riv in Resources */ = {isa = PBXBuildFile; fileRef = 84F7D29C2991022400D69279 /* house.riv */; };
+		84F7D2A42991022400D69279 /* confetti.riv in Resources */ = {isa = PBXBuildFile; fileRef = 84F7D29D2991022400D69279 /* confetti.riv */; };
+		84F7D2A52991022400D69279 /* check.riv in Resources */ = {isa = PBXBuildFile; fileRef = 84F7D29E2991022400D69279 /* check.riv */; };
+		84F7D2A62991022400D69279 /* menu_button.riv in Resources */ = {isa = PBXBuildFile; fileRef = 84F7D29F2991022400D69279 /* menu_button.riv */; };
+		84F7D2A92991022400D69279 /* icons.riv in Resources */ = {isa = PBXBuildFile; fileRef = 84F7D2A22991022400D69279 /* icons.riv */; };
 		F7C20B68A44BCF132E05BA5A /* Pods_Time_Tracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F865BFFB60107AAE0492A9F /* Pods_Time_Tracker.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		84035C4229920944004EE5C6 /* button.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = button.riv; sourceTree = "<group>"; };
+		84035C4629921049004EE5C6 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		840BCC35296EC07F00738A06 /* PDFViewSaved.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewSaved.swift; sourceTree = "<group>"; };
 		840BCC38296FC0DD00738A06 /* MailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailViewModel.swift; sourceTree = "<group>"; };
+		8412BFDC2991F1100089AF70 /* shapes.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = shapes.riv; sourceTree = "<group>"; };
+		8412BFE22991FD150089AF70 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		8412BFE42991FE620089AF70 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		8412BFE62991FE890089AF70 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		841701B62940A4C100FA9658 /* Time Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Time Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		841701B92940A4C100FA9658 /* Time_TrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time_TrackerApp.swift; sourceTree = "<group>"; };
 		841701BB2940A4C100FA9658 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -115,11 +137,21 @@
 		8499C3432956DC5700522178 /* ExpenseCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCard.swift; sourceTree = "<group>"; };
 		849C83902950624700132B03 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		849C83932950636100132B03 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		84A57DB629910786003F6579 /* CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
 		84B6222B296D098400567125 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
 		84C85C29298D01C800C1B607 /* CheckIntoProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckIntoProjectView.swift; sourceTree = "<group>"; };
 		84C85C2C298D023C00C1B607 /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		84C85C2E298D07EC00C1B607 /* Checkmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkmark.swift; sourceTree = "<group>"; };
 		84DE0BB7298E5CF000CDC8E9 /* CheckedInModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckedInModal.swift; sourceTree = "<group>"; };
+		84F7D2952991002300D69279 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		84F7D298299101BE00D69279 /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
+		84F7D299299101CE00D69279 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		84F7D29A299101CF00D69279 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
+		84F7D29C2991022400D69279 /* house.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = house.riv; sourceTree = "<group>"; };
+		84F7D29D2991022400D69279 /* confetti.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = confetti.riv; sourceTree = "<group>"; };
+		84F7D29E2991022400D69279 /* check.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = check.riv; sourceTree = "<group>"; };
+		84F7D29F2991022400D69279 /* menu_button.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = menu_button.riv; sourceTree = "<group>"; };
+		84F7D2A22991022400D69279 /* icons.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = icons.riv; sourceTree = "<group>"; };
 		9F865BFFB60107AAE0492A9F /* Pods_Time_Tracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Time_Tracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5339EA2062E7EAEFF2D111B /* Pods-Time Tracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Time Tracker.release.xcconfig"; path = "Target Support Files/Pods-Time Tracker/Pods-Time Tracker.release.xcconfig"; sourceTree = "<group>"; };
 		F7476E082EB53B8699D93975 /* Pods-Time Tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Time Tracker.debug.xcconfig"; path = "Target Support Files/Pods-Time Tracker/Pods-Time Tracker.debug.xcconfig"; sourceTree = "<group>"; };
@@ -175,6 +207,11 @@
 		841701B82940A4C100FA9658 /* Time Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				8499C3402956CBBC00522178 /* Extensions */,
+				84A57DB529910767003F6579 /* Styles */,
+				84F7D29B2991022400D69279 /* RiveAssets */,
+				84F7D2972991016B00D69279 /* Fonts */,
+				84F7D2942991001200D69279 /* Onboarding */,
 				842288492947E92600467096 /* Components */,
 				844F2877298785B0007A075E /* Time-Tracker-Info.plist */,
 				844F287529877EDB007A075E /* Configs */,
@@ -312,7 +349,6 @@
 			children = (
 				844D23A3295CDEE300AD5191 /* Views */,
 				849C83922950634800132B03 /* Coordinator */,
-				8499C3402956CBBC00522178 /* Extensions */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -457,6 +493,16 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
+		84A57DB529910767003F6579 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				84A57DB629910786003F6579 /* CustomFont.swift */,
+				8412BFE42991FE620089AF70 /* CustomTextField.swift */,
+				8412BFE62991FE890089AF70 /* CustomButton.swift */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
 		84B62229296CCE9200567125 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
@@ -472,6 +518,40 @@
 				847A3CE4296D169600BF6793 /* MotherView.swift */,
 			);
 			path = Routing;
+			sourceTree = "<group>";
+		};
+		84F7D2942991001200D69279 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				84F7D2952991002300D69279 /* OnboardingView.swift */,
+				8412BFE22991FD150089AF70 /* SignInView.swift */,
+				84035C4629921049004EE5C6 /* SignUpView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		84F7D2972991016B00D69279 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				84F7D29A299101CF00D69279 /* Inter-SemiBold.ttf */,
+				84F7D299299101CE00D69279 /* Poppins-Bold.ttf */,
+				84F7D298299101BE00D69279 /* Inter-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		84F7D29B2991022400D69279 /* RiveAssets */ = {
+			isa = PBXGroup;
+			children = (
+				84035C4229920944004EE5C6 /* button.riv */,
+				8412BFDC2991F1100089AF70 /* shapes.riv */,
+				84F7D29C2991022400D69279 /* house.riv */,
+				84F7D29D2991022400D69279 /* confetti.riv */,
+				84F7D29E2991022400D69279 /* check.riv */,
+				84F7D29F2991022400D69279 /* menu_button.riv */,
+				84F7D2A22991022400D69279 /* icons.riv */,
+			);
+			path = RiveAssets;
 			sourceTree = "<group>";
 		};
 		D2C4E3DF94B21A520C214C17 /* Frameworks */ = {
@@ -501,6 +581,8 @@
 			dependencies = (
 			);
 			name = "Time Tracker";
+			packageProductDependencies = (
+			);
 			productName = "Time Tracker";
 			productReference = 841701B62940A4C100FA9658 /* Time Tracker.app */;
 			productType = "com.apple.product-type.application";
@@ -529,6 +611,8 @@
 				Base,
 			);
 			mainGroup = 841701AD2940A4C100FA9658;
+			packageReferences = (
+			);
 			productRefGroup = 841701B72940A4C100FA9658 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -543,9 +627,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84F7D2A92991022400D69279 /* icons.riv in Resources */,
+				84F7D2A52991022400D69279 /* check.riv in Resources */,
+				84F7D2A32991022400D69279 /* house.riv in Resources */,
+				8412BFDB2991EB880089AF70 /* Inter-SemiBold.ttf in Resources */,
 				848008DF296D10360014CDF9 /* GoogleService-Info.plist in Resources */,
+				8412BFDD2991F1100089AF70 /* shapes.riv in Resources */,
+				84035C4329920944004EE5C6 /* button.riv in Resources */,
 				841701C12940A4C300FA9658 /* Preview Assets.xcassets in Resources */,
+				8412BFD92991EB7F0089AF70 /* Poppins-Bold.ttf in Resources */,
 				841701BE2940A4C300FA9658 /* Assets.xcassets in Resources */,
+				84F7D2A62991022400D69279 /* menu_button.riv in Resources */,
+				8412BFDA2991EB820089AF70 /* Inter-Regular.ttf in Resources */,
+				84F7D2A42991022400D69279 /* confetti.riv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,6 +717,7 @@
 				841701CB2940A5DF00FA9658 /* Time Tracker.xcdatamodeld in Sources */,
 				84C85C2F298D07EC00C1B607 /* Checkmark.swift in Sources */,
 				847A3CD6296D147E00BF6793 /* UserDetailView.swift in Sources */,
+				8412BFE52991FE620089AF70 /* CustomTextField.swift in Sources */,
 				842288412947302A00467096 /* TimecardModel.swift in Sources */,
 				844D23A5295CE82E00AD5191 /* SavedTimecardEditView.swift in Sources */,
 				847A3CDF296D15C400BF6793 /* LoginViewModel.swift in Sources */,
@@ -630,6 +725,7 @@
 				8422883F2946DC6F00467096 /* TimecardEditView.swift in Sources */,
 				84DE0BB8298E5CF000CDC8E9 /* CheckedInModal.swift in Sources */,
 				841701D9294204D000FA9658 /* DailyDetailView.swift in Sources */,
+				84F7D2962991002300D69279 /* OnboardingView.swift in Sources */,
 				840BCC36296EC07F00738A06 /* PDFViewSaved.swift in Sources */,
 				843345002952FBA200E79DBE /* HCard.swift in Sources */,
 				847A3CE3296D163300BF6793 /* AuthViewModel.swift in Sources */,
@@ -638,11 +734,14 @@
 				849C83942950636100132B03 /* Coordinator.swift in Sources */,
 				8479464B297A5E97000FFBB9 /* CreateProjectView.swift in Sources */,
 				8499C3422956CD0F00522178 /* TotalsCard.swift in Sources */,
+				8412BFE32991FD150089AF70 /* SignInView.swift in Sources */,
 				8479464D297CF3D8000FFBB9 /* CreateProjectMapView.swift in Sources */,
 				841701D72941C62F00FA9658 /* AddTimeCardView.swift in Sources */,
 				841701D52941AE1F00FA9658 /* SavedTimecardDetailView.swift in Sources */,
+				8412BFE72991FE890089AF70 /* CustomButton.swift in Sources */,
 				847A3CEC296D192800BF6793 /* SettingsPage.swift in Sources */,
 				841701BC2940A4C100FA9658 /* HomeView.swift in Sources */,
+				84A57DB729910786003F6579 /* CustomFont.swift in Sources */,
 				847A3CE1296D15F200BF6793 /* RegisterViewModel.swift in Sources */,
 				849C83912950624700132B03 /* ImagePickerView.swift in Sources */,
 				8499C33D2955B6F300522178 /* Extensions.swift in Sources */,
@@ -662,6 +761,7 @@
 				841701C82940A50200FA9658 /* DataController.swift in Sources */,
 				841701D3294196EC00FA9658 /* AddNewEmployeeView.swift in Sources */,
 				841701BA2940A4C100FA9658 /* Time_TrackerApp.swift in Sources */,
+				84035C4729921049004EE5C6 /* SignUpView.swift in Sources */,
 				847A3CDB296D14EC00BF6793 /* AuthenticationService.swift in Sources */,
 				840BCC39296FC0DD00738A06 /* MailViewModel.swift in Sources */,
 				844F28742983926B007A075E /* ProjectStreetViewModel.swift in Sources */,

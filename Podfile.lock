@@ -719,12 +719,14 @@ PODS:
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
   - PromisesObjC (2.1.1)
+  - RiveRuntime (3.1.4)
 
 DEPENDENCIES:
   - FirebaseAuth
   - FirebaseFirestore
   - FirebaseFirestoreSwift
   - GoogleMaps
+  - RiveRuntime
 
 SPEC REPOS:
   trunk:
@@ -746,6 +748,7 @@ SPEC REPOS:
     - Libuv-gRPC
     - nanopb
     - PromisesObjC
+    - RiveRuntime
 
 SPEC CHECKSUMS:
   abseil: ebe5b5529fb05d93a8bdb7951607be08b7fa71bc
@@ -766,7 +769,8 @@ SPEC CHECKSUMS:
   Libuv-gRPC: 55e51798e14ef436ad9bc45d12d43b77b49df378
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
+  RiveRuntime: 9499ab919aff123cc10bc79b7c4c2d8166bed713
 
-PODFILE CHECKSUM: 7800dd1c15ed6d82de3efacfdefa6132c116397e
+PODFILE CHECKSUM: bf0965d29944dda5266a730c1f9f20f7eadac8b4
 
 COCOAPODS: 1.11.3
