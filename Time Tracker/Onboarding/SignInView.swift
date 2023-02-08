@@ -9,42 +9,33 @@ import SwiftUI
 import RiveRuntime
 
 struct SignInView: View {
-    @State var email = ""
-    @State var password = ""
+    
+    enum FocusableField: Hashable {
+        case email
+        case password
+        case fullname
+    }
+    
+    @EnvironmentObject var viewRouter: ViewRouter
+    @EnvironmentObject var authenticationService: AuthenticationService
+    @StateObject var viewModel = LoginViewModel()
+    @StateObject var regViewModel = RegisterViewModel()
     @State var isLoading = false
     @State private var showSignUp: Bool = false
-//    @Binding var show: Bool
-//    let confetti = RiveViewModel(fileName: "confetti", stateMachineName: "State Machine 1")
-    let check = RiveViewModel(fileName: "check", stateMachineName: "State Machine 1")
-    
-    func logIn() {
-        isLoading = true
-        
-        if email != "" {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                check.triggerInput("Check")
-            }
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-//                confetti.triggerInput("Trigger explosion")
-//                withAnimation {
-//                    isLoading = false
-//                }
-//            }
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-//                withAnimation {
-//                    show.toggle()
-//                }
-//            }
-        } else {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                check.triggerInput("Error")
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                isLoading = false
+    @FocusState private var focus: FocusableField?
+
+    private func signInWithEmailPassword() {
+        Task {
+            if await viewModel.signInWithEmailPassword() == true {
+                DispatchQueue.main.async {
+                    withAnimation {
+                        viewRouter.currentPage = .homePage
+                    }
+                }
             }
         }
     }
-    
+      
     var body: some View {
         VStack(spacing: 24) {
             Text("Sign in")
@@ -55,25 +46,55 @@ struct SignInView: View {
                 Text("Email")
                     .customFont(.subheadline)
                     .foregroundColor(.secondary)
-                TextField("", text: $email)
+                TextField("", text: $viewModel.email)
                     .customTextField(image: Image(systemName: "at"))
+                    .textInputAutocapitalization(.never)
+                    .disableAutocorrection(true)
+                    .focused($focus, equals: .email)
             }
             VStack(alignment: .leading) {
                 Text("Password")
                     .customFont(.subheadline)
                     .foregroundColor(.secondary)
-                SecureField("", text: $password)
+                SecureField("", text: $viewModel.password)
                     .customTextField(image: Image(systemName: "lock"))
+                    .focused($focus, equals: .password)
+                    .submitLabel(.go)
+                    .onSubmit {
+                        signInWithEmailPassword()
+                    }
+                    .onChange(of: viewModel.email) { newValue in
+                        viewModel.errorMessage = ""
+                    }
+                    .onChange(of: viewModel.password) { newValue in
+                        viewModel.errorMessage = ""
+                    }
+
             }
-            Button {
-                logIn()
-            } label: {
-                HStack {
-                    Image(systemName: "arrow.right")
-                    Text("Sign in")
-                        .customFont(.headline)
+            Button(action: signInWithEmailPassword) {
+                if viewModel.authenticationState != .authenticating {
+                    HStack {
+                        Image(systemName: "arrow.right")
+                        Text("Sign in")
+                            .customFont(.headline)
+                    }
+                    
                 }
-                .largeButton()
+                
+                else {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                        .frame(maxWidth: .infinity)
+                }
+            }
+            .largeButton()
+            .disabled(!viewModel.isValid)
+            
+            if !viewModel.errorMessage.isEmpty {
+                VStack {
+                    Text(viewModel.errorMessage)
+                        .foregroundColor(Color(UIColor.systemRed))
+                }
             }
             
             HStack {
@@ -101,19 +122,11 @@ struct SignInView: View {
             RoundedRectangle(cornerRadius: 20, style: .continuous)
                 .stroke(.linearGradient(colors: [.white.opacity(0.8), .white.opacity(0.1)], startPoint: .topLeading, endPoint: .bottomTrailing))
         )
-        .overlay(
-            ZStack {
-                if isLoading {
-                    check.view()
-                        .frame(width: 100, height: 100)
-                        .allowsHitTesting(false)
-                }
-//                confetti.view()
-//                    .scaleEffect(3)
-//                    .allowsHitTesting(false)
-            }
-        )
         .padding()
+        .onAppear {
+            viewModel.connect(authenticationService: authenticationService)
+        }
+
         if showSignUp {
             SignUpView(showSignUp: $showSignUp)
                 .opacity(showSignUp ? 1 : 0)

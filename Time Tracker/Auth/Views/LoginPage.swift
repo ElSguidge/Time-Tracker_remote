@@ -26,7 +26,9 @@ struct LoginPage: View {
     @State var showSignUpForm = false
     @FocusState private var focus: FocusableField?
     @FocusState var isInputActive: Bool
+    
     private func signInWithEmailPassword() {
+            
         Task {
             if await viewModel.signInWithEmailPassword() == true {
                 DispatchQueue.main.async {

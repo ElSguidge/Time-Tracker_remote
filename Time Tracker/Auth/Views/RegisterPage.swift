@@ -53,7 +53,6 @@ struct RegisterPage: View {
         HStack {
             Image(systemName: "person")
             TextField("Full Name", text: $regViewModel.fullName)
-                .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
                 .focused(focus, equals: .fullname)
                 .submitLabel(.go)
