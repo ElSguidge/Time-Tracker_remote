@@ -23,6 +23,7 @@ struct SignInView: View {
     @State var isLoading = false
     @State private var showSignUp: Bool = false
     @FocusState private var focus: FocusableField?
+    
 
     private func signInWithEmailPassword() {
         Task {
@@ -69,7 +70,6 @@ struct SignInView: View {
                     .onChange(of: viewModel.password) { newValue in
                         viewModel.errorMessage = ""
                     }
-
             }
             Button(action: signInWithEmailPassword) {
                 if viewModel.authenticationState != .authenticating {
@@ -78,9 +78,7 @@ struct SignInView: View {
                         Text("Sign in")
                             .customFont(.headline)
                     }
-                    
                 }
-                
                 else {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle(tint: .white))
@@ -96,7 +94,6 @@ struct SignInView: View {
                         .foregroundColor(Color(UIColor.systemRed))
                 }
             }
-            
             HStack {
                 Rectangle().frame(height: 1).opacity(0.1)
                 Text("OR").customFont(.subheadline2).foregroundColor(.black.opacity(0.3))
@@ -106,6 +103,7 @@ struct SignInView: View {
             Button("Sign up with Email.") {
                 withAnimation(.spring()) {
                     showSignUp = true
+                    viewModel.errorMessage = ""
                 }
             }
                 .padding()
@@ -128,7 +126,7 @@ struct SignInView: View {
         }
 
         if showSignUp {
-            SignUpView(showSignUp: $showSignUp)
+            SignUpView(showSignUp: $showSignUp, focus: $focus)
                 .opacity(showSignUp ? 1 : 0)
                 .offset(y: showSignUp ? 0 : 300)
                 .overlay(

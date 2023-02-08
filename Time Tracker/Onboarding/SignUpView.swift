@@ -9,42 +9,28 @@ import SwiftUI
 import RiveRuntime
 
 struct SignUpView: View {
-        @State var email = ""
-        @State var password = ""
-        @State private var fullName = ""
-        @State var isLoading = false
-        @Binding var showSignUp: Bool
-        let confetti = RiveViewModel(fileName: "confetti", stateMachineName: "State Machine 1")
-        let check = RiveViewModel(fileName: "check", stateMachineName: "State Machine 1")
-        
-        func logIn() {
-            isLoading = true
-            
-            if email != "" {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    check.triggerInput("Check")
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    confetti.triggerInput("Trigger explosion")
-                    withAnimation {
-                        isLoading = false
+    @EnvironmentObject var viewRouter: ViewRouter
+    @EnvironmentObject var authenticationService: AuthenticationService
+    @StateObject var regViewModel = RegisterViewModel()
+    @Binding var showSignUp: Bool
+
+    var focus: FocusState<SignInView.FocusableField?>.Binding
+    
+    private func createUserWithEmailPassword() {
+        if regViewModel.fullName != "" {
+            Task {
+                if await regViewModel.createUserWithEmailPassword() == true {
+                    DispatchQueue.main.async {
+                        withAnimation {
+                            viewRouter.currentPage = .homePage
+                        }
                     }
                 }
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-//                    withAnimation {
-//                        show.toggle()
-//                    }
-//                }
-            } else {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    check.triggerInput("Error")
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    isLoading = false
-                }
             }
+        } else {
+            regViewModel.errorMessage = "Please enter your full name to complete registration."
         }
-        
+    }
         var body: some View {
             VStack(spacing: 24) {
                 Text("Sign up")
@@ -53,32 +39,72 @@ struct SignUpView: View {
                     Text("Email")
                         .customFont(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField("", text: $email)
+                    TextField("", text: $regViewModel.email)
                         .customTextField(image: Image(systemName: "at"))
+                        .textInputAutocapitalization(.never)
+                        .disableAutocorrection(true)
+                        .focused(focus, equals: .email)
                 }
                 VStack(alignment: .leading) {
                     Text("Password")
                         .customFont(.subheadline)
                         .foregroundColor(.secondary)
-                    SecureField("", text: $password)
+                    SecureField("", text: $regViewModel.password)
                         .customTextField(image: Image(systemName: "lock"))
+                        .focused(focus, equals: .password)
                 }
                 VStack(alignment: .leading) {
                     Text("Full name")
                         .customFont(.subheadline)
                         .foregroundColor(.secondary)
-                    SecureField("", text: $fullName)
+                    SecureField("", text: $regViewModel.fullName)
                         .customTextField(image: Image(systemName: "person"))
+                        .disableAutocorrection(true)
+                        .focused(focus, equals: .fullname)
+                        .submitLabel(.go)
+                        .onSubmit {
+                            if regViewModel.fullName != "" {
+                                createUserWithEmailPassword()
+                            } else {
+                                regViewModel.errorMessage = "Please enter your full name to complete registration."
+                            }
+                        }
+                        .onChange(of: regViewModel.email) { newValue in
+                            regViewModel.errorMessage = ""
+                        }
+                        .onChange(of: regViewModel.password) { newValue in
+                            regViewModel.errorMessage = ""
+                        }
+                        .onChange(of: regViewModel.fullName) { newValue in
+                            regViewModel.errorMessage = ""
+                        }
                 }
-                Button {
-                    logIn()
-                } label: {
-                    HStack {
-                        Image(systemName: "arrow.right")
-                        Text("Sign up")
-                            .customFont(.headline)
+                Button(action: createUserWithEmailPassword) {
+                    if regViewModel.authenticationState != .authenticating {
+                        HStack {
+                            Image(systemName: "arrow.right")
+                            Text("Sign up")
+                                .customFont(.headline)
+                        }
                     }
-                    .largeButton()
+                    else {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                            .frame(maxWidth: .infinity)
+                    }
+                }
+                .largeButton()
+                .disabled(!regViewModel.isValid)
+                .onAppear {
+                    regViewModel.connect(authenticationService: authenticationService)
+
+                }
+                
+                if !regViewModel.errorMessage.isEmpty {
+                    VStack {
+                        Text(regViewModel.errorMessage)
+                            .foregroundColor(Color(UIColor.systemRed))
+                    }
                 }
                 
                 HStack {
@@ -87,9 +113,10 @@ struct SignUpView: View {
                     Rectangle().frame(height: 1).opacity(0.1)
                 }
                 
-                Button("Log in") {
+                Button("Have an account? Sign in instead.") {
                     withAnimation(.spring()) {
                         showSignUp = false
+                        regViewModel.errorMessage = ""
                     }
                 }
                     .padding()
@@ -104,18 +131,6 @@ struct SignUpView: View {
             .overlay(
                 RoundedRectangle(cornerRadius: 20, style: .continuous)
                     .stroke(.linearGradient(colors: [.white.opacity(0.8), .white.opacity(0.1)], startPoint: .topLeading, endPoint: .bottomTrailing))
-            )
-            .overlay(
-                ZStack {
-                    if isLoading {
-                        check.view()
-                            .frame(width: 100, height: 100)
-                            .allowsHitTesting(false)
-                    }
-                    confetti.view()
-                        .scaleEffect(3)
-                        .allowsHitTesting(false)
-                }
             )
             .padding()
             if !showSignUp {
