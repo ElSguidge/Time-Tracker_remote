@@ -44,7 +44,7 @@ struct SettingsPage: View {
         authenticationService.signOut()
         
         withAnimation {
-            viewRouter.currentPage = .loginPage
+            viewRouter.currentPage = .onBoardingPage
         }
         
     }

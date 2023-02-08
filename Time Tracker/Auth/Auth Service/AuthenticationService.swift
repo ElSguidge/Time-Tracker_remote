@@ -124,7 +124,7 @@ class AuthenticationService: ObservableObject {
                             self.authenticationState = .unauthenticated
                             
                             DispatchQueue.main.async {
-                            ViewRouter().currentPage = .loginPage
+                            ViewRouter().currentPage = .onBoardingPage
                             }
                             print("User signed out.")
                         }
