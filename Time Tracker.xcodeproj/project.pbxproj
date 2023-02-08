@@ -72,7 +72,6 @@
 		84DE0BB8298E5CF000CDC8E9 /* CheckedInModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE0BB7298E5CF000CDC8E9 /* CheckedInModal.swift */; };
 		84F7D2962991002300D69279 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7D2952991002300D69279 /* OnboardingView.swift */; };
 		84F7D2A32991022400D69279 /* house.riv in Resources */ = {isa = PBXBuildFile; fileRef = 84F7D29C2991022400D69279 /* house.riv */; };
-		84F7D2A42991022400D69279 /* confetti.riv in Resources */ = {isa = PBXBuildFile; fileRef = 84F7D29D2991022400D69279 /* confetti.riv */; };
 		84F7D2A52991022400D69279 /* check.riv in Resources */ = {isa = PBXBuildFile; fileRef = 84F7D29E2991022400D69279 /* check.riv */; };
 		84F7D2A62991022400D69279 /* menu_button.riv in Resources */ = {isa = PBXBuildFile; fileRef = 84F7D29F2991022400D69279 /* menu_button.riv */; };
 		84F7D2A92991022400D69279 /* icons.riv in Resources */ = {isa = PBXBuildFile; fileRef = 84F7D2A22991022400D69279 /* icons.riv */; };
@@ -148,7 +147,6 @@
 		84F7D299299101CE00D69279 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		84F7D29A299101CF00D69279 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
 		84F7D29C2991022400D69279 /* house.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = house.riv; sourceTree = "<group>"; };
-		84F7D29D2991022400D69279 /* confetti.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = confetti.riv; sourceTree = "<group>"; };
 		84F7D29E2991022400D69279 /* check.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = check.riv; sourceTree = "<group>"; };
 		84F7D29F2991022400D69279 /* menu_button.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = menu_button.riv; sourceTree = "<group>"; };
 		84F7D2A22991022400D69279 /* icons.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = icons.riv; sourceTree = "<group>"; };
@@ -546,7 +544,6 @@
 				84035C4229920944004EE5C6 /* button.riv */,
 				8412BFDC2991F1100089AF70 /* shapes.riv */,
 				84F7D29C2991022400D69279 /* house.riv */,
-				84F7D29D2991022400D69279 /* confetti.riv */,
 				84F7D29E2991022400D69279 /* check.riv */,
 				84F7D29F2991022400D69279 /* menu_button.riv */,
 				84F7D2A22991022400D69279 /* icons.riv */,
@@ -639,7 +636,6 @@
 				841701BE2940A4C300FA9658 /* Assets.xcassets in Resources */,
 				84F7D2A62991022400D69279 /* menu_button.riv in Resources */,
 				8412BFDA2991EB820089AF70 /* Inter-Regular.ttf in Resources */,
-				84F7D2A42991022400D69279 /* confetti.riv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

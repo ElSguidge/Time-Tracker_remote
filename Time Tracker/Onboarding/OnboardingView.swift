@@ -11,8 +11,7 @@ import RiveRuntime
 struct OnboardingView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     let button = RiveViewModel(fileName: "button", autoPlay: false)
-    @State var showModal = false
-//    @Binding var show: Bool
+    @State private var showModal = false
     
     var body: some View {
         ZStack {
