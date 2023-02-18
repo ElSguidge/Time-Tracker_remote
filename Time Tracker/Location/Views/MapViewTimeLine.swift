@@ -12,7 +12,6 @@ import CoreLocation
 import MapKit
 
 struct MapViewTimeLine: View {
-    
     @ObservedObject var authViewModel = AuthViewModel()
     @ObservedObject var obs = observer()
     @StateObject var viewModel = MapViewModel()
@@ -183,11 +182,15 @@ struct MapView: UIViewRepresentable {
         map.showsUserLocation = true
         let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: -37.8136, longitude: 144.9631), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.5))
         map.region = region
+        map.register(ProjectAnnotationView.self, forAnnotationViewWithReuseIdentifier: "Project Annotation")
+
         return map
     }
     
+    
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        
+    
+
         
         for i in geopoints {
 
@@ -221,18 +224,17 @@ struct MapView: UIViewRepresentable {
             parent = parent1
             
         }
-        
+
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
             
-            let pin = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "pin")
-            
-            if annotation is ProjectClass {
-                pin.markerTintColor = .blue
-                pin.canShowCallout = true
-                return pin
+        switch annotation {
+            case is ProjectClass:
+                return mapView.dequeueReusableAnnotationView(withIdentifier: "Project Annotation", for: annotation)
+            default:
+                return nil
             }
-            return nil
         }
+
         
         func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
             if let projectAnnotation = view.annotation as? ProjectClass {

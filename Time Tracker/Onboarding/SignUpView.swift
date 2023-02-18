@@ -20,17 +20,29 @@ struct SignUpView: View {
         if regViewModel.fullName != "" {
             Task {
                 if await regViewModel.createUserWithEmailPassword() == true {
-                    DispatchQueue.main.async {
-                        withAnimation {
+                        DispatchQueue.main.async {
                             viewRouter.currentPage = .homePage
                         }
                     }
                 }
-            }
         } else {
             regViewModel.errorMessage = "Please enter your full name to complete registration."
         }
     }
+
+//    private func createUserWithEmailPassword() {
+//        if regViewModel.fullName != "" {
+//            Task {
+//                if await regViewModel.createUserWithEmailPassword() == true {
+//                        withAnimation {
+//                            viewRouter.currentPage = .homePage
+//                        }
+//                }
+//            }
+//        } else {
+//            regViewModel.errorMessage = "Please enter your full name to complete registration."
+//        }
+//    }
         var body: some View {
             VStack(spacing: 24) {
                 Text("Sign up")

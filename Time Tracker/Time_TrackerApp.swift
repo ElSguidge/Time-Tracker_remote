@@ -13,7 +13,7 @@ import GoogleMaps
 @main
 struct Time_TrackerApp: App {
     
-//    @StateObject var dataController : DataController
+    @StateObject var dataController = DataController()
     @StateObject var viewRouter = ViewRouter()
     
     init() {
@@ -29,7 +29,7 @@ struct Time_TrackerApp: App {
     var body: some Scene {
         WindowGroup {
             
-            MotherView().environmentObject(viewRouter)
+            MotherView().environmentObject(viewRouter).environmentObject(dataController)
         }
     }
 }

@@ -65,24 +65,19 @@ class AuthenticationService: ObservableObject {
         do {
             
             try await Auth.auth().createUser(withEmail: email, password: password)
-            let userProfile = UserProfile(uid: user?.uid ?? "unknown", fullName: fullName, email: email, isLoggedIn: true, location: GeoPoint(latitude: 0, longitude: 0), checkedIn: CheckIn())
-            profileRepository.createProfile(profile: userProfile) { (profile, error) in
-                
-                if let error = error {
-                    print("Error while creating the users profile: \(error)")
-                    return
+                let userProfile = UserProfile(uid: user?.uid, fullName: fullName, email: email, isLoggedIn: true, location: GeoPoint(latitude: 0, longitude: 0), checkedIn: CheckIn())
+                profileRepository.createProfile(profile: userProfile) { (profile, error) in
+                    
+                    if let error = error {
+                        print("Error while creating the users profile: \(error)")
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        self.profile = profile
+                    }
                 }
-                DispatchQueue.main.async {
-                    self.profile = profile
-                }
-            }
-            NotificationDelegate.shared.checkNotificationPermission { granted in
-                 if granted {
-                     NotificationDelegate.shared.scheduleInitialNotification()
-                 } else {
-                     NotificationDelegate.shared.showNotificationPermissionAlert()
-                 }
-             }
+            
+
              return true
             
         } catch {
@@ -122,10 +117,10 @@ class AuthenticationService: ObservableObject {
                         }
                         else {
                             self.authenticationState = .unauthenticated
-                            
-                            DispatchQueue.main.async {
-                            ViewRouter().currentPage = .onBoardingPage
-                            }
+//
+//                            DispatchQueue.main.async {
+//                            ViewRouter().currentPage = .onBoardingPage
+//                            }
                             print("User signed out.")
                         }
                     }

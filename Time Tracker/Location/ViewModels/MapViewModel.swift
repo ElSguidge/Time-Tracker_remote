@@ -12,11 +12,16 @@ import FirebaseFirestoreSwift
 import CoreLocation
 import MapKit
 
+enum AlertState {
+    case success, exists, error, none
+}
+
 class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     @Published var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.331517, longitude: -121.891054), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     @Published var userProfiles: [UserProfile] = []
     @Published var userProfile: UserProfile = UserProfile(uid: "", fullName: "", email: "", isLoggedIn: false, location: GeoPoint(latitude: 0.0, longitude: 0.0), checkedIn: CheckIn())
+    @Published var alertState: AlertState = .none
 
     let profileRepository = UserProfileRepository()
     
@@ -30,24 +35,63 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     let db = Firestore.firestore()
     
+
+    
     func createProject(name: String, location: CLLocationCoordinate2D, address: String, jobNumber: String) {
         guard let _ = self.authViewModel.userSession?.uid else { return }
-        let project = Project(name: name, location: GeoPoint(latitude: location.latitude, longitude: location.longitude), address: address, jobNumber: jobNumber)
-        let projectRef = db.collection("projects").document()
-        projectRef.setData(project.toDict()) { (error) in
+
+        let projectRef = db.collection("projects")
+        projectRef.whereField("name", isEqualTo: name).whereField("jobNumber", isEqualTo: jobNumber).getDocuments { (snapshot, error) in
             if error != nil {
                 print(error?.localizedDescription as Any)
+                self.alertState = .error
                 return
             }
-            print("Project created")
-            self.fetchProjects()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                if self.userProfile.checkedIn.isCheckedIn == false {
-                    self.checkInToProject(currentLocation: self.locationManager?.location)
+
+            if snapshot?.documents.count ?? 0 > 0 {
+                // project already exists, show an error message or return without creating a new project
+                print("Project with the same name and job number already exists")
+                self.alertState = .exists
+                return
+            }
+
+            let project = Project(name: name, location: GeoPoint(latitude: location.latitude, longitude: location.longitude), address: address, jobNumber: jobNumber)
+            let projectRef = self.db.collection("projects").document()
+            projectRef.setData(project.toDict()) { (error) in
+                if error != nil {
+                    print(error?.localizedDescription as Any)
+                    return
+                }
+                print("Project created")
+                self.fetchProjects()
+                self.alertState = .success
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    if self.userProfile.checkedIn.isCheckedIn == false {
+                        self.checkInToProject(currentLocation: self.locationManager?.location)
+                    }
                 }
             }
         }
     }
+
+//    func createProject(name: String, location: CLLocationCoordinate2D, address: String, jobNumber: String) {
+//        guard let _ = self.authViewModel.userSession?.uid else { return }
+//        let project = Project(name: name, location: GeoPoint(latitude: location.latitude, longitude: location.longitude), address: address, jobNumber: jobNumber)
+//        let projectRef = db.collection("projects").document()
+//        projectRef.setData(project.toDict()) { (error) in
+//            if error != nil {
+//                print(error?.localizedDescription as Any)
+//                return
+//            }
+//            print("Project created")
+//            self.fetchProjects()
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+//                if self.userProfile.checkedIn.isCheckedIn == false {
+//                    self.checkInToProject(currentLocation: self.locationManager?.location)
+//                }
+//            }
+//        }
+//    }
     
     func fetchProjects() {
         db.collection("projects").getDocuments{ (snapshot, error) in
@@ -64,10 +108,11 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func checkIfLocationServicesIsEnabled() {
+        
+
 
         if CLLocationManager.locationServicesEnabled() {
             
-            DispatchQueue.main.async {
                 self.locationManager = CLLocationManager()
                 self.locationManager!.delegate = self
                 self.locationManager?.startUpdatingLocation()
@@ -92,7 +137,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                         }
                     }
                 }
-            }
+
         }
     }
     

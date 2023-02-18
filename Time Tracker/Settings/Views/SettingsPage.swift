@@ -44,9 +44,10 @@ struct SettingsPage: View {
         authenticationService.signOut()
         
         withAnimation {
-            viewRouter.currentPage = .onBoardingPage
+            DispatchQueue.main.async {
+                self.viewRouter.currentPage = .onBoardingPage
+            }
         }
-        
     }
     func testMail() {}
 }

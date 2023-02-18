@@ -9,9 +9,9 @@ import SwiftUI
 import CoreData
 
 struct HomeView: View {
+    
     @EnvironmentObject var dataController : DataController
     @EnvironmentObject var viewRouter: ViewRouter
-    
     
     let employees : FetchRequest<Employee>
     

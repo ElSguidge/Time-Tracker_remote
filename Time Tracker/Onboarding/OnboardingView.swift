@@ -20,6 +20,15 @@ struct OnboardingView: View {
             
             content
                 .offset(y: showModal ? -50 : 0)
+                .onAppear {
+                    NotificationDelegate.shared.checkNotificationPermission { granted in
+                        if granted {
+                            NotificationDelegate.shared.scheduleInitialNotification()
+                        } else {
+                            NotificationDelegate.shared.showNotificationPermissionAlert()
+                        }
+                    }
+                }
             if showModal {
                 SignInView()
                     .opacity(showModal ? 1 : 0)

@@ -64,14 +64,17 @@ class UserProfileRepository: ObservableObject {
     
     func createProfile(profile: UserProfile, completion: @escaping (_ profile: UserProfile?, _ error: Error?) -> Void) {
         do {
-            let _ = try db.collection("profiles").document(profile.uid ?? "unknown").setData(from: profile)
-            completion(profile, nil)
+            if let uid = profile.uid {
+                let _ = try db.collection("profiles").document(uid).setData(from: profile)
+                completion(profile, nil)
+            }
         }
         catch let error {
             print("Error in writing profile to Firestore: \(error)")
             completion(nil, error)
         }
     }
+    
     func addCoordinatesToProfile(last: CLLocation, userId: String) {
         db.collection("profiles").whereField("uid", isEqualTo: userId).getDocuments { result, error in
             if error == nil {
@@ -157,7 +160,6 @@ class UserProfileRepository: ObservableObject {
                 }
                 completion(profiles, nil)
             }
-        }
-    
+        }    
 }
 

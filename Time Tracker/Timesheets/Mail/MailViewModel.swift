@@ -23,8 +23,7 @@ struct MailViewModel: UIViewControllerRepresentable {
     
     let newSubject : String
     let newMsgBody : String
-//    @Binding var activeAlert: ActiveAlertTimecard
-//    @Binding var showAlert: Bool
+
     class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
         
         @Binding var activeAlert: AddTimeCardView.ActiveAlertTimecard

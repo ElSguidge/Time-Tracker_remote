@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		84035C4329920944004EE5C6 /* button.riv in Resources */ = {isa = PBXBuildFile; fileRef = 84035C4229920944004EE5C6 /* button.riv */; };
 		84035C4729921049004EE5C6 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84035C4629921049004EE5C6 /* SignUpView.swift */; };
+		84035C49299794C5004EE5C6 /* ProjectAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84035C48299794C5004EE5C6 /* ProjectAnnotationView.swift */; };
 		840BCC36296EC07F00738A06 /* PDFViewSaved.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840BCC35296EC07F00738A06 /* PDFViewSaved.swift */; };
 		840BCC39296FC0DD00738A06 /* MailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840BCC38296FC0DD00738A06 /* MailViewModel.swift */; };
 		8412BFD92991EB7F0089AF70 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84F7D299299101CE00D69279 /* Poppins-Bold.ttf */; };
@@ -79,6 +80,7 @@
 /* Begin PBXFileReference section */
 		84035C4229920944004EE5C6 /* button.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = button.riv; sourceTree = "<group>"; };
 		84035C4629921049004EE5C6 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		84035C48299794C5004EE5C6 /* ProjectAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectAnnotationView.swift; sourceTree = "<group>"; };
 		840BCC35296EC07F00738A06 /* PDFViewSaved.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewSaved.swift; sourceTree = "<group>"; };
 		840BCC38296FC0DD00738A06 /* MailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailViewModel.swift; sourceTree = "<group>"; };
 		8412BFDC2991F1100089AF70 /* shapes.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = shapes.riv; sourceTree = "<group>"; };
@@ -377,6 +379,7 @@
 				847A3CCC296D134C00BF6793 /* ObserverModel.swift */,
 				8479464C297CF3D8000FFBB9 /* CreateProjectMapView.swift */,
 				844F28732983926B007A075E /* ProjectStreetViewModel.swift */,
+				84035C48299794C5004EE5C6 /* ProjectAnnotationView.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -691,6 +694,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84035C49299794C5004EE5C6 /* ProjectAnnotationView.swift in Sources */,
 				847A3CE8296D184200BF6793 /* TabBarView.swift in Sources */,
 				8499C33F2956C20F00522178 /* Timecard.swift in Sources */,
 				847A3CDD296D157300BF6793 /* UserNotifications.swift in Sources */,
@@ -887,7 +891,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -925,7 +930,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
